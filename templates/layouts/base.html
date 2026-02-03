@@ -1,0 +1,65 @@
+<!--
+  templateType: none
+-->
+<!doctype html>
+<html lang="{{ html_lang }}" {{ html_lang_dir }}>
+  <head>
+    <meta charset="utf-8">
+    {% if page_meta.html_title or pageTitle %}<title>{{ page_meta.html_title or pageTitle }}</title>{% endif %}
+    <meta name="description" content="{{ page_meta.meta_description }}">
+    <link rel="stylesheet" href="{{ get_asset_url('../../css/main.css') + '?' + unixtimestamp() }}">
+    {{ require_css(get_asset_url("../../css/main.css")) }}
+    {{ require_css(get_asset_url("../../css/custom-style.css")) }}
+     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="icon" type="image/png" href="https://tmgroupinc.com/hubfs/favicon2025/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="https://tmgroupinc.com/hubfs/favicon2025/favicon.svg" />
+    <link rel="shortcut icon" href="https://tmgroupinc.com/hubfs/favicon2025/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://tmgroupinc.com/hubfs/favicon2025/apple-touch-icon.png" />
+    <link rel="manifest" href="https://tmgroupinc.com/hubfs/favicon2025/site.webmanifest" />
+  <script>
+  window.addEventListener("hashchange", function() {
+    // Send a configuration update with the new page_path (which includes the hash)
+    gtag("config", "G-N7G06K21X2", {
+      "page_path": location.pathname + location.search + location.hash
+    });
+  });
+</script>
+    <link href="{{ get_asset_url('/TM-Group/css/tools/aos.css') + '?' + unixtimestamp() }}" rel="stylesheet">
+    {# This is intended to be used if a template requires template specific style sheets #}
+    {% if template_css %}
+      {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+    {{ require_css(get_asset_url("../../css/theme-overrides.css")) }}
+    {{ require_css(get_asset_url("../../css/typography.css")) }}
+    
+    {# To see a full list of what is included via standard_header_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+
+                
+ {{ standard_header_includes }}
+  </head>
+  <body class="{% block body_class %}{% endblock body_class %}">
+    <div class="body-wrapper {{ builtin_body_classes }}">
+      {% block header %}
+        {% global_partial path="../partials/header.html" %}
+      {% endblock header %}
+
+      {# The main-content ID is used for the navigation skipper in the header.html file. More information on the navigation skipper can be found here: https://github.com/HubSpot/cms-theme-boilerplate/wiki/Accessibility #}
+
+      <main id="main-content" class="body-container-wrapper">
+        {% block body %}
+        {% endblock body %}
+      </main>
+
+      {% block footer %}
+        {% global_partial path="../partials/footer.html" %}
+      {% endblock footer %}
+    </div>
+    
+     <script src="{{ get_asset_url('/TM-Group/js/aos.js')  + '?' + unixtimestamp() }}"></script>
+    {{ require_js(get_asset_url("../../js/main.js")) }}
+       
+
+    {# To see a full list of what is included via standard_footer_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+    {{ standard_footer_includes }}
+  </body>
+</html>

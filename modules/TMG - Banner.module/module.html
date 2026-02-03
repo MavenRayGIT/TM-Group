@@ -1,0 +1,165 @@
+<div class="tmg_banner_section {{ module.add_custom_class }}">
+  <div class="content-wrapper">
+    <div class="tmg_banner_row">
+      <div class="tmg_col_6" data-aos="fade-up">
+        <div class="tmg_banner_text">
+          <h1 class="title-xxl">{{ module.title }}</h1>
+          <p class="text-s">{{ module.text_field }}</p>
+<!--           {{ module.text }} -->
+          {% if module.button_link and module.button_link.button_link.url.href %}
+            {% set href = module.button_link.button_link.url.href %}
+            {% if module.button_link.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% endif %}
+            <a href="{{ href|escape_url }}" class="main-btn button" 
+               {% if module.button_link.button_link.open_in_new_tab %}target="_blank"{% endif %}
+               {% if module.button_link.button_link.rel %}rel="{{ module.button_link.button_link.rel|escape_attr }}"{% endif %}
+            >
+              {{ module.button_link.button_text }}
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="21px" viewBox="0 0 25 21" style="enable-background:new 0 0 25 21;" xml:space="preserve">
+                <style type="text/css">
+                  .st0 {
+                    fill: none;
+                    stroke: #FFFFFF;
+                    stroke-width: 2;
+                  }
+                </style>
+                <path class="st0" d="M14.3,1l9.1,9.5l-9.1,9.5"></path>
+                <line class="st0" x1="0" y1="10.6" x2="23.5" y2="10.6"></line>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tmg_banner_background">
+    <img src="{{ module.background_image.src|escape_url }}" fetchpriority="high" alt="{{ module.background_image.alt|escape_attr }}">
+  </div>
+</div>
+
+{% require_css %}
+<style>
+  {% scope_css %}
+
+  .tmg_banner_section {
+    width: 100%;
+    padding: 300px 0 80px;
+    position: relative;
+  }
+
+  .tmg_banner_section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .tmg_banner_row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .tmg_col_6 {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+
+  .tmg_banner_text h1 {
+    color: #fff;
+    margin-bottom: 25px;
+  }
+
+  .tmg_banner_text p {
+    color: #fff;
+    margin: 0;
+  }
+
+  .tmg_banner_text .button {
+    background-color: #C5299B;
+    border: 1px solid #C5299B;
+    text-decoration: none;
+  }
+
+  .tmg_banner_text .button:hover {
+    background-color: #06226D;
+    font-weight: normal;
+  }
+
+  .tmg_banner_text svg {
+    width: 15px;
+    margin: -5px 0 0 20px;
+  }
+
+  @media (max-width: 990px) {
+    .tmg_banner_row {
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .tmg_col_6 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .tmg_banner_text h1 {
+      font-size: 50px;
+    }
+  }
+
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+
+</script>
+{% end_require_js %}
+
+<style>
+  .tmg_banner_text a {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: center;
+    gap: 15px;
+  }
+  .tmg_banner_background  {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .tmg_banner_background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tmg_banner_text svg {
+    margin: 0!important;
+  }
+ @media (width <= 479px) {
+    .tmg_banner_section {
+    width: 100%;
+    min-height: 650px;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+    .tmg_banner_section {
+    width: 100%;
+    min-height: unset;
+    height: auto;
+    padding: 175px 0 70px !important;
+  }
+  }
+  }
+</style>

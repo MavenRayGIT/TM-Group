@@ -1,0 +1,11 @@
+[ {
+  "id" : "14962ae4-f9bc-0b0a-ebc9-85c24cdc7612",
+  "name" : "header_text",
+  "label" : "Header Text",
+  "required" : false,
+  "locked" : false,
+  "placeholder" : "Solutions",
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+} ]

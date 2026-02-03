@@ -1,0 +1,351 @@
+<style>
+  /* Reset and base styles */
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  /* Google Fonts Import for Khula */
+  @import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap');
+
+  /* Main container */
+  .success-module-container{
+    width:100%;
+    background-color:#071440;
+    color:#fff;
+    font-family:'Khula',sans-serif;
+  }
+
+  /* Flex container for the two columns */
+  .success-module-flex{
+    display:flex;
+    margin:0 auto;
+    padding:3rem 2rem;
+    max-width:1280px;
+  }
+
+  /* Left column with image */
+  .success-module-image{
+    flex:0 0 50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-top-left-radius:20px;
+    overflow:hidden;
+  }
+  .success-module-image img{
+    width:100%;
+    height:100%!important;
+    object-fit:cover;
+  }
+
+  /* Right column with content */
+  .success-module-content{
+    flex:0 0 50%;
+    padding:2rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .submitted-message{display:none!important}
+
+  /* Heading styles */
+  .success-module-heading{
+    font-size:50px;
+    line-height:1;
+    margin-bottom:1.5rem;
+    font-weight:300;
+    letter-spacing:-0.05em;
+    color:#fff!important;
+    font-family:'Khula',sans-serif;
+  }
+
+  /* Description text */
+  .success-module-description{
+    font-family:'Open Sans',sans-serif;
+    font-style:normal;
+    font-weight:300;
+    font-size:16px;
+    line-height:22px;
+    color:#fff;
+  }
+
+  .success-module-description .form-columns-1,
+  .success-module-description .form-columns-2{position:relative}
+
+  .success-module-description .hs-error-msg{
+    font-size:12px;
+    position:absolute;
+    top:45px;
+  }
+
+  .success-module-description form .inputs-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:absolute;
+    width:100%;
+    top:0;
+  }
+
+  .success-module-description fieldset.form-columns-1 .hs-input{width:100%}
+
+  .success-module-description .form-title,
+  .success-module-description form label,
+  .success-module-description form legend{
+    color:#051131;
+    display:none;
+  }
+
+  .download-description{padding-bottom:40px}
+
+  /* Button */
+  .success-module-container .success-module-flex .success-module-content .success-module-button{
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    background-color:#C5299B!important;
+    color:#fff!important;
+    text-decoration:none!important;
+    width:200px!important;
+    height:60px!important;
+    border-radius:50px!important;
+    font-size:16px!important;
+    font-weight:400!important;
+    transition:background-color .3s ease!important;
+    text-align:center!important;
+    border:none!important;
+    outline:none!important;
+    box-shadow:none!important;
+    line-height:1.5!important;
+    cursor:pointer!important;
+    font-family:'Khula',sans-serif!important;
+    letter-spacing:.5px!important;
+  }
+  .success-module-container .success-module-flex .success-module-content .success-module-button:hover{
+    background-color:#06226D!important;
+    text-decoration:none!important;
+  }
+
+  /* Mobile */
+  @media (max-width:768px){
+    .success-module-flex{flex-direction:column; padding:2rem 1rem;}
+    .success-module-image{margin-bottom:1.5rem;}
+    .success-module-content{padding:1rem;}
+    .success-module-heading{font-size:2rem;}
+  }
+
+  /* Form holder */
+  .form-holder{width:100%!important; max-width:100%!important; overflow:hidden!important;}
+
+  /* Base input field styling */
+  .success-module-description .hs-form input[type="text"],
+  .success-module-description .hs-form input[type="email"],
+  .success-module-description .hs-form input[type="tel"],
+  .success-module-description .hs-form input[type="number"],
+  .success-module-description .hs-form input[type="password"],
+  .success-module-description .hs-form select,
+  .success-module-description .hs-form textarea{
+    height:50px!important;
+    border-radius:30px!important;
+    border:0!important;
+    padding:0 20px!important;
+    background-color:#f5f5f5!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Error state */
+  .success-module-description .hs-form .error input[type="text"],
+  .success-module-description .hs-form .error input[type="email"],
+  .success-module-description .hs-form .error input[type="tel"],
+  .success-module-description .hs-form .error input[type="number"],
+  .success-module-description .hs-form .error input[type="password"],
+  .success-module-description .hs-form .error select,
+  .success-module-description .hs-form .error textarea,
+  .success-module-description .hs-form input.invalid,
+  .success-module-description .hs-form select.invalid,
+  .success-module-description .hs-form textarea.invalid{
+    border:1px solid #ff0000!important;
+  }
+
+  /* Focus */
+  .success-module-description .hs-form input:focus-visible,
+  .success-module-description .hs-form select:focus-visible,
+  .success-module-description .hs-form textarea:focus-visible{
+    outline:0!important;
+    box-shadow:none!important;
+  }
+
+  .success-module-description .hs_submit.hs-submit{padding-top:20px}
+  .success-module-description .hs-form-field{margin-bottom:20px;}
+
+  /* Textarea */
+  .success-module-description .hs-form textarea{
+    min-height:50px!important;
+    padding:15px 20px!important;
+  }
+
+  @media (max-width:768px){
+    .success-module-description .hs-form fieldset.form-columns-2 .field{width:100%!important;}
+    .success-module-description .hs-form fieldset.form-columns-2 .field:nth-child(1),
+    .success-module-description .hs-form fieldset.form-columns-2 .field:nth-child(2){
+      margin-right:0!important; float:none!important; clear:both!important;
+    }
+    .success-module-description .hs-form fieldset.form-columns-2 .hs-input{width:100%!important;}
+    .success-module-description .hs-form fieldset.form-columns-2 .field + .field{margin-top:15px!important;}
+  }
+</style>
+
+<div class="success-module-container" downloadable-file="{{ module.downloadable_file }}" download-url-location="">
+  <div class="success-module-flex">
+    <div class="success-module-image">
+      {% if module.featured_image.src %}
+        {% set sizeAttrs = 'width="{{ module.featured_image.width|escape_attr }}" height="{{ module.featured_image.height|escape_attr }}"' %}
+        {% if module.featured_image.size_type == 'auto' %}
+          {% set sizeAttrs = 'width="{{ module.featured_image.width|escape_attr }}" height="{{ module.featured_image.height|escape_attr }}" style="max-width: 100%; height: auto; max-height: 400px;"' %}
+        {% elif module.featured_image.size_type == 'auto_custom_max' %}
+          {% set sizeAttrs = 'width="{{ module.featured_image.max_width|escape_attr }}" height="{{ module.featured_image.max_height|escape_attr }}" style="max-width: 100%; height: auto; max-height: 400px;"' %}
+        {% endif %}
+        {% set loadingAttr = module.featured_image.loading != 'disabled' ? 'loading="{{ module.featured_image.loading|escape_attr }}"' : '' %}
+        <img src="{{ module.featured_image.src|escape_url }}" alt="{{ module.featured_image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+      {% endif %}
+    </div>
+
+    <div class="success-module-content">
+      <h2 class="success-module-heading">{{ module.heading }}</h2>
+      <div class="success-module-description">
+        <div class="download-description">{{ module.description }}</div>
+        <div class="form-holder">
+          <!-- Unique form mount point will be created by the script -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load HubSpot forms once; HubSpot ignores duplicate loads -->
+  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+<!-- HubSpot Forms runtime (safe to include multiple times; HS dedupes) -->
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+<script>
+(function(){
+  // Scope to THIS module instance (place this <script> inside .success-module-container)
+  var scriptEl = document.currentScript;
+  var root = scriptEl.closest('.success-module-container');
+  if (!root) return;
+
+  var contentContainer = root.querySelector('.success-module-content');
+  var downloadableFile = root.getAttribute('downloadable-file') || '';
+  var currentPageUrl = window.location.href;
+  root.setAttribute('download-url-location', currentPageUrl);
+
+  var headingEl = root.querySelector('.success-module-heading');
+  var descWrap  = root.querySelector('.download-description');
+  var holder    = root.querySelector('.form-holder');
+
+  // Unique mount + instance ID
+  var mount = document.createElement('div');
+  var uid   = 'hs-form-' + Math.random().toString(36).slice(2) + Date.now();
+  mount.id  = uid;
+  holder.appendChild(mount);
+
+  function initInstanceBehavior(formEl){
+    if (!formEl) return;
+
+    // Hide all fields initially; show only submit
+    var columns = formEl.querySelectorAll('fieldset.form-columns-1, fieldset.form-columns-2');
+    columns.forEach(function(c){ c.style.display = 'none'; });
+
+    var submitContainer = formEl.querySelector('.hs_submit');
+    if (submitContainer) submitContainer.style.display = 'block';
+
+    // Set hidden fields
+    var filenameField = formEl.querySelector('.hs_filename_downloaded input');
+    var urlField      = formEl.querySelector('.hs_url_for_the_download input');
+    if (filenameField) filenameField.value = downloadableFile;
+    if (urlField)      urlField.value      = currentPageUrl;
+
+    // First click expands, second click submits
+    var submitBtn  = formEl.querySelector('input[type="submit"]');
+    var firstClick = true;
+    if (submitBtn){
+      submitBtn.addEventListener('click', function(e){
+        if (firstClick){
+          e.preventDefault();
+          columns.forEach(function(c){ c.style.display = ''; });
+          if (descWrap) descWrap.style.display = 'none';
+          firstClick = false;
+        }
+      });
+    }
+
+    // Observe THIS mount for success swap (HubSpot replaces form with TY)
+    var obs = new MutationObserver(function(){
+      var hasForm = mount.querySelector('.hs-form');
+      if (!hasForm){
+        // Success UI
+        if (headingEl){
+          headingEl.innerHTML = 'We certainly hope this download is helpful to you and your business.';
+        }
+        if (descWrap){
+          descWrap.style.display = '';
+          descWrap.innerHTML = 'If you have any questions at all, feel free to <a href="#contact-us" style="color:#C5299B; font-weight:bold; text-decoration:none;">contact us</a>.';
+        }
+
+        // GA4 event + download
+        if (downloadableFile){
+          if (typeof gtag === 'function'){
+            gtag('event', 'file_download', {
+              file_name: downloadableFile,
+              page_url : currentPageUrl,
+              event_category: 'engagement',
+              event_label   : 'form_download'
+            });
+          }
+          setTimeout(function(){
+            var a = document.createElement('a');
+            a.href = downloadableFile;
+            a.setAttribute('download','');
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }, 400);
+        }
+        obs.disconnect();
+      }
+    });
+    obs.observe(mount, { childList:true, subtree:true });
+  }
+
+  function ensureHsFormsReady(cb){
+    if (window.hbspt && hbspt.forms && typeof hbspt.forms.create === 'function'){
+      cb();
+    } else {
+      var tries = 0;
+      var iv = setInterval(function(){
+        tries++;
+        if (window.hbspt && hbspt.forms && typeof hbspt.forms.create === 'function'){
+          clearInterval(iv);
+          cb();
+        }
+        if (tries > 50){ clearInterval(iv); }
+      }, 100);
+    }
+  }
+
+  ensureHsFormsReady(function(){
+    hbspt.forms.create({
+      portalId : "44974531",
+      formId   : "539a60c5-0b4e-4e93-b5db-4bf1e0d295eb",
+      region   : "na1",
+      target   : '#' + uid,
+      formInstanceId: uid, // critical: unique IDs/validation per instance
+      onFormReady: function($form){
+        var domForm = ($form && $form[0]) ? $form[0] : mount.querySelector('.hs-form');
+        initInstanceBehavior(domForm);
+      }
+    });
+  });
+})();
+</script>
+
+</div>

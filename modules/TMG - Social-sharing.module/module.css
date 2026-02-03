@@ -1,0 +1,24 @@
+/* Social sharing wrapper */
+
+.social-sharing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Social sharing text */
+
+.social-sharing__share-text {
+  margin-right: 0.7rem;
+  font-weight: bold;
+}
+
+/* Social sharing icons */
+
+.social-sharing__link {
+  margin-right: 0.7rem;
+}
+
+.social-sharing__link:last-child {
+  margin-right: 0;
+}

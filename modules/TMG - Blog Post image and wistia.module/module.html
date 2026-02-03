@@ -1,0 +1,239 @@
+{% if module.blog_image_module %}
+<div id="blogmodule2col" class="blog_2col_section {{ module.add_custom_class }}">
+    <div class="blog_2col_wrapper">
+        <div class="blog_2col_row">
+            <div class="blog_2col_main" data-aos="fade-up">
+                <div class="blog_2col_image">
+                    <div class="image_container">
+                        {% set featured_image = content.featured_image %}
+                        {% if featured_image %}
+                            <img src="{{ featured_image }}" 
+                                 alt="{{ content.title }}"
+                                 class="featured_image">
+                        {% else %}
+                            <img src="{{ module.default_featured_image.src }}" 
+                                 alt="Default post image"
+                                 class="featured_image">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="blog_2col_sidebar" data-aos="fade-up">
+                <div class="blog_2col_content">
+                    {% if module.wistia_video_and_image.select_post_type == 'wistia_video' %}
+                    <div class="blog_2col_video">
+                        <div class="wistia_responsive_padding">
+                            <div class="wistia_responsive_wrapper">
+                                <div class="wistia_embed wistia_async_{{ module.wistia_video_and_image.wistia_video_id }} videoFoam=true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if module.wistia_video_and_image.title or module.wistia_video_and_image.description %}
+                    <div class="blog_2col_text_content">
+                        {% if module.wistia_video_and_image.title %}
+                        <h3 class="blog_2col_video_title">{{ module.wistia_video_and_image.title }}</h3>
+                        {% endif %}
+                        {% if module.wistia_video_and_image.description %}
+                        <div class="blog_2col_video_desc">
+                            {{ module.wistia_video_and_image.description }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div id="blogmodule2col" class="blog_fullwidth_section {{ module.add_custom_class }}">
+    <div class="blog_fullwidth_wrapper">
+        <div class="blog_fullwidth_image" data-aos="fade-up">
+            <div class="fullwidth_image_container">
+                {% set featured_image = content.featured_image %}
+                {% if featured_image %}
+                    <img src="{{ featured_image }}" 
+                         alt="{{ content.title }}"
+                         class="featured_image_full">
+                {% else %}
+                    <img src="{{ module.default_featured_image.src }}" 
+                         alt="Default post image"
+                         class="featured_image_full">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% require_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+<style>
+{% scope_css %}
+
+.blog_2col_section,
+.blog_fullwidth_section {
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    {{ module.style.desktop.spacing_field.css }}
+}
+
+.blog_2col_wrapper {
+    width: 100%;
+}
+
+.blog_2col_row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.blog_2col_main {
+    flex: 0 0 55%;
+    width: 55%;
+}
+
+.blog_2col_sidebar {
+    flex: 0 0 45%;
+    width: 45%;
+}
+
+.blog_2col_image {
+    width: 100%;
+}
+
+.image_container {
+    position: relative;
+    padding-top: 75%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.featured_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 20px;
+}
+
+.blog_2col_content {
+    height: 100%;
+}
+
+.blog_2col_video {
+    height: 100%;
+    margin-bottom: 16px;
+    padding-right: 5%;
+}
+
+.wistia_responsive_padding {
+    padding: 56.25% 0 0 0;
+    position: relative;
+}
+
+.wistia_responsive_wrapper {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.wistia_embed {
+    height: 100%;
+    width: 100%;
+}
+
+.blog_2col_text_content {
+    padding: 0 8px;
+}
+
+.blog_2col_video_title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: {{ module.style.text_color.css }};
+}
+
+.blog_2col_video_desc p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: {{ module.style.text_color.css }};
+    margin: 0;
+}
+
+/* Full Width Layout Styles */
+.blog_fullwidth_wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.blog_fullwidth_image {
+    width: 100%;
+}
+
+.fullwidth_image_container {
+    position: relative;
+    padding-top: 45.25%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.featured_image_full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .blog_2col_row {
+        flex-direction: column;
+    }
+
+    .blog_2col_main,
+    .blog_2col_sidebar {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .blog_2col_video {
+        padding-right: 0;
+    }
+
+    .blog_2col_section,
+    .blog_fullwidth_section {
+        {{ module.style.mobile_spacing.spacing_field.css }};
+    }
+    
+    .blog_2col_text_content {
+        padding: 0;
+    }
+}
+
+#blogmodule2col .blog_2col_wrapper,
+#blogmodule2col .blog_fullwidth_wrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% if module.blog_image_module %}
+{% require_js %}
+<script src="https://fast.wistia.com/embed/medias/{{ module.wistia_video_and_image.wistia_video_id }}.jsonp" async></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+{% end_require_js %}
+{% endif %}

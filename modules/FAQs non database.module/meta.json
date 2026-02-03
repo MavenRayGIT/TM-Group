@@ -1,0 +1,8 @@
+{
+  "global" : false,
+  "content_types" : [ "QUOTE_TEMPLATE", "LANDING_PAGE", "SITE_PAGE", "WEB_INTERACTIVE", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 171824234900,
+  "label" : "FAQs non database",
+  "is_available_for_new_content" : true
+}

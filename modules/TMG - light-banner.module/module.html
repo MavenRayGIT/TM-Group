@@ -1,0 +1,104 @@
+<div class="tmg_lg_banner_section {{ module.add_custom_class }}">
+    <div class="content-wrapper">
+        <div class="lgt_banner_txt">
+<!--           {% inline_rich_text field="text" value="{{ module.text }}" %} -->
+          
+           <h1 class="title-xl">{{ module.title }}</h1>
+           <p class="text-s">{{ module.text_field }}</p>
+          
+          {% if module.button_link.button_link.url.href %}
+
+           {% set href = module.button_link.button_link.url.href %}
+          {% if module.button_link.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+          {% set href = "mailto:" + href %}
+          {% endif %}
+          <a href="{{ href|escape_url }}" class="button" 
+             {% if module.button_link.button_link.open_in_new_tab %}target="_blank"{% endif %}
+             {% if module.button_link.button_link.rel %}rel="{{ module.button_link.button_link.rel|escape_attr }}"{% endif %}
+             >
+            {{ module.button_link.button_text }}
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="21px" viewBox="0 0 25 21" style="enable-background:new 0 0 25 21;" xml:space="preserve">
+                        <style type="text/css">
+                        .st0 {
+                            fill: none;
+                            stroke: #FFFFFF;
+                            stroke-width: 2;
+                        }
+                        </style>
+                        <path class="st0" d="M14.3,1l9.1,9.5l-9.1,9.5"></path>
+                        <line class="st0" x1="0" y1="10.6" x2="23.5" y2="10.6"></line>
+                    </svg>
+          </a>       
+          {% endif %}
+          
+        </div>
+    </div>
+</div>
+
+
+
+
+{% require_css %}
+<style>
+  {% scope_css %} 
+
+  .tmg_lg_banner_section{
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    {{ module.style.desktop.spacing_field.css }};
+  }
+
+  .lgt_banner_txt {
+    max-width: 960px;
+    width: 100%;
+}
+
+.lgt_banner_txt h1 {   
+    color: #06226D;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+  
+   .content-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  
+
+.lgt_banner_txt  p{ 
+  color: #06226D;
+
+ }
+
+.lgt_banner_txt .button{
+    background: {{ module.style.cta_color.color }};
+    border: {{ module.style.cta_color.color }};
+    text-decoration: none;
+
+  }
+  .lgt_banner_txt .button:hover{text-decoration: none; font-weight: normal; background: {{ module.style.cta_hover_color.color }};}
+
+  .lgt_banner_txt svg { width: 15px; margin-bottom: -5px; margin-left: 20px; }
+
+  {% end_scope_css %} 
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+
+</script>
+{% end_require_js %}
+
+<style>
+  @media (width <= 479px) {  
+   .tmg_lg_banner_section {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    }
+  }
+ @media (max-width: 767px) {
+   .content-wrapper { padding: 0 30px; }
+}
+</style>

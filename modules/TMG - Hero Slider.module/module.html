@@ -1,0 +1,185 @@
+<div class="tmg_hero_slider_section">
+    <div class="content-wrapper">
+      <div class="tmg_hero_row">
+        <div class="tmg_hero_text"  data-aos="fade-up">
+          <span class="p-label eyebrow">{{ module.topic }}</span>
+          <h1 class="title-xl">{{ module.heading }}</h1>
+          {% set href = module.button_link.url.href %}
+          {% if module.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+          {% set href = "mailto:" + href %}
+          {% endif %}
+          <a class="main-btn button"
+             {% if module.button_link.url.type is equalto "CALL_TO_ACTION"  %}
+             href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
+             {% else %}
+             href="{{ href|escape_url }}"
+             {% endif %}
+             {% if module.button_link.open_in_new_tab %}
+             target="_blank"
+             {% endif %}
+             {% if module.button_link.rel %}
+             rel="{{ module.button_link.rel|escape_attr }}"
+             {% endif %}
+             >
+            {{ module.button_text }}
+          </a>
+  
+        </div>
+        <div class="logo_img visible-desktop" data-aos="fade-up">
+     {% if module.logo_image.src %}
+      {% set sizeAttrs = 'width="{{ module.logo_image.width|escape_attr }}" height="{{ module.logo_image.height|escape_attr }}"' %}
+     {% if module.logo_image.size_type == 'auto' %}
+      {% set sizeAttrs = 'width="{{ module.logo_image.width|escape_attr }}" height="{{ module.logo_image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+     {% elif module.logo_image.size_type == 'auto_custom_max' %}
+      {% set sizeAttrs = 'width="{{ module.logo_image.max_width|escape_attr }}" height="{{ module.logo_image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+    {% endif %}
+    {% set loadingAttr = module.logo_image.loading != 'disabled' ? 'loading="{{ module.logo_image.loading|escape_attr }}"' : '' %}
+    <img src="{{ module.logo_image.src|escape_url }}?{{ unixtimestamp() }}" alt="{{ module.logo_image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+  {% endif %}
+</div>
+      </div>
+    </div>
+    <div class="logo_img visible-mobile">
+  {% if module.logo_image.src %}
+    {% set sizeAttrs = 'width="{{ module.logo_image.width|escape_attr }}" height="{{ module.logo_image.height|escape_attr }}"' %}
+    {% if module.logo_image.size_type == 'auto' %}
+      {% set sizeAttrs = 'width="{{ module.logo_image.width|escape_attr }}" height="{{ module.logo_image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+    {% elif module.logo_image.size_type == 'auto_custom_max' %}
+      {% set sizeAttrs = 'width="{{ module.logo_image.max_width|escape_attr }}" height="{{ module.logo_image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+    {% endif %}
+    {% set loadingAttr = module.logo_image.loading != 'disabled' ? 'loading="{{ module.logo_image.loading|escape_attr }}"' : '' %}
+    <img src="{{ module.logo_image.src|escape_url }}?{{ unixtimestamp() }}" alt="{{ module.logo_image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+  {% endif %}
+</div>
+    <div class="tmg_hero-bg">
+    <img class="tmg_hero-bg_image"
+         height="1333px"
+         width="2000px"
+         src="{{ module.background_image.src|escape_url }}"
+         alt="{{ module.background_image.alt|escape_attr }}">
+
+    <img class="tmg_hero-bg_image-mobile"
+         width="767px"
+         height="1333px"
+         src="{{ module.background_image_mobile.src|escape_url }}"
+         alt="{{ module.background_image_mobile.alt|escape_attr }}">
+    </div>
+  </div>
+ <div class="tmg_hero_bottom_border">
+  <img src="https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/banner_border-new.svg?{{ unixtimestamp() }}" alt="">
+</div>
+
+
+<style>
+  .tmg_hero_slider_section {
+    width: 100%;
+    min-height: 650px;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tmg_hero_slider_section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.45) 80%, rgba(0,0,0,0.8) 100%);
+  }
+
+  .tmg_hero-bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .tmg_hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tmg_hero_row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 120px;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .tmg_hero_text {
+    width: 50%;
+  }
+  .tmg_hero_text h1 {
+    color: #fff;
+    margin-bottom: 42px;
+  }
+
+  .eyebrow {
+    display: block;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .tmg_hero_bottom_border img {
+    width: 100%;
+    display: block;
+  }
+
+  .logo_img.visible-mobile {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .tmg_hero-bg_image { display: none; }
+    .tmg_hero-bg_image-mobile { display: block; }
+
+    .logo_img.visible-mobile {
+      display: block;
+      position: absolute;
+      left: 30px;
+      bottom: 30px;
+    }
+    .logo_img.visible-desktop { display: none; }
+
+    .tmg_hero_row { padding-bottom: 0; }
+    .tmg_hero_slider_section { align-items: center; }
+    .content-wrapper { padding: 0 30px; }
+
+    .tmg_hero_text {
+      width: 100%;
+    }
+    .tmg_hero_text h1 {
+      line-height: 48px;
+    }
+  }
+  @media (width <= 479px) {
+     .tmg_hero_slider_section {
+    min-height: unset;
+    height: auto;
+    padding: 175px 0;
+  }
+  }
+
+  @media (max-width: 375px) {
+    .tmg_hero_text .button {
+      font-size: 16px;
+    }
+  }
+</style>
+
+  {% require_js %}
+  <script>
+  
+  </script>
+  {% end_require_js %}

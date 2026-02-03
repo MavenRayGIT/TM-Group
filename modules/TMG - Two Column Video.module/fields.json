@@ -1,0 +1,373 @@
+[ {
+  "id" : "f4fb536c-ade6-cba9-47a8-8e7a3d0115fa",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a48e8dd8-ae9f-d5db-bbea-45e90e3c331d",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "016f48a0-1220-1b7f-f0f7-2d07d7f90272",
+    "name" : "desktop",
+    "label" : "Desktop Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "70dae48a-9f4d-0f97-9833-af69c01b0e79",
+      "name" : "spacing_field",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : null
+          },
+          "right" : {
+            "value" : null,
+            "units" : null
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : null
+          },
+          "right" : {
+            "value" : null,
+            "units" : null
+          }
+        }
+      }
+    }
+  }, {
+    "id" : "a06a7c07-2c37-4c11-50ca-9ebf4061c7fb",
+    "name" : "mobile_spacing",
+    "label" : "Mobile Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "2967b75d-0926-06f3-fd71-dc2878f21154",
+      "name" : "spacing_field",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : "#051131",
+      "opacity" : 100
+    },
+    "desktop" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 130,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : null
+          },
+          "right" : {
+            "value" : null,
+            "units" : null
+          }
+        }
+      }
+    },
+    "mobile_spacing" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  }
+}, {
+  "id" : "c7a23355-96f6-003f-ddb5-45bb5fa00f2e",
+  "name" : "add_custom_class",
+  "label" : "Add Custom Class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "af4141ba-37c2-7fcc-e999-df95370513d9",
+  "name" : "select_image_position",
+  "label" : "Select Video Position",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "lft_img", "Left" ], [ "rgt_img", "Right" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "rgt_img"
+}, {
+  "id" : "1cac1cf5-eabf-9a26-0dec-4cce31d71c5c",
+  "name" : "left_column",
+  "label" : "Video Group",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "0419e2d1-a2e4-0be7-2a10-13f3117e6cbe",
+    "name" : "embed_field",
+    "label" : "Embed",
+    "required" : false,
+    "locked" : false,
+    "supported_source_types" : [ "html" ],
+    "supported_oembed_types" : [ "photo", "video", "link", "rich" ],
+    "resizable" : true,
+    "show_preview" : true,
+    "supported_media_bridge_providers" : [ ],
+    "type" : "embed",
+    "display_width" : null,
+    "default" : {
+      "source_type" : "html",
+      "embed_html" : "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I5GM_XiZPHA?si=gpsxo8PR1Ip5XiIt\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "embed_field" : {
+      "source_type" : "html",
+      "embed_html" : "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I5GM_XiZPHA?si=gpsxo8PR1Ip5XiIt\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+    }
+  }
+}, {
+  "id" : "3c8318d1-2deb-210f-1018-419aefdcb681",
+  "name" : "text_group",
+  "label" : "Text Group",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "1546d784-a46f-13e4-d435-c49f334d845d",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "492d7f9f-1318-2bd2-edd1-337ca196ea47",
+    "name" : "text_field",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "990654eb-9141-1dc8-76d9-00455187c985",
+    "name" : "text_2",
+    "label" : "Text 2",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "7bea921d-bb06-7ac3-5ce6-53f637c13757",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<h2>This is a video of us talking about Family offices</h2>\n<p>This will talk briefly about out solutions. Hopefully we can break into simple grid, or just key areas. Maybe not platforms? Maybe more problem-oriented?</p>"
+  }, {
+    "id" : "836d55ac-b023-8d4f-9f70-1cdecd3a178e",
+    "name" : "button",
+    "label" : "Button",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "896ded95-0a0a-4ad9-2ba6-f037e61511a4",
+      "name" : "button_text",
+      "label" : "Button Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Learn More"
+    }, {
+      "id" : "a239c917-8987-d312-7cb3-b5f7e6030e0d",
+      "name" : "button_link",
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "button_text" : "Learn More",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "text" : "<h2>This is a video of us talking about Family offices</h2>\n<p>This will talk briefly about out solutions. Hopefully we can break into simple grid, or just key areas. Maybe not platforms? Maybe more problem-oriented?</p>",
+    "button" : {
+      "button_text" : "Learn More",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }
+} ]

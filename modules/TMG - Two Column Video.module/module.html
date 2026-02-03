@@ -1,0 +1,336 @@
+<div class="tmg_two_column_section {{ module.add_custom_class }}">
+  <div class="content-wrapper">
+    <div class="tmg_two_column_row"  data-aos="fade-up">
+      <div class="tmg_col_6">
+        <div class="tmg_our_story_img">
+          {% if module.left_column.embed_field.source_type == "oembed" %}
+          {% set oembedResponse = module.left_column.embed_field.oembed_response  %}
+          <div class="oembed_container {% if module.left_column.embed_field.size_type == 'auto_full_width' %} oembed_container--full-size{% endif %}" id="oembed_container-{{name|escape_attr}}">
+            <div class="iframe_wrapper"
+                 data-embed-response-html="{{ oembedResponse.html|escape_attr }}"
+                 data-embed-response-width="{{ oembedResponse.width|escape_attr }}"
+                 data-embed-response-height="{{ oembedResponse.height|escape_attr }}"
+                 data-embed-url="{{ module.left_column.embed_field.oembed_url|escape_attr }}"
+                 {% unless module.left_column.embed_field.size_type == "auto_full_width" || module.left_column.embed_field.size_type == "exact" %}
+                 data-max-height="{% if module.left_column.embed_field.size_type == "auto_custom_max" %}{{ module.left_column.embed_field.max_height|escape_attr }}{% endif %}"
+                 data-max-width="{% if module.left_column.embed_field.size_type == "auto_custom_max" %}{{ module.left_column.embed_field.max_width|escape_attr }}{% endif %}"
+                 {% endunless %}
+                 {% if module.left_column.embed_field.size_type == "exact" %}
+                 data-height="{{ module.left_column.embed_field.height|escape_attr }}"
+                 data-width="{{ module.left_column.embed_field.width|escape_attr }}"
+                 {% endif %}
+                 >
+            </div>
+          </div>
+          {% require_css %}
+          <style>
+            .oembed_container {
+              display: inline-block;
+              height: 100%;
+              position: relative;
+              width: 100%;
+            }
+
+            .oembed_container .iframe_wrapper > * {
+              height: 100%;
+              left: 0;
+              margin: 0 auto;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 100%;
+            }
+
+            .iframe_wrapper {
+              height: 0;
+              padding-bottom: 56.25%;
+              padding-top: 25px;
+              position: relative;
+            }
+          </style>
+          {% end_require_css %}
+          {% require_js %}
+          <script>
+            function loadEmbedField(oembedContainer) {
+              const iframeWrapper = oembedContainer.querySelector('.iframe_wrapper');
+              if (!iframeWrapper) {
+                return;
+              }
+              const url = iframeWrapper.dataset.embedUrl;
+              if (!url) {
+                return;
+              }
+
+
+              function setIframe(data) {
+                let {
+                  maxHeight,
+                  maxWidth,
+                  height,
+                  width,
+                } = iframeWrapper.dataset;
+                maxHeight = maxHeight !== undefined && !maxHeight ? data.height : maxHeight;
+                maxWidth = maxWidth !== undefined && !maxWidth ? data.width : maxWidth;
+                height = height !== undefined && !height ? data.height : height;
+                width = width !== undefined && !width ? data.width : width;
+
+                const el = document.createElement('div');
+                el.innerHTML = data.html;
+                const iframe = el.firstChild;
+                iframeWrapper.appendChild(iframe);
+
+                if (maxHeight) {
+                  const maxHeightStr = maxHeight.toString(10) + "px";
+                  oembedContainer.style.maxHeight = maxHeightStr;
+                  iframe.style.maxHeight = maxHeightStr;
+                }
+
+                if (maxWidth) {
+                  const maxWidthStr = maxWidth.toString(10) + "px";
+                  oembedContainer.style.maxWidth = maxWidthStr;
+                  iframe.style.maxWidth = maxWidthStr;
+                }
+
+                if (height) {
+                  const heightStr = height.toString(10) + "px";
+                  oembedContainer.style.height = heightStr;
+                  iframe.style.height = heightStr;
+                }
+
+                if (width) {
+                  const widthStr = width.toString(10) + "px";
+                  oembedContainer.style.width = widthStr;
+                  iframe.style.width = widthStr;
+                }
+              }
+
+              const embedResponse = {
+                html: iframeWrapper.dataset.embedResponseHtml,
+                width: iframeWrapper.dataset.embedResponseWidth,
+                height: iframeWrapper.dataset.embedResponseHeight
+              };
+
+              if (embedResponse.html) {
+                setIframe(embedResponse);
+                return;
+              }
+
+              const request = new XMLHttpRequest();
+              const requestUrl = "/_hcms/oembed?url=" + encodeURIComponent(url) + "&autoplay=0";
+              request.open('GET', requestUrl, true);
+              request.onload = function() {
+                if (request.status >= 200 && request.status < 400) {
+                  const data = JSON.parse(request.responseText);
+                  setIframe(data);
+                } else {
+                  console.error('Server reached, error retrieving results.');
+                }
+              };
+              request.onerror = function() {
+                console.error('Could not reach the server.');
+              };
+              request.send();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              var oEmbedContainers = document.getElementsByClassName('oembed_container');
+              Array.prototype.forEach.call(oEmbedContainers, loadEmbedField)
+            });
+          </script>
+          {% end_require_js %}
+          {% else %}
+          <div id="embed_container" class="embed_container">
+            <div class="iframe_wrapper">
+              {{ module.left_column.embed_field.embed_html }}
+            </div>
+          </div>
+          {% require_css %}
+          <style>
+            .iframe_wrapper {
+              height: 0;
+              padding-bottom: 56.25%;
+              padding-top: 25px;
+              position: relative;
+            }
+
+            .embed_container {
+              display: inline-block;
+              height: 100%;
+              position: relative;
+              width: 100%;
+            }
+
+            .embed_container iframe {
+              left: 0;
+              max-height: 100%;
+              max-width: 100%;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+          {% end_require_css %}
+          {% endif %}
+
+        </div>
+      </div>
+      <div class="tmg_col_6">
+        <div class="tmg_our_story_text">
+          <div>
+                  <h2 class="title-l">{{ module.text_group.title }}</h2>
+                  <p class="text-s">{{ module.text_group.text_field }}</p>
+                  <p class="text-s">{{ module.text_group.text_2 }}</p>
+         </div>
+<!--           {{ module.text_group.text }} -->
+          {% set href = module.text_group.button.button_link.url.href %}
+          {% if module.text_group.button.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+          {% set href = "mailto:" + href %}
+          {% endif %}
+          <a href="{{ href|escape_url }}" class="button custom_btn" {% if module.text_group.button.button_link.open_in_new_tab %}target="_blank" {% endif %} {% if module.text_group.button.button_link.rel %}rel="{{ module.text_group.button.button_link.rel|escape_attr }}" {% endif %}>
+            {{ module.text_group.button.button_text }} 
+
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="21px" viewBox="0 0 25 21" style="enable-background:new 0 0 25 21;" xml:space="preserve">
+              <style type="text/css">
+                .st0 {
+                  fill: none;
+                  stroke: #FFFFFF;
+                  stroke-width: 2;
+                }
+              </style>
+              <path class="st0" d="M14.3,1l9.1,9.5l-9.1,9.5"></path>
+              <line class="st0" x1="0" y1="10.6" x2="23.5" y2="10.6"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% require_css %}
+<style>
+  {% scope_css %} 
+
+  .tmg_two_column_section{
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    {{ module.style.desktop.spacing_field.css }}
+  }
+  .tmg_two_column_row{ 
+    display:flex; 
+    flex-wrap: wrap; 
+    align-items: center;
+
+  }
+  .tmg_col_6{
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+
+  }
+  .tmg_our_story_img img {  width: 100%;}
+  .tmg_our_story_text h2{
+    color: #FFFFFF;
+    margin-bottom: 40px;
+  }
+  .tmg_our_story_text p{  
+    color: #FFFFFF;
+  }
+  .tmg_our_story_img img {  border-top-left-radius: 20px;  }
+  .tmg_our_story_text {   padding-left: 80px; }
+
+
+
+  /*   .button.custom_btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 80px;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, #C5299B, #19ECDF) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  } */
+
+
+  .button.custom_btn svg {  width: 15px; margin-bottom: -5px; margin-left: 20px; }
+
+  {% if module.select_image_position =="rgt_img" %}
+
+  .tmg_two_column_row {  flex-direction: row-reverse;}
+  .tmg_our_story_img img {  border-top-left-radius: 0;  border-top-right-radius: 20px; }
+  .tmg_our_story_text {  padding-left: 0; padding-right: 80px;}
+
+
+  {% elif module.select_image_position =="lft_img" %}
+
+  {% endif %}
+
+
+
+  @media screen and (max-width: 767px) {
+
+    .tmg_col_6{
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .tmg_two_column_section{  {{ module.style.mobile_spacing.spacing_field.css }} ; }
+    .tmg_our_story_text {  padding-left: 0; padding-top: 30px;}
+
+
+    {% if module.select_image_position =="rgt_img" %}
+
+    .tmg_two_column_row {  flex-direction: row-reverse;}
+    .tmg_our_story_img img {  border-top-left-radius: 20px;  border-top-right-radius: 0; }
+    .tmg_our_story_text {  padding-left: 0; padding-right: 0; padding-top: 30px;}
+
+    {% elif module.select_image_position =="lft_img" %}
+
+    {% endif %}
+
+    .tmg_our_story_text h2 {
+      margin-bottom: 20px;
+    }
+
+
+
+  }
+  {% end_scope_css %} 
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+
+</script>
+{% end_require_js %}
+<style>
+   .tmg_two_column_section {
+    padding: 60px 0 !important;
+  }
+  @media (width <= 991px) {
+    .tmg_two_column_row {
+      flex-direction: column !important;
+      grid-row-gap: 30px !important;
+  }
+    .tmg_col_6 {
+      max-width: 100% !important;
+    }
+  }
+   @media (width <= 768px) {
+     .tmg_two_column_row {
+      grid-row-gap: 0px !important;
+  }
+    .tmg_two_column_section {
+      padding: 35px 0 !important;
+    }
+  }
+</style>

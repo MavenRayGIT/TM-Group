@@ -1,0 +1,116 @@
+<div class="tmg_our_story_section {{ module.add_custom_class }}">
+    <div class="content-wrapper">
+      <div class="tmg_our_story_row">
+        <div class="tmg_col_6" data-aos="fade-up">
+          <div class="tmg_our_story_img">
+            {% if module.image.src %}
+            {% set sizeAttrs = 'width="{{ module.image.width|escape_attr }}" height="{{ module.image.height|escape_attr }}"' %}
+            {% if module.image.size_type == 'auto' %}
+            {% set sizeAttrs = 'width="{{ module.image.width|escape_attr }}" height="{{ module.image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+            {% elif module.image.size_type == 'auto_custom_max' %}
+            {% set sizeAttrs = 'width="{{ module.image.max_width|escape_attr }}" height="{{ module.image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+            {% endif %}
+            {% set loadingAttr = module.image.loading != 'disabled' ? 'loading="{{ module.image.loading|escape_attr }}"' : '' %}
+            <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+            {% endif %}
+          </div>
+        </div>
+        <div class="tmg_col_6" data-aos="fade-up">
+          <div class="tmg_our_story_text">
+            {{ module.text }}
+            {% set href = module.button_link.url.href %}
+            {% if module.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+            {% endif %}
+            <a class="button custom_btn"
+               {% if module.button_link.url.type is equalto "CALL_TO_ACTION"  %}
+               href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #}
+               {% else %}
+               href="{{ href|escape_url }}"
+               {% endif %}
+               {% if module.button_link.open_in_new_tab %}
+               target="_blank"
+               {% endif %}
+               {% if module.button_link.rel %}
+               rel="{{ module.button_link.rel|escape_attr }}"
+               {% endif %}
+               >
+              {{ module.button_text }}
+            </a>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% require_css %}
+  <style>
+    {% scope_css %} 
+  
+    .tmg_our_story_section{
+      width: 100%;
+      background-color: {{ module.style.background_color.css }};
+      position: relative;
+      padding-top: 150px;
+      padding-bottom: 75px;
+  
+    }
+    .tmg_our_story_row{ 
+      display:flex; 
+      flex-wrap: wrap; 
+  
+  
+    }
+    .tmg_col_6{
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+  
+    }
+    .tmg_our_story_img img { width: 100%;  } 
+    .tmg_our_story_text h2{
+      font-family: 'Khula';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 50px;
+      line-height: 52px;
+      letter-spacing: -0.05em;
+      color: #FFFFFF;
+      margin-bottom: 42px;
+    }
+    .tmg_our_story_text p{
+      font-style: normal;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin-bottom: 0;
+    }
+    .tmg_our_story_img img {border-top-right-radius: 20px; }
+    .tmg_our_story_text { padding-left: 80px;  }
+    .button.custom_btn{ margin-top:42px; }
+    
+  
+  
+    @media (max-width : 990px){
+  
+      .tmg_col_6{
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .tmg_our_story_text {
+        padding-left: 0;
+        padding-top: 40px;
+      }
+    }
+  
+  
+  
+    {% end_scope_css %} 
+  </style>
+  {% end_require_css %}
+  {% require_js %}
+  <script>
+  
+  </script>
+  {% end_require_js %}

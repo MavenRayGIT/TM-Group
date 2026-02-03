@@ -1,0 +1,227 @@
+{
+  "name" : {
+    "message" : "Sosyal paylaşım",
+    "description" : "",
+    "placeholders" : null
+  },
+  "share_text.default" : {
+    "message" : "Paylaş:",
+    "description" : "",
+    "placeholders" : null
+  },
+  "share_text.label" : {
+    "message" : "Metni paylaş",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.accessibility_options.label" : {
+    "message" : "Erişilebilirlik seçenekleri",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.accessibility_options.title.default" : {
+    "message" : "Bunu Facebook'ta paylaş",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.accessibility_options.title.help_text" : {
+    "message" : "Ekran okuyucu tarafından okundu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.accessibility_options.title.label" : {
+    "message" : "Başlık",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.label" : {
+    "message" : "Sosyal bağlantılar",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.choices.envelope" : {
+    "message" : "E-posta adresi",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.choices.facebook-f" : {
+    "message" : "Facebook",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.choices.linkedin-in" : {
+    "message" : "LinkedIn",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.choices.pinterest-p" : {
+    "message" : "Pinterest",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.choices.twitter" : {
+    "message" : "Twitter",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.social_account.label" : {
+    "message" : "Sosyal hesap",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.twitter_icon.choices.twitter" : {
+    "message" : "Twitter kuşu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.twitter_icon.choices.x-twitter" : {
+    "message" : "Twitter X",
+    "description" : "",
+    "placeholders" : null
+  },
+  "social_links.twitter_icon.label" : {
+    "message" : "Twitter simgesi",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.alignment.alignment.label" : {
+    "message" : "Hizalama",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.alignment.label" : {
+    "message" : "Hizalama",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.background.color.label" : {
+    "message" : "Renk",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.background.label" : {
+    "message" : "Arka plan",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.corner.label" : {
+    "message" : "Köşe",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.corner.radius.label" : {
+    "message" : "Yarı Çap",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.fill.color.label" : {
+    "message" : "Renk",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.fill.label" : {
+    "message" : "Doldur",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.label" : {
+    "message" : "Stiller",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.help_text" : {
+    "message" : "Seçilen öğenin görünümünü önceden tanımlanmiş değerlere hızlıca ayarlamak için, ön tanımları kullan.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_color.choices.dark" : {
+    "message" : "Koyu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_color.choices.light" : {
+    "message" : "Açık",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_color.label" : {
+    "message" : "Simge rengi",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_shape.choices.circle" : {
+    "message" : "Daire",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_shape.choices.square" : {
+    "message" : "Kare",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_shape.label" : {
+    "message" : "Simge şekli",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_size.choices.large" : {
+    "message" : "Büyük",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_size.choices.regular" : {
+    "message" : "Normal",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_size.choices.small" : {
+    "message" : "Küçük",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.icon_size.label" : {
+    "message" : "Simge boyutu",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.presets.label" : {
+    "message" : "Ön ayarlar",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.size.label" : {
+    "message" : "Boyut",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.size.size.label" : {
+    "message" : "Boyut",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.spacing.label" : {
+    "message" : "Aralık",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.spacing.space_between_icons.label" : {
+    "message" : "Simgeler arası boşluk",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.spacing.spacing.label" : {
+    "message" : "Aralık",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.text.font.label" : {
+    "message" : "Yazı tipi",
+    "description" : "",
+    "placeholders" : null
+  },
+  "styles.text.label" : {
+    "message" : "Metin",
+    "description" : "",
+    "placeholders" : null
+  }
+}

@@ -1,0 +1,171 @@
+/* Modal & contact-info overrides unique to this header module */
+.tmg-modal-close-btn {
+  color: #06226D;
+  font-family: Inter;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: normal;
+  transform: rotate(45deg);
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+.tmg-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  margin: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.tmg-modal-show {
+  overflow: hidden;
+}
+.tmg-modal-show .tmg-modal {
+  display: flex;
+}
+.tmg-modal-dialog {
+  width: 100%;
+  height: 100%;
+}
+.tmg-modal__bg {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  pointer-events: none;
+  z-index: -1;
+}
+.tmg-modal-header {
+  position: relative;
+  padding: 15px 45px;
+  border-bottom: 1px solid #DCD5D5;
+}
+.contact-info-links {
+  display: flex;
+  margin: 0 -16px;
+}
+.contact-info-link-wrap {
+  margin: 0 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.contact-info-link-label {
+  color: #06226D;
+  font-family: "Khula";
+  font-size: 18px;
+  font-weight: 400;
+}
+.contact-info-link-wrap.active .contact-info-link-label {
+  color: #C5299B;
+}
+.contact-info-link-wrap.active svg path.stroke-change {
+  stroke: #C5299B;
+}
+.contact-info-link-wrap.active svg path.fill-change {
+  fill: #C5299B;
+}
+.tmg-modal-content {
+  background: #ffffff;
+  height: 100%;
+}
+.contact-info-location-notes {
+  display: flex;
+  justify-content: center;
+}
+.contact-info-location-note-wrap {
+  margin: 0 25px;
+  border: 1px solid #06226D;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+}
+.ciln-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+}
+.contact-info-location-note-wrap[note="office"] .ciln-circle {
+  background: #C5299B;
+}
+.contact-info-location-note-wrap[note="team"] .ciln-circle {
+  background: #19ECDF;
+}
+.contact-info-location-note-wrap[note="client"] .ciln-circle {
+  background: #DEE6EA;
+}
+.ciln-label {
+  color: #06226D;
+  font-family: Khula;
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+.contact-info-location-map-img {
+  width: 100%;
+}
+.tmg-modal-body {
+  /* module-specific body overrides here */
+}
+.contact-info-details-overflow-wrap {
+  max-height: calc(100vh - 129px);
+  padding: 30px 85px;
+  overflow: auto;
+}
+.contact-info-details-wrap {
+  margin-bottom: 50px;
+  min-height: calc(100vh - 129px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-info-location-map-wrap {
+  margin-top: 40px;
+}
+/* Form button & input overrides (module-specific) */
+form .hs-button {
+  background-color: #C5299B !important;
+  border-color: #C5299B !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 26px !important;
+  color: #FFFFFF !important;
+}
+form .hs-button:hover {
+  background-color: #06226D !important;
+}
+form input[type=email],
+form input[type=tel],
+form input[type=text],
+form textarea {
+  padding: 7px 14px;
+  background-color: #F1F5F7 !important;
+  border: none;
+  border-bottom: 2px solid transparent;
+  outline: none !important;
+  font-size: 18px !important;
+  color: #06226D;
+}
+form input:focus,
+form textarea:focus {
+  border-color: #06226D;
+}
+/* from original module: additional scope-specific tweaks */
+.header .tmg-modal form label {
+  margin-bottom: 0;
+}
+.header .tmg-modal form label span {
+  font-weight: 700;
+  font-size: 18px;
+  color: #06226D;
+}

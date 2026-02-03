@@ -1,0 +1,207 @@
+{% set table_id = 'addons_features' %}
+{% set table_rows = hubdb_table_rows(table_id, queryparam='') %}
+{% set limit = module.database_limit %}
+{% set count = 0 %}
+{% if table_rows %}
+<div id="custom-tab-module" class="tmg_faq_section">
+    <div class="content-wrapper">
+      <div class="head_title">
+        <h2>{{ module.heading }}</h2>
+      </div>
+    </div>  
+  
+    <div class="content-wrapper">
+      <div class="custom-tab-container" data-aos="fade-up">
+        {% for row in table_rows %}
+            <div class="custom-tab" data-options="{% for foreign_row in row.included_in %}{{ foreign_row.name }}{% if not loop.last %},{% endif %}{% endfor %}">
+                <div class="custom-tab-header" onclick="toggleTab(this)">
+                    <span class="custom-icon">+</span>
+                    <span>{{ row.name }}</span>
+                </div>
+                <div class="custom-tab-content">
+                    <div class="custom-column-container">
+                        <div class="custom-column">{{ row.description }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+<style>
+{% scope_css %}
+      .head_title h2{
+      font-family: 'Khula';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 50px;
+      line-height: 55px;
+      letter-spacing: -0.05em;
+      color: #FFFFFF;    margin-bottom: 50px;
+  
+    }
+.tmg_faq_section {  
+    width: 100%;
+    background-color: #06226D;
+    position: relative;
+    padding: 75px 0 75px 0;
+}
+.head-title h2 {
+    font-family: 'Khula';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: -0.05em;
+    color: #FFFFFF;
+    margin-bottom: 50px;
+}
+
+#custom-tab-module {}
+
+#custom-tab-module .custom-tab-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#custom-tab-module .custom-tab {
+    margin-bottom: 2px;
+    overflow: hidden;
+}
+#custom-tab-module .custom-tab:first-child .custom-tab-header{
+    border-top-right-radius: 15px;
+}
+#custom-tab-module .custom-tab-header {
+    display: flex;
+    justify-content: start;
+    padding: 25px 42px;
+    background-color: #ffffff;
+    cursor: pointer;
+    border-radius: 0;
+    gap: 20px;
+    align-items: center;
+}
+
+#custom-tab-module .custom-tab-content {
+    display: none;
+    padding: 37px 76px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+#custom-tab-module .custom-tab-content.show {
+    display: block;
+    max-height: 1000px;
+    opacity: 1;
+}
+
+#custom-tab-module .custom-column-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#custom-tab-module .custom-column {
+    width: 100%;
+}
+
+.custom-tab-header span {
+    font-family: 'Khula';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 26px;
+    color: #000000;
+    transform: translate(0px, 5px);
+}
+
+.custom-tab-header span.custom-icon {
+    color: #C5299B;
+}
+
+#custom-tab-module .custom-column p {
+    font-style: normal;
+    font-size: 20px;
+    line-height: 27px;
+    color: #012169;
+    margin: 0;
+    padding: 0;
+}
+
+#custom-tab-module .custom-cta-button {
+    margin-top: 40px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    background: #C5299B;
+    border: #C5299B;
+}
+
+#custom-tab-module .custom-cta-button:hover {
+    background-color: #06226D;
+}
+
+#custom-tab-module .custom-icon {
+    font-size: 40px;
+    transform: translate(0px, 6px);
+}
+{% end_scope_css %}
+</style>
+{% require_js %}
+<script>
+function toggleTab(element) {
+  const allTabs = document.querySelectorAll('#custom-tab-module .custom-tab-content');
+  const allIcons = document.querySelectorAll('#custom-tab-module .custom-icon');
+  const content = element.nextElementSibling;
+  const icon = element.querySelector('.custom-icon');
+
+  // Close all tabs except the one being clicked
+  allTabs.forEach(tab => {
+      if (tab !== content) {
+          tab.classList.remove('show');
+      }
+  });
+
+  // Reset all icons except the one being clicked
+  allIcons.forEach(ic => {
+      if (ic !== icon) {
+          ic.textContent = '+';
+      }
+  });
+
+  if (content.classList.contains('show')) {
+      content.classList.remove('show');
+      icon.textContent = '+';
+  } else {
+      content.classList.add('show');
+      icon.textContent = '-';
+
+      // Smooth scroll to the tab
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+</script>
+{% end_require_js %}
+<script>
+    let currentUrlFaqs = window.location.pathname.toLowerCase();
+    let customTabs = $('.custom-tab');
+
+    for(let index = 0; index < customTabs.length; index ++) {
+        let filters = $(customTabs[index]).attr('url-data-filter').toLowerCase().split(',');
+
+        let isMatch = filters.some(function(filter) {
+            return filter.trim() != '' && currentUrlFaqs.includes(filter.trim());
+        });
+
+        if (!isMatch) {
+            $(customTabs[index]).remove();
+        }
+    }
+</script>
+{% else %}
+{% endif %}

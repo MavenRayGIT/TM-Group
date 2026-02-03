@@ -1,0 +1,84 @@
+[ {
+  "id" : "f4fb536c-ade6-cba9-47a8-8e7a3d0115fa",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a48e8dd8-ae9f-d5db-bbea-45e90e3c331d",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  }
+}, {
+  "id" : "c7a23355-96f6-003f-ddb5-45bb5fa00f2e",
+  "name" : "add_custom_class",
+  "label" : "Add Custom Class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "163dc84c-292a-5f60-d488-fd258d8c0411",
+  "name" : "testimonial_review",
+  "label" : "Testimonial Review",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "a534bfd4-bdd6-c2c9-6151-bed7b0677d16",
+    "name" : "text_field",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "d68bf243-4cd6-f5f6-e59b-949dc0548096",
+    "name" : "client_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CIO at a Tier 3 Supplier"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "client_name" : "CIO at a Tier 3 Supplier"
+  }, {
+    "client_name" : "CIO at a Tier 3 Supplier"
+  }, {
+    "client_name" : "CIO at a Tier 3 Supplier"
+  } ]
+} ]

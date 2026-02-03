@@ -1,0 +1,187 @@
+<!--
+  templateType: "blog_post"
+  label: "TMG - blog post"
+  isAvailableForNewContent: true
+-->
+{% set template_css = "../../css/templates/tmg_blog.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block header %}
+  {% global_partial path="./partials/TMG - Light-header.html" %}
+{% endblock header %}
+
+{% block body_class %}header_light{% endblock body_class %}
+
+{% block body %}
+<main class="body-container-wrapper">
+    <div class="body-container body-container--blog-post tmg_blog_dt_post">
+        {# Blog header #}
+        <div class="blog-header">
+            <div class="blog-header__inner">
+                <h2 class="blog-header__title">
+                    <a href="javascript:void(0);" onclick="handleBackNavigation()" class="back-link">
+                        <span><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</span>
+                    </a>
+                </h2>
+            </div>
+        </div>
+
+        {# Blog post content #}
+        <div class="content-wrapper">
+            <div class="tmg_blog_wraper">
+                <article class="blog-post">
+                    <h1 class="title-l">{{ content.name }}</h1>
+                    
+                    <div class="rx67m_meta_container">
+                        <div class="nt89p_author_date">
+                            <span class="wk23q_author hj45t_author_link">
+                                By                               
+                                    {{ content.blog_post_author.display_name }}
+                                
+                            </span>
+                            <span class="vp78m_separator">•</span>
+                            <span class="uy34n_date">
+                                {{ content.publish_date|datetimeformat('%B %e, %Y') }}
+                            </span>
+                        </div>
+                          {% if content.tag_list %}
+                              <div class="zq12k_tags">
+                                  {% for tag in content.tag_list %}
+                                  <a href="/blog/tag/{{ tag.slug }}" class="bx56y_tag">{{ tag.name }}</a>
+                                  {% endfor %}
+                              </div>
+                          {% endif %}
+                        
+                        <div class="gs89h_share">
+                            {% module "module_17196381543958" path="/TM-Group/modules/TMG - Social-sharing", label="TMG - Social-sharing" %}
+                        </div>
+                    </div>
+
+                    {% module "module_17315495800602" path="/TM-Group/modules/TMG - Blog Post image and wistia", label="TMG - Blog Post image and wistia" %}
+                  
+
+                    
+                    <div class="blog-post__body">
+                        {{ content.post_body }}
+                    </div>
+                  
+                    {% module "module_17593335497608" path="/TM-Group/modules/Download Controller blog", label="Download Controller blog" %}
+                  
+                </article>
+            </div>
+        </div>
+
+        {# Recent posts section #}
+        {% macro recent_post(post) %}
+        <a href="{{ post.absolute_url }}" class="xk92m_card">
+            <div class="zt45j_image_container">
+                <img src="{{ post.featuredImage }}" alt="{{ post.title }}" class="py67q_image">
+            </div>
+            <div class="vn23p_content">
+                <h3 class="lm34r_title">{{ post.title }}</h3>
+                <span class="yw78d_link">Read More</span>
+            </div>
+        </a>
+        {% endmacro %}
+
+        <div class="kj12n_section">
+            <div class="qp34m_wrapper">
+                <h2 class="fg67h_heading">Related Articles</h2>
+                <div class="md45p_grid">
+                    {% related_blog_posts
+                        limit=3,
+                        no_wrapper=True,
+                        post_formatter="recent_post",
+                        blog_tag_id="{{ content.tag_ids }}"
+                    %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+.rx67m_meta_container {
+    font-size: 12px;
+    color: #666;
+    margin: 1rem 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nt89p_author_date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hj45t_author_link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hj45t_author_link:hover {
+    text-decoration: underline;
+}
+
+.vp78m_separator {
+    color: #999;
+}
+
+.zq12k_tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.bx56y_tag {
+    color: #03133f;
+    text-decoration: none;
+    background: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.bx56y_tag:hover {
+    background: #06226D;
+    color: white;
+    text-decoration: none;
+}
+
+.gs89h_share {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    .rx67m_meta_container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .gs89h_share {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+    </style>
+
+    <script>
+  function handleBackNavigation() {
+    if (document.referrer) {
+        // Check if user came from the same domain
+        if (document.referrer.includes(window.location.hostname)) {
+            window.history.back();
+            return;
+        }
+    }
+    // Default fallback to the blog URL using the current domain
+    window.location.href = window.location.origin + '/blog';
+}
+    </script>
+</main>
+{% endblock body %}

@@ -1,0 +1,239 @@
+<div class="tmg_two_column_section {{ module.add_custom_class }}">
+	<div class="content-wrapper">
+		<div class="two_column_slider-{{name}}">
+			{% for item in module.slide %}
+			<div class="tmg_two_column_row"  data-aos="fade-up">
+				<div class="tmg_col_6">
+					<div class="tmg_our_story_text">
+            <h2 class="title-l">{{ module.text_group.title }}</h2>
+            <p class="text-s">{{ module.text_group.text_new }}</p>
+						{{ item.text_group.text }}
+						{% set href = item.text_group.button.button_link.url.href %}
+						{% if item.text_group.button.button_link.url.type is equalto "EMAIL_ADDRESS" %}
+						{% set href = "mailto:" + href %}
+						{% endif %}
+						<a href="{{ href|escape_url }}" class="button custom_btn" {% if item.text_group.button.button_link.open_in_new_tab %}target="_blank" {% endif %} {% if item.text_group.button.button_link.rel %}rel="{{ item.text_group.button.button_link.rel|escape_attr }}" {% endif %}>
+							{{ item.text_group.button.button_text }}
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="21px" viewBox="0 0 25 21" style="enable-background:new 0 0 25 21;" xml:space="preserve">
+								<style type="text/css">
+									.st0 {
+										fill: none;
+										stroke: #FFFFFF;
+										stroke-width: 2;
+									}
+								</style>
+								<path class="st0" d="M14.3,1l9.1,9.5l-9.1,9.5"></path>
+								<line class="st0" x1="0" y1="10.6" x2="23.5" y2="10.6"></line>
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="tmg_col_6">
+					<div class="tmg_our_story_img">
+						{% if item.left_column.image.src %}
+						{% set sizeAttrs = 'width="{{ item.left_column.image.width|escape_attr }}" height="{{ item.left_column.image.height|escape_attr }}"' %}
+						{% if item.left_column.image.size_type == 'auto' %}
+						{% set sizeAttrs = 'width="{{ item.left_column.image.width|escape_attr }}" height="{{ item.left_column.image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+						{% elif item.left_column.image.size_type == 'auto_custom_max' %}
+						{% set sizeAttrs = 'width="{{ item.left_column.image.max_width|escape_attr }}" height="{{ item.left_column.image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+						{% endif %}
+						{% set loadingAttr = item.left_column.image.loading != 'disabled' ? 'loading="{{ item.left_column.image.loading|escape_attr }}"' : '' %}
+						<img src="{{ item.left_column.image.src|escape_url }}" alt="{{ item.left_column.image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="btn-wrap">
+			<div class="prev-btn-{{name}}">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+					<style type="text/css">
+						.st0 {
+							fill: none;
+							stroke: #C5299B;
+							stroke-width: 2;
+						}
+					</style>
+					<path class="st0" d="M9.5,20.5l-9.1-9.5l9.1-9.5" />
+					<line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2" />
+				</svg>
+			</div>
+			<div class="next-btn-{{name}}">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+					<style type="text/css">
+						.st0 {
+							fill: none;
+							stroke: #C5299B;
+							stroke-width: 2;
+						}
+					</style>
+					<path class="st0" d="M14.8,1.6l9.1,9.5l-9.1,9.5" />
+					<line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2" />
+				</svg>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% require_css %}
+<style>
+	{% scope_css %} 
+
+	.tmg_two_column_section{
+		width: 100%;
+		background-color: {{ module.style.background_color.css }};
+		position: relative;
+		{{ module.style.desktop.spacing_field.css }}
+	}
+	.tmg_two_column_row{ 
+		display:flex; 
+		flex-wrap: wrap; 
+		align-items: center;
+
+	}
+	.tmg_col_6{
+		-ms-flex: 0 0 50%;
+		flex: 0 0 50%;
+		max-width: 50%;
+
+	}
+	.tmg_our_story_img img {  width: 100%;}
+	.tmg_our_story_text h2 {
+		color: #FFFFFF;
+		margin-bottom: 40px;
+	}
+	.tmg_our_story_text p{
+		font-style: normal;
+		font-size: 20px;
+		color: #FFFFFF;
+	}
+	.tmg_our_story_img img {  border-top-left-radius: 20px;  }
+	.tmg_our_story_text {   padding-right: 80px; }
+
+	.button.custom_btn svg {  width: 15px; margin-bottom: -5px; margin-left: 20px; }
+	.tmg_two_column_section .slick-slide {
+		margin: 0 30px;
+	}
+	.tmg_two_column_section .slick-track {
+		display: flex !important;
+		gap: 30px;
+	}
+	.tmg_two_column_section .slick-list {
+		padding: 0 30px;
+	}
+
+
+	.slick-dots { bottom: auto;}
+	.slick-dots li button {  background: #ffffff;  }
+	.slick-dots li.slick-active button {  background: #C5299B; }
+	.slick-dots li button:before{ display:none;}
+
+
+	/*arrow-slider*/
+
+	.btn-wrap { display: flex; justify-content: end; gap: 22px; align-items: center; padding-top: 23px;}
+	.prev-btn-{{name}} {  width: 64px; height: 64px; cursor: pointer; border: 2px solid #C5299B; border-radius: 50px; display: flex; align-items: center; justify-content: center;}
+	.next-btn-{{name}} { width: 64px; height: 64px;  background-size: contain; cursor: pointer; border: 2px solid #C5299B;  border-radius: 50px;  display: flex; align-items: center; 
+		justify-content: center;
+	}
+	.prev-btn-{{name}} svg .st0,
+	.next-btn-{{name}} svg .st0 { stroke: #C5299B;
+	}
+	.prev-btn-{{name}}:hover { border: 2px solid #19ECDF;}
+	.next-btn-{{name}}:hover{ border: 2px solid #19ECDF; }
+
+	.prev-btn-{{name}}:hover svg .st0,
+	.next-btn-{{name}}:hover svg .st0 { stroke: #19ECDF;}
+
+	.prev-btn-{{name}}.slick-disabled { opacity: 0.5; }
+	.next-btn-{{name}}.slick-disabled{ opacity: 0.5; }
+
+
+	/*arrow-slider*/
+	.slick-list.draggable:before {
+		display: none;
+	}
+
+	@media screen and (max-width: 767px) {
+		.tmg_two_column_section .slick-slide {
+			margin: 0 5px;
+		}
+		.tmg_two_column_section .slick-track {
+			display: flex !important;
+			gap: 5px;
+		}
+		.tmg_two_column_section .slick-list {
+			padding: 0 5px;
+		}
+
+		.tmg_col_6{
+			-ms-flex: 0 0 100%;
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+
+		.tmg_two_column_section{  {{ module.style.mobile_spacing.spacing_field.css }} ; }
+		.tmg_our_story_text {  padding-left: 0; padding-top:0;margin-bottom: 40px;}
+		.tmg_two_column_row {  flex-direction: row-reverse;}
+		.tmg_our_story_img img {  border-top-left-radius: 20px;  border-top-right-radius: 0; }
+		.tmg_our_story_text {  padding-left: 0; padding-right: 0; padding-top: 30px;}
+
+
+		.tmg_our_story_text h2 {
+			margin-bottom: 20px;
+		}
+	}
+	{% end_scope_css %} 
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+	$(".two_column_slider-{{name}}").slick({
+		slidesToShow: 1,
+		infinite:false,
+		slidesToScroll: 1,
+		autoplay: false,
+		autoplaySpeed: 2000,
+		dots: false,
+		arrows: false
+
+		// dots: false, Boolean
+		// arrows: false, Boolean
+		});
+
+	$(".prev-btn-{{name}}").click(function () {
+		$(".two_column_slider-{{name}}").slick("slickPrev");
+		});
+
+	$(".next-btn-{{name}}").click(function () {
+		$(".two_column_slider-{{name}}").slick("slickNext");
+		});
+	$(".prev-btn-{{name}}").addClass("slick-disabled");
+		$(".two_column_slider-{{name}}").on("afterChange", function () {
+		if ($(".slick-prev-{{name}}").hasClass("slick-disabled")) {
+		$(".prev-btn-{{name}}").addClass("slick-disabled");
+		} else {
+		$(".prev-btn-{{name}}").removeClass("slick-disabled");
+			}
+	if ($(".slick-next-{{name}}").hasClass("slick-disabled")) {
+				$(".next-btn-{{name}}").addClass("slick-disabled");
+				} else {
+		$(".next-btn-{{name}}").removeClass("slick-disabled");
+			}
+
+
+	});
+
+</script>
+{% end_require_js %}
+<style>
+   .tmg_two_column_section {
+    padding: 60px 0 !important;
+  }
+  @media (width <= 768px) {
+    .tmg_two_column_section {
+      padding: 35px 0 !important;
+    }
+  }
+</style>

@@ -1,0 +1,224 @@
+.result-listing-section {
+	padding: 80px 0;
+}
+
+.top-search-flex {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 24px;
+	justify-content: space-between;
+	margin-bottom: 48px;
+}
+
+.result-stats {
+	display: none;
+	color: var(--smoke-900, #120F14);
+	font-family: CircularXX;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 450;
+	line-height: 150%;
+}
+
+.results-search-container {
+	width: 100%;
+	position: relative;
+}
+
+.results-search-form {
+	position: relative;
+}
+
+.results-search-form .results-search-input[type="text"] {
+	color: var(--smoke-900, #120F14);
+	font-family: CircularXX;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 450;
+	line-height: normal;
+	outline: none;
+	padding: 14px 43px 14px 16px;
+	background-color: var(--surface-bg-light-gray, #F5F5F5);
+	border: 1px solid var(--surface-border-primary, #9A9191);
+	border-radius: 4px;
+}
+
+.input-search-button {
+	position: absolute;
+	inset: 50% 15px auto auto;
+	transform: translateY(-50%);
+	background-color: transparent;
+	padding: 0;
+}
+
+.search-results-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 44px 18px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.search-result-item {
+	width: 100%;
+	max-width: 351px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.result-card {
+	width: 100%;
+	height: 100%;
+	border: 1px solid var(--surface-border-primary, #9A9191);
+	background: var(--surface-bg-white, #FFF);
+	border-radius: 4px;
+	text-decoration: none;
+	transition: box-shadow .3s ease, border .3s ease;
+}
+
+.result-card:hover {
+	border-color: var(--surface-border-black,#120f14);
+	box-shadow: 4px 7px 27px 4px rgba(0,0,0,.16);
+}
+
+.result-featured-image {
+	width: 100%;
+	height: 193px;
+}
+
+.result-featured-image img {
+	border-radius: 4px;
+	width: 100%;
+	height: 100%;
+}
+
+.cover-image {
+	object-fit: cover;
+}
+
+.fallback-image {
+	object-fit: contain;
+}
+
+.result-copy-flex {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	padding: 18px 20px 20px 20px;
+}
+
+.result-card-title {
+	height: 51.8px;
+	color: var(--smoke-900, #120F14);
+	font-family: CircularXX;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 150%;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.result-card-description {
+	color: #7D7D80;
+	font-family: CircularXX;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 450;
+	line-height: 150%;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+.results-pagination-container {
+	display: none;
+	margin-top: 48px;
+	justify-content: center;
+	column-gap: 8px;
+}
+
+.number-pagination-flex {
+	display: flex;
+	column-gap: 8px;
+}
+
+.pagination-number-button,
+.pagination-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--white);
+	border: 1px solid #c1c1c1;
+	border-radius: 4px;
+	color: var(--smoke-900);
+	font-size: 16px;
+	font-weight: 450;
+	gap: 10px;
+	height: 33px;
+	line-height: 130%;
+	padding: 10px;
+	text-decoration: none;
+	width: 35px;
+	transition: opacity .3s ease;
+}
+
+.pagination-number-button:hover,
+.pagination-button:hover {
+	opacity: .5;
+}
+
+.pagination-number-button.active {
+	background: #f9eae4;
+	border: 1px solid var(--brown-500);
+	border-radius: 4px;
+	pointer-events: none;
+}
+
+.pagination-button.disabled {
+	opacity: .5;
+	pointer-events: none;
+}
+
+.hs-search-results__prev-page {
+	float: left;
+}
+.hs-search-results__next-page {
+	float: right;
+}
+
+@media (min-width: 36rem) {
+	.result-listing-section {
+		padding: 100px 0;
+	}
+}
+
+@media (min-width: 48rem){
+	.search-results-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 64rem) {
+	.result-listing-section {
+		padding: 80px 0;
+	}
+
+	.results-search-container {
+		max-width: 643px;
+	}
+
+	.search-results-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 87.5rem) {
+	.search-results-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

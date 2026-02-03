@@ -1,0 +1,157 @@
+<div class="tmg_three_column_section {{ module.add_custom_class }}">
+  <div class="content-wrapper">
+    <div class="head_title"  data-aos="fade-up">
+      <h2>{{ module.heading }}</h2>
+    </div>
+  </div>
+  <div class="content-wrapper ">
+    <div class="tmg_we_serve_row"  data-aos="fade-up">
+      {% for item in module.we_serve_card %}
+      <div class="tmg_col_4">
+        <div class="we_card_box">
+          <div class="tmg_we_serve_text">
+            {{ item.text }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+{% require_css %}
+<style>
+  {% scope_css %}
+
+  .tmg_three_column_section {
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    {{ module.style.desktop_spacing.spacing.css }};
+  }
+
+  .tmg_we_serve_row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -25px;
+  }
+
+  .head_title h2 {
+    font-family: 'Khula';
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: -0.05em;
+    color: #051131;
+    margin-bottom: 40px;
+  }
+
+  .tmg_col_4 {
+    width: 33.333%;
+    padding: 0 25px;
+    box-sizing: border-box;
+  }
+
+  .we_card_box {
+    position: relative;
+    padding: 0 25px;
+  }
+
+  .tmg_we_serve_text {
+    padding: 38px 0 30px;
+  }
+
+  .tmg_we_serve_text h4 {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: -0.05em;
+    color: #051131;
+    margin: 0 0 20px;
+  }
+
+  .tmg_we_serve_text p {
+    font-size: 18px;
+    line-height: 24px;
+    color: #051131;
+    margin: 0;
+  }
+
+  .navigation-testmonials {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .button.custom_btn {
+    display: inline-block;
+    padding: 10px 26px;
+    font-family: 'Khula';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+  }
+
+  /* Layout variants */
+  {% if module.select_card_layout == 'Column_1' %}
+  .tmg_col_4 { width: 100%; margin-bottom: 50px; }
+  {% elif module.select_card_layout == 'Column_2' %}
+  .tmg_col_4 { width: 50%; margin-bottom: 50px; }
+  {% elif module.select_card_layout == 'Column_3' %}
+  .tmg_col_4 { width: 33.333%; margin-bottom: 50px; }
+  {% else %}
+  .tmg_col_4 { width: 25%; margin-bottom: 50px; }
+  {% endif %}
+
+  /* Mobile styles */
+  @media (max-width: 1200px) {
+    .tmg_three_column_section {
+      {{ module.style.mobile_spacing.spacing.css }};
+    }
+    .tmg_we_serve_row {
+      margin: 0;
+    }
+    .tmg_col_4 {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .we_card_box {
+      padding: 25px 0 0;
+      border-bottom: 1px solid #88A8B6;
+    }
+    .tmg_col_4:first-child .we_card_box {
+      padding-top: 0;
+    }
+    .tmg_col_4:last-child .we_card_box {
+      border-bottom: 0;
+    }
+    .tmg_we_serve_text {
+      padding-bottom: 25px;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .tmg_col_4 {
+      width: 100%;
+    }
+  }
+
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+
+
+</script>
+{% end_require_js %}
+<style>
+  #hs_cos_wrapper_widget_1730912959189 .tmg_three_column_section {
+    padding: 60px 0;
+  }
+</style>

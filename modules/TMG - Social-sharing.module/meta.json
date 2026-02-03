@@ -1,0 +1,12 @@
+{
+  "global" : true,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "master_language" : "en",
+  "smart_type" : "NOT_SMART",
+  "categories" : [ "social" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 171626131202,
+  "label" : "Social sharing",
+  "icon" : "../../../growth%20demo/images/module-icons/social-posts.svg",
+  "is_available_for_new_content" : true
+}

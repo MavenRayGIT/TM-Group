@@ -1,0 +1,172 @@
+<div class="tmg_testimonial_section {{ module.add_custom_class }}">
+    <div class="content-wrapper">
+       <!--         <div class="head_tital">
+          <h2>What our Customers say</h2>
+          </div> -->
+        <div class="tmg-testimonial-desktop">
+            <div class="testimonial_slider"  data-aos="fade-up">
+                {% for item in module.testimonial_review %}
+                <div class="testimonial_element">
+                <p class="title-l-italic">{{ item.text_field }}</p>
+                <span class="title-s-italic">{{ item.client_name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="btn-wrap">
+                <div class="prev-btn-{{name}}">
+                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+                      <style type="text/css">
+                         .st0{fill:none;stroke:#C5299B;stroke-width:2;}
+                      </style>
+                      <path class="st0" d="M9.5,20.5l-9.1-9.5l9.1-9.5"/>
+                      <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2"/>
+                   </svg>
+                </div>
+                <div class="next-btn-{{name}}">
+                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+                      <style type="text/css">
+                         .st0{fill:none;stroke:#C5299B;stroke-width:2;}
+                      </style>
+                      <path class="st0" d="M14.8,1.6l9.1,9.5l-9.1,9.5"/>
+                      <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2"/>
+                   </svg>
+                </div>
+             </div>
+        </div>
+        <div class="tmg-testimonial-mobile">
+            {% for item in module.testimonial_review %}
+                {% if loop.first %}
+                    <div class="testimonial_element">
+                    <p class="title-l-italic">{{ item.text_field }}</p>
+                    <span class="title-s-italic">{{ item.client_name }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+ </div>
+ {% require_css %}
+ <style>
+    {% scope_css %} 
+    .tmg_testimonial_section{
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    padding: 175px 0 75px 0;
+    }
+    .head_tital { text-align:left; }
+    .head_tital h2 {
+    letter-spacing: -0.05em;
+    color: #FFFFFF;
+    }
+    .testimonial_slider{ max-width:70%; margin:0 ; width:100%; }
+    .testimonial_element{   }
+    .testimonial_element p{
+    color: #FFFFFF;
+    }
+    .testimonial_element > span{
+    color: #FFFFFF;
+    margin-top: 58px;
+    display: inline-block;
+    }
+    .tmg_testimonial_section  .slick-list.draggable:before{ display:none;}
+    /*arrow-slider*/
+    .btn-wrap { display: flex; justify-content: end; gap: 22px; align-items: center; padding-top: 23px;}
+    .prev-btn-{{name}} {  width: 64px; height: 64px; cursor: pointer; border: 2px solid #C5299B; border-radius: 50px; display: flex; align-items: center; justify-content: center;}
+    .next-btn-{{name}} { width: 64px; height: 64px;  background-size: contain; cursor: pointer; border: 2px solid #C5299B;  border-radius: 50px;  display: flex; align-items: center; 
+    justify-content: center;
+    }
+    .prev-btn-{{name}} svg .st0,
+    .next-btn-{{name}} svg .st0 { stroke: #C5299B;}
+    .prev-btn-{{name}}:hover { border: 2px solid #19ECDF;}
+    .next-btn-{{name}}:hover{ border: 2px solid #19ECDF; }
+    .prev-btn-{{name}}:hover svg .st0,
+    .next-btn-{{name}}:hover svg .st0 { stroke: #19ECDF;}
+    .prev-btn-{{name}}.slick-disabled { opacity: 0.5; }
+    .next-btn-{{name}}.slick-disabled{ opacity: 0.5; }
+    /*arrow-slider*/
+    .testimonial_element p em {
+    font-family: 'Georgia';
+    }
+    @media (max-width : 767px){
+    .testimonial_slider{ max-width:100%; margin:0 ; width:100%; }
+    }
+
+    .tmg-testimonial-mobile {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .tmg-testimonial-mobile {
+            display: block;
+        }
+
+        .tmg-testimonial-desktop {
+            display: none;
+        }
+
+        .testimonial_element > span{
+            margin-top: 30px;
+        }
+    }
+    {% end_scope_css %} 
+ </style>
+ {% end_require_css %}
+ {% require_js %}
+ <script>
+    $(document).ready(function () {
+      $(".testimonial_slider").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite:false,
+        arrows: false,
+        infinite: false,
+        autoplaySpeed: 2000,
+        autoplay: false
+      });
+    
+      $(".prev-btn-{{name}}").click(function () {
+        $(".testimonial_slider").slick("slickPrev");
+    });
+    
+    $(".next-btn-{{name}}").click(function () {
+      $(".testimonial_slider").slick("slickNext");
+    });
+    $(".prev-btn-{{name}}").addClass("slick-disabled");
+      $(".testimonial_slider").on("afterChange", function () {
+      if ($(".slick-prev").hasClass("slick-disabled")) {
+        $(".prev-btn-{{name}}").addClass("slick-disabled");
+          } else {
+          $(".prev-btn-{{name}}").removeClass("slick-disabled");
+            }
+      if ($(".slick-next").hasClass("slick-disabled")) {
+        $(".next-btn-{{name}}").addClass("slick-disabled");
+          } else {
+          $(".next-btn-{{name}}").removeClass("slick-disabled");
+            }
+    });
+    });
+    
+ </script>
+ {% end_require_js %}
+<style>
+  .tmg_testimonial_section {
+      padding: 80px 0 60px !important;
+    }
+  @media (width <= 1280px) {
+     .tmg_testimonial_section {
+      padding: 60px 0 40px !important;
+    }
+  }
+  @media (width <= 768px) {
+     .tmg_testimonial_section {
+      padding: 60px 0 !important;
+    }
+    .testimonial_element>span {
+      margin-top: 0 !important;
+    }
+    
+  }
+</style>

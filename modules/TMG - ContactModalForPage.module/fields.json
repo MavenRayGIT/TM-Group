@@ -1,0 +1,133 @@
+[ {
+  "id" : "36e79de2-5698-bde3-f32f-6e5f4ef847a8",
+  "name" : "logo_image",
+  "label" : "Logo image",
+  "required" : false,
+  "locked" : true,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "exact",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/TMG-white%20Logo-1.svg",
+    "alt" : "TMG-white Logo-1",
+    "loading" : "lazy",
+    "width" : 136,
+    "height" : 39,
+    "max_width" : 136,
+    "max_height" : 39
+  }
+}, {
+  "id" : "f25c5b69-3681-dc99-5385-532953457f77",
+  "name" : "logo_link",
+  "label" : "Logo Link",
+  "required" : false,
+  "locked" : true,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://44974531.hs-sites.com/home",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "10c4fdad-b1c1-1cd2-905d-a409be79d583",
+  "name" : "logo",
+  "label" : "logo",
+  "required" : false,
+  "locked" : true,
+  "show_loading" : false,
+  "type" : "logo",
+  "display_width" : null,
+  "default" : {
+    "override_inherited_src" : true,
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/TMG-%20logo.svg",
+    "alt" : "TMG- logo",
+    "suppress_company_name" : true,
+    "width" : 94,
+    "height" : 27
+  }
+}, {
+  "id" : "c825d18a-cd95-3cd3-68fc-6e472b074d1c",
+  "name" : "menu",
+  "label" : "Menu",
+  "required" : false,
+  "locked" : true,
+  "type" : "menu",
+  "display_width" : null,
+  "default" : 171185516418
+}, {
+  "id" : "fbc7cdad-dfaa-f376-d964-1fdf50ed3744",
+  "name" : "max_levels",
+  "label" : "Max Levels",
+  "required" : false,
+  "locked" : true,
+  "display" : "text",
+  "min" : 1,
+  "max" : 3,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 3
+}, {
+  "id" : "62622642-c003-70da-a8d7-7e595756315c",
+  "name" : "fisrt_button",
+  "label" : "Button",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "c23b0792-9097-6895-72c8-6042cf05465a",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Contact us"
+  }, {
+    "id" : "4dcb4872-c14b-bb3b-fc9f-6886a2139dc6",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_text" : "Contact us",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+} ]

@@ -1,0 +1,117 @@
+[ {
+  "id" : "f4fb536c-ade6-cba9-47a8-8e7a3d0115fa",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "2132841a-5efe-58f6-b83d-de0bfa06363e",
+    "name" : "background_image",
+    "label" : "Background image",
+    "required" : false,
+    "locked" : false,
+    "type" : "backgroundimage",
+    "display_width" : null,
+    "default" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/Banner-image.jpg"
+    }
+  }, {
+    "id" : "a48e8dd8-ae9f-d5db-bbea-45e90e3c331d",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_image" : {
+      "background_position" : "MIDDLE_CENTER",
+      "background_size" : "cover",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/Banner-image.jpg"
+    },
+    "background_color" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  }
+}, {
+  "id" : "c7a23355-96f6-003f-ddb5-45bb5fa00f2e",
+  "name" : "add_custom_class",
+  "label" : "Add Custom Class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "d342b356-22e9-09a1-1e5a-509e91098ea4",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/image%206.jpg",
+    "alt" : "image 6",
+    "loading" : "lazy",
+    "width" : 528,
+    "height" : 494,
+    "max_width" : 528,
+    "max_height" : 494
+  }
+}, {
+  "id" : "7bea921d-bb06-7ac3-5ce6-53f637c13757",
+  "name" : "text",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Our story</h2>\n<p>This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.</p>"
+}, {
+  "id" : "2b6fc569-c42d-8085-3049-ada94a70d543",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Learn about us"
+}, {
+  "id" : "5f11f583-7771-dfb4-dcfe-0584fb7cdf5c",
+  "name" : "button_link",
+  "label" : "Button Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "type" : "EXTERNAL",
+      "href" : ""
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

@@ -1,0 +1,594 @@
+<!-- Course Selection Interface -->
+<div class="tmg-course-selection">
+  <h2>Select Your Training Courses</h2>
+  <p>Click on the dates you'd like to register for:</p>
+  
+  <div id="tmg-courses-list" class="tmg-courses-grid">
+    <div class="tmg-loading">Loading available courses...</div>
+  </div>
+  
+  <div class="tmg-selected-summary">
+    <h3>Your Selected Courses</h3>
+    <div id="tmg-selected-courses">
+      <p class="tmg-no-selections">No courses selected yet</p>
+    </div>
+  </div>
+</div>
+
+<!-- HubSpot Form Container -->
+<div id="tmg-form-container"></div>
+
+<style>
+/* Same styles as before */
+.tmg-course-selection {
+  margin-bottom: 30px;
+  font-family: inherit;
+}
+
+.tmg-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.tmg-course-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 12px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tmg-course-card h3 {
+  color: #04216B;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.tmg-course-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.tmg-course-price, .tmg-course-duration {
+  color: #06226D;
+}
+
+.tmg-course-dates {
+  margin-top: 10px;
+}
+
+.tmg-course-dates h4 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* More compact date list */
+.tmg-date-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tmg-date-option {
+  margin: 0;
+  padding: 0;
+}
+
+.tmg-date-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f5f5f5;
+  padding: 4px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tmg-date-checkbox:hover {
+  background: #e9e9e9;
+}
+
+.tmg-date-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.tmg-date-checkbox input:checked + span {
+  color: white;
+}
+
+.tmg-date-checkbox input:checked ~ .tmg-date-text {
+  color: white;
+}
+
+.tmg-date-checkbox input:checked ~ .tmg-checkmark {
+  background-color: #C5299B;
+  border-color: #C5299B;
+}
+
+.tmg-checkmark {
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+.tmg-date-checkbox input:checked {
+  background-color: #C5299B;
+}
+
+.tmg-date-checkbox input:checked ~ .tmg-date-text {
+  font-weight: 500;
+}
+
+.tmg-date-checkbox input:checked ~ .tmg-checkmark:after {
+  display: block;
+}
+
+.tmg-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Active selected date */
+.tmg-date-checkbox.active {
+  background-color: #C5299B;
+  border-color: #C5299B;
+  color: white;
+}
+
+.tmg-selected-summary {
+  margin-top: 20px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.tmg-selected-summary h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #04216B;
+  font-size: 16px;
+}
+
+.tmg-selected-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.tmg-selected-item .tmg-course-info {
+  flex-grow: 1;
+}
+
+.tmg-remove-btn {
+  background: none;
+  border: none;
+  color: #999;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tmg-remove-btn:hover {
+  color: #C5299B;
+}
+
+.tmg-no-selections {
+  color: #666;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.tmg-loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.tmg-no-dates {
+  color: #666;
+  font-style: italic;
+  font-size: 13px;
+  margin-top: 5px;
+}
+</style>
+
+<script>
+(function() {
+  // Prevent variable collisions with an IIFE
+  
+  // Store selected courses
+  var tmgSelectedCourses = [];
+  var tmgMaxSelections = 8;
+  
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create the HubSpot form
+    createHubSpotForm();
+    
+    // Get URL parameters for pre-selection
+    var urlParams = new URLSearchParams(window.location.search);
+    var preselectedCourse = urlParams.get('course');
+    var preselectedDate = urlParams.get('date');
+    
+    // Load courses from HubDB
+    loadCourses(preselectedCourse, preselectedDate);
+  });
+  
+  // Create HubSpot form
+  function createHubSpotForm() {
+    if (typeof hbspt !== 'undefined') {
+      hbspt.forms.create({
+        portalId: "44974531",
+        formId:   "b909fbd6-7b6c-4ebc-a3c7-53cb44bea817",
+        target:   '#tmg-form-container',
+        onFormReady: function($form) {
+          window.tmgCourseFields = [];
+          for (var i = 0; i <= 8; i++) {
+            var name = i === 0 ? 'course_registered' : 'course_registered_' + i;
+            var $inp = $form.find('input[name="' + name + '"]');
+            if ($inp.length) window.tmgCourseFields.push($inp);
+          }
+          $form.on('submit', function() {
+            updateHubSpotFormFields();
+          });
+        }
+      });
+    } else {
+      console.error('HubSpot forms script not loaded');
+    }
+  }
+  
+  // Parse a date string like "June 12" into a Date object
+  function parseTrainingDate(dateStr) {
+    // Current date for reference
+    var today = new Date();
+    var currentYear = today.getFullYear();
+    
+    // Try to parse the date
+    var parts = dateStr.split(' ');
+    if (parts.length < 2) return null;
+    
+    var month = parts[0];
+    var day = parseInt(parts[1].replace(/\D/g, ''));
+    
+    // Convert month name to month number (0-11)
+    var months = {
+      'january': 0, 'jan': 0,
+      'february': 1, 'feb': 1,
+      'march': 2, 'mar': 2,
+      'april': 3, 'apr': 3,
+      'may': 4,
+      'june': 5, 'jun': 5,
+      'july': 6, 'jul': 6,
+      'august': 7, 'aug': 7,
+      'september': 8, 'sep': 8, 'sept': 8,
+      'october': 9, 'oct': 9,
+      'november': 10, 'nov': 10,
+      'december': 11, 'dec': 11
+    };
+    
+    var monthNum = months[month.toLowerCase()];
+    if (monthNum === undefined) return null;
+    
+    // Create date with current year
+    var date = new Date(currentYear, monthNum, day);
+    
+    // If date has already passed this year, assume next year
+    if (date < today) {
+      date.setFullYear(currentYear + 1);
+    }
+    
+    return date;
+  }
+  
+  // Check if a date is in the future (including today)
+  function isDateInFuture(dateStr) {
+    var parsedDate = parseTrainingDate(dateStr);
+    if (!parsedDate) return false;
+    
+    // Compare with current date (without time)
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    return parsedDate >= today;
+  }
+  
+  // Load courses data from HubDB
+  function loadCourses(preselectedCourse, preselectedDate) {
+    var coursesContainer = document.getElementById('tmg-courses-list');
+    if (!coursesContainer) return;
+    
+    // HubDB rendering here using server-side HubL
+    {% set courses = hubdb_table_rows(111848617) %}
+    
+    var coursesHtml = '';
+    
+    {% for course in courses %}
+      {% if course.dates_comma_separated %}
+        coursesHtml += '<div class="tmg-course-card">';
+        coursesHtml += '<h3>{{ course.name|escape }}</h3>';
+        coursesHtml += '<div class="tmg-course-meta">';
+        
+        {% if course.price %}
+        coursesHtml += '<div class="tmg-course-price"><strong>Price:</strong> ${{ course.price }}</div>';
+        {% endif %}
+        
+        {% if course.duration %}
+        coursesHtml += '<div class="tmg-course-duration"><strong>Duration:</strong> {{ course.duration }} hours</div>';
+        {% endif %}
+        
+        coursesHtml += '</div>';
+        
+        // Process dates
+        var allDates = "{{ course.dates_comma_separated|escape }}".split(',').map(function(date) {
+          return date.trim();
+        }).filter(function(date) {
+          return date !== '';
+        });
+        
+        // Filter to only include future dates
+        var dates = allDates.filter(isDateInFuture);
+        
+        coursesHtml += '<div class="tmg-course-dates">';
+        coursesHtml += '<h4>Available Dates:</h4>';
+        
+        if (dates.length === 0) {
+          coursesHtml += '<p class="tmg-no-dates">No upcoming dates available</p>';
+        } else {
+          coursesHtml += '<ul class="tmg-date-list">';
+          
+          var courseName = "{{ course.name|escape }}";
+          for (var i = 0; i < dates.length; i++) {
+            var isPreselected = (preselectedCourse === courseName && preselectedDate === dates[i]);
+            coursesHtml += '<li class="tmg-date-option">';
+            coursesHtml += '<label class="tmg-date-checkbox' + (isPreselected ? ' active' : '') + '">';
+            coursesHtml += '<input type="checkbox" class="tmg-course-checkbox" ' +
+                          'data-course="' + courseName + '" ' +
+                          'data-date="' + dates[i] + '"' +
+                          (isPreselected ? ' checked' : '') + '>';
+            coursesHtml += '<span class="tmg-checkmark"></span>';
+            coursesHtml += '<span class="tmg-date-text">' + dates[i] + '</span>';
+            coursesHtml += '</label>';
+            coursesHtml += '</li>';
+          }
+          
+          coursesHtml += '</ul>';
+        }
+        
+        coursesHtml += '</div>';
+        coursesHtml += '</div>';
+      {% endif %}
+    {% endfor %}
+    
+    // If no courses found, show message
+    if (coursesHtml === '') {
+      coursesHtml = '<div class="tmg-no-courses">No courses currently available</div>';
+    }
+    
+    coursesContainer.innerHTML = coursesHtml;
+    
+    // Add event listeners to checkboxes
+    var checkboxes = document.querySelectorAll('.tmg-course-checkbox');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener('change', handleCourseSelection);
+    }
+    
+    // If we had preselected course/date, trigger the selection
+    if (preselectedCourse && preselectedDate) {
+      // Find the checkbox
+      var found = false;
+      for (var j = 0; j < checkboxes.length; j++) {
+        var checkbox = checkboxes[j];
+        if (checkbox.getAttribute('data-course') === preselectedCourse && 
+            checkbox.getAttribute('data-date') === preselectedDate) {
+          // Trigger the change event (already checked via HTML)
+          var event = new Event('change');
+          checkbox.dispatchEvent(event);
+          found = true;
+          break;
+        }
+      }
+    }
+  }
+  
+  // Handle course selection
+  function handleCourseSelection(event) {
+    var checkbox = event.target;
+    var courseName = checkbox.getAttribute('data-course');
+    var courseDate = checkbox.getAttribute('data-date');
+    var selection = courseName + ' (' + courseDate + ')';
+    
+    if (checkbox.checked) {
+      // Remove any existing date selection for this same course
+      var existingIndex = -1;
+      for (var i = 0; i < tmgSelectedCourses.length; i++) {
+        if (tmgSelectedCourses[i].course === courseName) {
+          existingIndex = i;
+          break;
+        }
+      }
+      
+      if (existingIndex !== -1) {
+        // Uncheck the previous date's checkbox
+        var previousDate = tmgSelectedCourses[existingIndex].date;
+        var checkboxes = document.querySelectorAll('.tmg-course-checkbox');
+        for (var j = 0; j < checkboxes.length; j++) {
+          var otherCheckbox = checkboxes[j];
+          if (otherCheckbox !== checkbox && 
+              otherCheckbox.getAttribute('data-course') === courseName &&
+              otherCheckbox.getAttribute('data-date') === previousDate) {
+            otherCheckbox.checked = false;
+            
+            // Remove active class from parent label
+            var label = otherCheckbox.closest('.tmg-date-checkbox');
+            if (label) {
+              label.classList.remove('active');
+            }
+            
+            break;
+          }
+        }
+        
+        // Replace the selection
+        tmgSelectedCourses[existingIndex] = {
+          course: courseName,
+          date: courseDate,
+          selection: selection
+        };
+      } else {
+        // Add to selections if not at maximum
+        if (tmgSelectedCourses.length < tmgMaxSelections) {
+          tmgSelectedCourses.push({
+            course: courseName,
+            date: courseDate,
+            selection: selection
+          });
+        } else {
+          // Uncheck if maximum reached
+          checkbox.checked = false;
+          alert('You can only select up to ' + tmgMaxSelections + ' courses.');
+          return;
+        }
+      }
+      
+      // Add active class to parent label
+      var label = checkbox.closest('.tmg-date-checkbox');
+      if (label) {
+        label.classList.add('active');
+      }
+    } else {
+      // Remove from selections
+      for (var k = 0; k < tmgSelectedCourses.length; k++) {
+        var item = tmgSelectedCourses[k];
+        if (item.course === courseName && item.date === courseDate) {
+          tmgSelectedCourses.splice(k, 1);
+          
+          // Remove active class from parent label
+          var label = checkbox.closest('.tmg-date-checkbox');
+          if (label) {
+            label.classList.remove('active');
+          }
+          
+          break;
+        }
+      }
+    }
+    
+    updateSelectedCoursesDisplay();
+    updateHubSpotFormFields();
+  }
+  
+  // Update the display of selected courses
+  function updateSelectedCoursesDisplay() {
+    var container = document.getElementById('tmg-selected-courses');
+    if (!container) return;
+    
+    if (tmgSelectedCourses.length === 0) {
+      container.innerHTML = '<p class="tmg-no-selections">No courses selected yet</p>';
+      return;
+    }
+    
+    var html = '';
+    for (var i = 0; i < tmgSelectedCourses.length; i++) {
+      var selection = tmgSelectedCourses[i];
+      html += '<div class="tmg-selected-item" data-index="' + i + '">';
+      html += '<div class="tmg-course-info">';
+      html += '<strong>' + (i + 1) + '.</strong> ' + selection.course + ' (' + selection.date + ')';
+      html += '</div>';
+      html += '<button type="button" class="tmg-remove-btn" data-index="' + i + '">×</button>';
+      html += '</div>';
+    }
+    
+    container.innerHTML = html;
+    
+    // Add event listeners to remove buttons
+    var removeButtons = container.querySelectorAll('.tmg-remove-btn');
+    for (var j = 0; j < removeButtons.length; j++) {
+      removeButtons[j].addEventListener('click', function() {
+        var index = parseInt(this.getAttribute('data-index'));
+        var selection = tmgSelectedCourses[index];
+        
+        // Find and uncheck the corresponding checkbox
+        var checkboxes = document.querySelectorAll('.tmg-course-checkbox');
+        for (var k = 0; k < checkboxes.length; k++) {
+          var checkbox = checkboxes[k];
+          if (checkbox.getAttribute('data-course') === selection.course && 
+              checkbox.getAttribute('data-date') === selection.date) {
+            checkbox.checked = false;
+            
+            // Remove active class from parent label
+            var label = checkbox.closest('.tmg-date-checkbox');
+            if (label) {
+              label.classList.remove('active');
+            }
+            
+            break;
+          }
+        }
+        
+        // Remove the selection
+        tmgSelectedCourses.splice(index, 1);
+        
+        // Update display and form
+        updateSelectedCoursesDisplay();
+        updateHubSpotFormFields();
+      });
+    }
+  }
+  
+function updateHubSpotFormFields() {
+  if (!window.tmgCourseFields) return;
+
+  window.tmgCourseFields.forEach(function($inp, idx) {
+    var real  = tmgSelectedCourses[idx] && tmgSelectedCourses[idx].selection;
+    var value = real || '\u200B';        // zero-width space is “something” but invisible
+
+    // set both the live value and the attribute HubSpot will read
+    $inp.val(value);
+    $inp.attr('value', value);
+
+    // fire the events HubSpot’s form JS watches
+    $inp.trigger('input');
+    $inp.trigger('change');
+  });
+}
+})();
+</script>

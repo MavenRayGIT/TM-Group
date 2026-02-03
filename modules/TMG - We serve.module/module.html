@@ -1,0 +1,435 @@
+<div class="tmg_we_serve_section {{ module.add_custom_class }}">
+  <div class="content-wrapper">
+    <div class="head_title">
+      <h2 class="title-l">{{ module.heading }}</h2>
+    </div>
+  </div>
+  <div class="content-wrapper ">
+    <div class="tmg_we_serve_row center-slider-{{name}}" data-aos="fade-up">
+      {% for item in module.we_serve_card %}
+      <div class="tmg_col_4">
+        <div class="we_serve_card">
+          <div class="we_serve_img">
+  {% if item.image.src %}
+    {% set sizeAttrs = 'width="{{ item.image.width|escape_attr }}" height="{{ item.image.height|escape_attr }}"' %}
+    {% if item.image.size_type == 'auto' %}
+      {% set sizeAttrs = 'width="{{ item.image.width|escape_attr }}" height="{{ item.image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+    {% elif item.image.size_type == 'auto_custom_max' %}
+      {% set sizeAttrs = 'width="{{ item.image.max_width|escape_attr }}" height="{{ item.image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+    {% endif %}
+    {% set loadingAttr = item.image.loading != 'disabled' ? 'loading="{{ item.image.loading|escape_attr }}"' : '' %}
+     <img src="{{ item.image.src|escape_url + '?' + unixtimestamp() }}" alt="{{ item.image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+  {% endif %}
+</div>
+          <div class="tmg_we_serve_text">       
+              <h4 class="title-s">{{ item.heading }}</h4>                      
+          </div>
+
+          <div class="tmg_we_serve_text tmg_we_serve_over_lay">
+            {% set href = item.add_link.url.href %}
+            {% if item.add_link.url.type is equalto "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+            {% endif %}
+            <a {% if item.add_link.url.type is equalto "CALL_TO_ACTION" %} href="{{ href }}" {% else %} href="{{ href|escape_url }}" {% endif %} {% if item.add_link.open_in_new_tab %} target="_blank" {% endif %} {% if item.add_link.rel %} rel="{{ item.add_link.rel|escape_attr }}" {% endif %}>
+              <h4 class="title-s">{{ item.heading }}</h4>
+              <div class="cardbody text-s">{{ item.text }}</div>
+             <div class="link_arrow">
+      <img src="https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/arrow-insite.svg" alt="">
+      </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="btn-wrap">
+      <div class="prev-btn-{{name}}">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+          <style type="text/css">
+            .st0 {
+              fill: none;
+              stroke: #C5299B;
+              stroke-width: 2;
+            }
+          </style>
+          <path class="st0" d="M9.5,20.5l-9.1-9.5l9.1-9.5" />
+          <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2" />
+        </svg>
+      </div>
+      <div class="next-btn-{{name}}">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+          <style type="text/css">
+            .st0 {
+              fill: none;
+              stroke: #C5299B;
+              stroke-width: 2;
+            }
+          </style>
+          <path class="st0" d="M14.8,1.6l9.1,9.5l-9.1,9.5" />
+          <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% require_css %}
+<style>
+{% scope_css %} 
+.tmg_we_serve_section {
+width: 100%;
+background-color: {{ module.style.background_color.css }};
+position: relative;
+padding: 75px 0 75px 0;
+}
+
+.tmg_we_serve_row { 
+display: flex; 
+flex-wrap: wrap; 
+margin-left: 0;
+margin-right: 0;
+}
+
+.head_title h2 {
+color: #FFFFFF;
+margin-bottom: 50px;
+}
+
+.we_serve_card {
+border-radius: 0px 0px 0px 20px;
+background: #7312AF;
+padding-bottom: 0;
+position: relative;
+transition: all 0.4s ease-in-out;
+-webkit-transition: all 0.4s ease-in-out;
+overflow: hidden;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.tmg_we_serve_text {   
+padding: 30px 25px 30px;
+background: #7312AF;
+border-radius: 0px 0px 0px 20px;
+width: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.tmg_we_serve_text p { 
+color: #FFFFFF; 
+}
+ 
+.we_serve_card:hover .tmg_we_serve_text {   
+border-radius: 0px 0px 0px 20px;
+}
+
+.tmg_we_serve_text.tmg_we_serve_over_lay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+right: 0;
+background: #7312AF;
+border-radius: 0px 0px 0px 20px;
+/* height: 100%; */
+opacity: 0;
+visibility: hidden;
+}
+  
+.we_serve_card:hover .tmg_we_serve_text.tmg_we_serve_over_lay { 
+visibility: visible; 
+opacity: 1;  
+}
+
+.link_arrow { 
+position: absolute; 
+bottom: 20px; 
+right: 20px;  
+}
+
+.tmg_we_serve_text a { 
+text-decoration: none;
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.we_serve_img {
+width: 100%;
+flex-shrink: 0;
+}
+
+.we_serve_img img { 
+width: 100%;
+display: block;
+}
+
+.tmg_we_serve_text h4 {
+color: #FFFFFF;
+margin: 0px!important;
+min-height: 50px;
+display: flex;
+align-items: center;
+}
+
+.cardbody p {
+padding-top: 40px;
+} 
+
+.btn-wrap {
+display: flex;
+justify-content: end;
+gap: 22px;
+align-items: center;
+padding-top: 23px;
+}
+
+.prev-btn-{{name}}, .next-btn-{{name}} {
+width: 64px;
+height: 64px;
+cursor: pointer;
+border: 2px solid #C5299B;
+border-radius: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.prev-btn-{{name}} svg .st0,
+.next-btn-{{name}} svg .st0 { 
+stroke: #C5299B;
+}
+
+.prev-btn-{{name}}:hover,
+.next-btn-{{name}}:hover { 
+border: 2px solid #19ECDF;
+}
+
+.prev-btn-{{name}}:hover svg .st0,
+.next-btn-{{name}}:hover svg .st0 { 
+stroke: #19ECDF;
+}
+
+.prev-btn-{{name}}.slick-disabled,
+.next-btn-{{name}}.slick-disabled { 
+opacity: 0.5; 
+}
+
+.tmg_col_4 { 
+margin-right: 20px; 
+}
+
+/* Gradient styles */
+.center-slider-{{name}} .slick-list.draggable {
+position: relative;
+}
+
+.center-slider-{{name}} .slick-list.draggable:before {
+background: linear-gradient(90.79deg, hsla(0, 0%, 100%, 0) .66%, #051131 99.52%);
+content: "";
+height: 100%;
+position: absolute;
+right: -2px;
+top: 0;
+width: 338px;
+z-index: 1;
+transition: all 0.3s ease;
+pointer-events: none;
+}
+
+.center-slider-{{name}} .slick-list.draggable.hide-gradient:before {
+opacity: 0;
+pointer-events: none;
+z-index: -1;
+}
+
+/* Responsive styles */
+@media (max-width: 990px) {
+.tmg_we_serve_text h4 {
+  min-height: 45px; /* Slightly reduced height for tablets */
+}
+}
+
+@media (max-width: 768px) {
+.btn-wrap {
+  justify-content: center;
+  padding-top: 0;
+  display: none;
+}
+
+.tmg_we_serve_text h4 {
+  min-height: 40px; /* Further reduced height for mobile */
+}
+
+.head_title h2 {
+  margin-bottom: 30px;
+}
+
+.tmg_we_serve_text {
+  padding: 20px 20px 20px;
+}
+
+.cardbody p {
+  padding-top: 30px;
+}
+
+.we_serve_card:hover .tmg_we_serve_text.tmg_we_serve_over_lay {  
+  /* overflow-y: scroll; */
+}
+
+}
+
+@media (max-width: 480px) {
+.tmg_we_serve_text h4 {
+  min-height: 35px; /* Minimum height for very small screens */
+}
+}
+
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% require_js %}
+<script>
+$(document).ready(function () {
+  $(".center-slider-{{name}}").slick({
+    slidesToShow: 3.5,
+    slidesToScroll: 1,
+    speed: 500,       
+    centerPadding: '20px',
+    infinite: false,
+    autoplay: false,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 990,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          adaptiveHeight: true,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1.2,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+
+  function updateSlickHeight() {
+
+    if ($(window).width() > 767) {
+      $('.center-slider-{{name}} .tmg_we_serve_over_lay').css('height', '100%');
+      return;
+
+    } else {
+      $('.center-slider-{{name}} .we_serve_card').css('height', '');
+      $('.center-slider-{{name}} .we_serve_card').css('position', '');
+
+      $('.center-slider-{{name}} .tmg_we_serve_over_lay').css('height', '');
+
+      $('.center-slider-{{name}} .we_serve_img').css('height', '');
+
+      $('.center-slider-{{name}} .we_serve_img img').css('height', '');
+      $('.center-slider-{{name}} .we_serve_img img').css('object-fit', '');
+
+      
+      $('.center-slider-{{name}} .tmg_we_serve_text').css('position', '');
+      $('.center-slider-{{name}} .tmg_we_serve_text').css('left', '');
+      $('.center-slider-{{name}} .tmg_we_serve_text').css('right', '');
+      $('.center-slider-{{name}} .tmg_we_serve_text').css('bottom', '');
+    }
+
+    const maxHeight = Math.max.apply(null, $('.center-slider-{{name}}').children().map(function() {
+      return $(this).find('.tmg_we_serve_over_lay').outerHeight(); // Use outerHeight(true) if you want to include margins
+    }).get());
+
+    console.log('maxheight:', maxHeight);
+
+    $('.center-slider-{{name}} .we_serve_card').css('height', maxHeight + 'px');
+    $('.center-slider-{{name}} .we_serve_card').css('position', 'relative');
+
+    $('.center-slider-{{name}} .tmg_we_serve_over_lay').css('height', '100%');
+
+    $('.center-slider-{{name}} .we_serve_img').css('height', '100%');
+
+    $('.center-slider-{{name}} .we_serve_img img').css('height', '100%');
+    $('.center-slider-{{name}} .we_serve_img img').css('object-fit', 'cover');
+
+    
+    $('.center-slider-{{name}} .tmg_we_serve_text').css('position', 'absolute');
+    $('.center-slider-{{name}} .tmg_we_serve_text').css('left', '0px');
+    $('.center-slider-{{name}} .tmg_we_serve_text').css('right', '0px');
+    $('.center-slider-{{name}} .tmg_we_serve_text').css('bottom', '0px');
+    
+  }
+
+  updateSlickHeight();
+
+  $(window).on('resize', function() {
+    updateSlickHeight();
+  })
+  
+  // $('.center-slider-{{name}} .tmg_we_serve_over_lay').height();
+
+  $(".prev-btn-{{name}}").click(function () {
+    $(".center-slider-{{name}}").slick("slickPrev");
+  });
+
+  $(".next-btn-{{name}}").click(function () {
+    $(".center-slider-{{name}}").slick("slickNext");
+  });
+
+  $(".prev-btn-{{name}}").addClass("slick-disabled");
+
+  // Function to check if slider is at the last slides
+  function isAtLastSlides() {
+    const slider = $(".center-slider-{{name}}");
+    const totalSlides = slider.slick("getSlick").slideCount;
+    const currentSlide = slider.slick("slickCurrentSlide");
+    const slidesToShow = slider.slick("slickGetOption", "slidesToShow");
+    
+    return currentSlide + slidesToShow >= totalSlides;
+  }
+
+  // Initial check for gradient
+  if (isAtLastSlides()) {
+    $(".center-slider-{{name}} .slick-list.draggable").addClass("hide-gradient");
+  }
+
+  $(".center-slider-{{name}}").on("afterChange", function () {
+    // Handle navigation buttons
+    if ($(".slick-prev").hasClass("slick-disabled")) {
+      $(".prev-btn-{{name}}").addClass("slick-disabled");
+    } else {
+      $(".prev-btn-{{name}}").removeClass("slick-disabled");
+    }
+    if ($(".slick-next").hasClass("slick-disabled")) {
+      $(".next-btn-{{name}}").addClass("slick-disabled");
+    } else {
+      $(".next-btn-{{name}}").removeClass("slick-disabled");
+    }
+
+    // Handle gradient
+    if (isAtLastSlides()) {
+      $(".center-slider-{{name}} .slick-list.draggable").addClass("hide-gradient");
+    } else {
+      $(".center-slider-{{name}} .slick-list.draggable").removeClass("hide-gradient");
+    }
+  });
+});
+</script>
+{% end_require_js %}
+<style>
+  @media (width <= 768px) {
+    #hs_cos_wrapper_dnd_area-module-3 .tmg_we_serve_section {
+      padding: 35px 0 !important;
+    }
+  }
+</style>

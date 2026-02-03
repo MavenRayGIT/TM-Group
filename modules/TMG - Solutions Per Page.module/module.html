@@ -1,0 +1,128 @@
+{% set table_id = 'solutions_integration' %}
+{% set table_rows = hubdb_table_rows(table_id, queryparam='') %}
+{% set limit = module.database_limit %}
+{% set count = 0 %}
+{% if table_rows %}
+<div class="solutions-section">
+    <div class="content-wrapper">
+        <div class="tmg_our_story_text">
+          <h2 style="color:white; margin-bottom:0px!important; letter-spacing: -0.05em; font-size:50px; line-height:55px; font-weight: 300;">
+            {{ module.header_text }}
+          </h2>
+        </div>
+        
+        <div id="solutions-container" class="solutions-container">
+            {% for row in table_rows %}
+              <div class="solution-item" url-data-filter="{% for foreign_row in row.included_in_pages %}{{ foreign_row.url_identifier }}{% if not loop.last %}, {% endif %}{% endfor %}">
+                 <div>
+                  {% if row.thumbnail %}
+                    <img src="{{ row.thumbnail.url }}" style="max-width: 100px;" alt="{{ row.thumbnail.altText }}">
+                  {% endif %}
+                </div>
+                <div class="solutions-name">{{ row.name }}</div>
+                <div class="solutions-description">{{ row.description }}</div>
+                
+                <div class="filters" style="display: none">
+                  {% for foreign_row in row.included_in_pages %}
+                  <li filter-id="{{ foreign_row.hs_id }}" data-name="{{ foreign_row.name }}"> {{ foreign_row.name }}</li>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+  
+<style>
+{% scope_css %}
+.solutions-section {
+    width: 100%;
+    background-color: #051131;
+    position: relative;
+    padding: 120px 0 120px  0;
+}
+.solutions-container{ 
+    display:flex; 
+    flex-wrap: wrap; 
+    margin-left: -18px;
+    margin-right:-18px;  
+}
+.solution-item{   
+    width: calc(25% - 36px);
+    margin: 18px;
+}
+.solution-item img {
+      width: 100%;
+}
+.solutions-name {
+    font-family: 'Khula';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 28px;
+    line-height: 32px;
+    color: #FFFFFF;
+    margin: 52px 0 15px 0;
+    padding: 0;
+    display: block;
+    width: 70%;
+    min-height: 60px;
+}
+.solutions-description {
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+}
+@media (max-width: 1024px) {
+    .solution-item {
+        width: calc(33.33% - 36px);
+    }
+}
+@media (max-width: 768px) {
+    .solution-item {
+        width: calc(50% - 36px);
+    }
+}
+@media (max-width: 425px) {
+    .solution-item {
+        width: calc(100% - 36px);
+    }
+}
+{% end_scope_css %}
+</style>
+<script>
+// First, filter based on URL
+const currentUrl = window.location.pathname.toLowerCase();
+const solutionItems = document.querySelectorAll('.solution-item');
+const container = document.getElementById('solutions-container');
+
+// Remove non-matching items
+solutionItems.forEach(item => {
+    const filters = item.getAttribute('url-data-filter').toLowerCase().split(',');
+    const isMatch = filters.some(filter => 
+        currentUrl.includes(filter.trim())
+    );
+    if (!isMatch) {
+        item.remove();
+    }
+});
+
+// Sort remaining items alphabetically
+const items = Array.from(container.querySelectorAll('.solution-item'));
+items.sort((a, b) => {
+    const nameA = a.querySelector('.solutions-name').textContent.toLowerCase();
+    const nameB = b.querySelector('.solutions-name').textContent.toLowerCase();
+    return nameA.localeCompare(nameB);
+});
+
+// Clear container and append sorted items
+container.innerHTML = '';
+items.forEach(item => {
+    container.appendChild(item);
+});
+</script>
+{% else %}
+  <p>No data found in the table.</p>
+{% endif %}

@@ -1,0 +1,416 @@
+[ {
+  "id" : "f4fb536c-ade6-cba9-47a8-8e7a3d0115fa",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "68a2122d-42fa-a783-26d1-500d03f522d8",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "a48e8dd8-ae9f-d5db-bbea-45e90e3c331d",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "016f48a0-1220-1b7f-f0f7-2d07d7f90272",
+    "name" : "desktop",
+    "label" : "Desktop Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "70dae48a-9f4d-0f97-9833-af69c01b0e79",
+      "name" : "spacing_field",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  }, {
+    "id" : "a06a7c07-2c37-4c11-50ca-9ebf4061c7fb",
+    "name" : "mobile_spacing",
+    "label" : "Mobile Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "2967b75d-0926-06f3-fd71-dc2878f21154",
+      "name" : "spacing_field",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "text_color" : {
+      "color" : "#000000",
+      "opacity" : 100
+    },
+    "background_color" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    },
+    "desktop" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : null,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    },
+    "mobile_spacing" : {
+      "spacing_field" : {
+        "padding" : {
+          "top" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 30,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  }
+}, {
+  "id" : "7165ae1e-faf1-8b21-4e8b-e19c2fab774f",
+  "name" : "blog_image_module",
+  "label" : "Video Mode",
+  "help_text" : "Use this to swap between full image, or the split image + video. Full image is on by default. ",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "c7a23355-96f6-003f-ddb5-45bb5fa00f2e",
+  "name" : "add_custom_class",
+  "label" : "Add Custom Class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "1cac1cf5-eabf-9a26-0dec-4cce31d71c5c",
+  "name" : "left_column",
+  "label" : "Image Group",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "d342b356-22e9-09a1-1e5a-509e91098ea4",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500.jpg",
+      "alt" : "improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500",
+      "loading" : "lazy",
+      "width" : 499,
+      "height" : 346,
+      "max_width" : 499,
+      "max_height" : 346
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500.jpg",
+      "alt" : "improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500",
+      "loading" : "lazy",
+      "width" : 499,
+      "height" : 346,
+      "max_width" : 499,
+      "max_height" : 346
+    }
+  }
+}, {
+  "id" : "3c8318d1-2deb-210f-1018-419aefdcb681",
+  "name" : "wistia_video_and_image",
+  "label" : "Wistia video and image",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "98e83c5b-fd92-6918-08d4-99c1e79133bd",
+    "name" : "select_post_type",
+    "label" : "Select Post Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "image", "Image" ], [ "wistia_video", "Wistia video" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "wistia_video"
+  }, {
+    "id" : "f25f54e1-b2e9-533c-edce-c98c1767ffd9",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "wistia_video_and_image.select_post_type",
+      "controlling_value_regex" : "image",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG-ERPAI.jpg",
+      "alt" : "TMG-ERPAI",
+      "loading" : "lazy",
+      "width" : 1100,
+      "height" : 820,
+      "max_width" : 1100,
+      "max_height" : 820
+    }
+  }, {
+    "id" : "00d088a6-8479-8813-7a27-1808ed85202e",
+    "name" : "wistia_video_id",
+    "label" : "Wistia Video ID",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "wistia_video_and_image.select_post_type",
+      "controlling_value_regex" : "wistia_video",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "29b0fbf547"
+  }, {
+    "id" : "29fe3e6c-ad24-0970-bf9b-4747843e764f",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Add title here"
+  }, {
+    "id" : "7bea921d-bb06-7ac3-5ce6-53f637c13757",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>"
+  }, {
+    "id" : "0f94460e-76c8-d624-e764-bddc21e308d3",
+    "name" : "post_link",
+    "label" : "Post Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "select_post_type" : "wistia_video",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG-ERPAI.jpg",
+      "alt" : "TMG-ERPAI",
+      "loading" : "lazy",
+      "width" : 1100,
+      "height" : 820,
+      "max_width" : 1100,
+      "max_height" : 820
+    },
+    "wistia_video_id" : "29b0fbf547",
+    "title" : "Add title here",
+    "description" : "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>",
+    "post_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+} ]

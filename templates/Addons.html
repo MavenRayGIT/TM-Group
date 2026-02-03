@@ -1,0 +1,2224 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Addons
+  
+--> 
+{% extends "./layouts/base.html" %}
+{% block header %}
+  {% global_partial path="./partials/TMG - Light-header.html" %}
+{% endblock header %}
+{% block body_class %}header_light{% endblock body_class %}
+{% block body %}
+<div class="body-container body-container--hubdb">
+    <div class="tmg_add_on_section">
+        {% if dynamic_page_hubdb_row %}
+        <div class="tmg_addon_detail_wrapper">
+            <div class="content-wrapper">
+                <div class="cldn_row">
+                    <div class="tmg_column_7">
+                        <div class="tmg_addon_wrap cld_bg">
+                            <div class="tmg_placeholder-image">
+                                <img src="{{ dynamic_page_hubdb_row.logo.url }}" width="500" {% if row.image.width>
+                                row.image.height %}class="landscape"{% endif %} alt="{{ row.name }}">
+                            </div>
+                            <div class="about_brand_wrap">
+                                <h2>{{ dynamic_page_hubdb_row.name }} </h2>
+                                <div class="description_text">
+                                    <p>{{ dynamic_page_hubdb_row.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tmg_column_5">
+                        {% if dynamic_page_hubdb_row.related_products and dynamic_page_hubdb_row.related_products|length > 0 %}
+                        <div class="keywords_wrp">
+                            <h4>Related Products</h4>
+                            <ul>
+                                {% for tag in dynamic_page_hubdb_row.related_products %}
+                                <li class="link_bg">
+                                    {{ tag.name }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if dynamic_page_hubdb_row.related_industries and dynamic_page_hubdb_row.related_industries|length > 0 %}
+                        <div class="keywords_wrp">
+                            <h4>Industries</h4>
+                            <ul>
+                                {% for tag in dynamic_page_hubdb_row.related_industries %}
+                                <li class="link_bg">
+                                    {{ tag.name }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if dynamic_page_hubdb_row.cta_url %}
+                        <div class="cta_wrp">
+                            <a target="_blank" href="{{ dynamic_page_hubdb_row.cta_url }}" class="button custom-addon">
+                                Visit Website <span class="arrow">→</span>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        {% elif dynamic_page_hubdb_table_id %}
+        <div class="tmg_addon_list_wrap">
+            <div class="tmg_addon_banner_section">
+                <div class="content-wrapper ">
+                    <div class="tmg_addon_banner_txt">
+                        <h1>These are addons to the MSFT family of products we implement</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-content-wrap">
+              <div class="content-wrapper ">
+                  <div class="filter_srch_row">
+                      <div class="filter_wrapper">
+
+                          <div class="add_on_fl_list">
+                              <ul class="fil_list" id="filters">
+                                  {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id) %}
+                                  {% set seen_pills = {} %}
+                                  {% for foreign_row in row.related_products %}
+                                  <li class="filter" data-filter=".f-{{ foreign_row.hs_id }}" data-name="{{ foreign_row.name }}"> {{ foreign_row.name }}</li>
+                                  {% endfor %}
+                                  {% endfor %}
+                              </ul>
+                          </div>
+                      </div>
+                    
+                    
+                    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the filters list
+    const filtersList = document.getElementById('filters');
+    
+    if (!filtersList) return;
+
+    // Find the "All" filter
+    const allFilter = filtersList.querySelector('li[data-name="All"]');
+    
+    if (!allFilter) return;
+
+    // Remove the "All" filter from its current position
+    allFilter.remove();
+    
+    // Insert it at the beginning of the list
+    filtersList.insertBefore(allFilter, filtersList.firstChild);
+    
+    // Optional: Add a class to highlight it's the main filter
+    allFilter.classList.add('main-filter');
+});
+
+
+
+</script>
+                      <div class="tmg_addon_search_wrap">
+                          <div class="tmg_addon_search">
+                              <form>
+                                <div class="search-input-wrap">
+                                  <input type="search" name="Search" value="" placeholder="Search by keyword">
+                                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><g id="search1_layer"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></g></svg>
+                                </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="addon-content-wrap">
+              <div class="content-wrapper">
+                  <div class="tmg_add_on_row tmg_addon-grid projects" id="addon_list">
+                    {% set queryparam = "&orderBy=name" %}
+                      {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id) %}
+                      <div class="tmg_addon_block project all_add_on addon_list_item {% for foreign_row in row.related_products %}f-{{ foreign_row.hs_id }} {%endfor%}" data-filter="{% for foreign_row in row.related_products %}f-{{ foreign_row.hs_id }} {% endfor %}">
+                          <div class="tmg_addon_box">
+                              <div class="tmg_placeholder-image">
+                                  <a href="{{ request.path }}/{{ row.hs_path }}">
+                                      <img src="{{ row.logo.url }}" width="500" {% if row.logo.width>
+                                      row.logo.height %}class="landscape"{% endif %} alt="{{ row.name }} ">
+                                  </a>
+                              </div>
+                              <div class="tmg_content_row_db">
+                                  <h3>{{ row.name }}</h3>
+                                  {{ row.summary }}
+                                  <div class="read-more-link-wrap">
+                                    <a href="{{ request.path }}/{{ row.hs_path }}" class="read-more-link">
+                                      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+                                          <style type="text/css">
+                                          .st0 {
+                                              fill: none;
+                                              stroke: #C5299B;
+                                              stroke-width: 2;
+                                          }
+                                          </style>
+                                          <path class="st0" d="M14.8,1.6l9.1,9.5l-9.1,9.5" />
+                                          <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2" />
+                                      </svg>
+                                  </a>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                      <!-- <div class="load_more_wrap"><a href="#" id="loadMore">Load More</a></div> -->
+                  </div>
+                  {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+
+{# =============== CSS Styling =============== #}
+{% require_css %}
+ <style>
+ .custom-addon {
+   margin-top:30px;
+border: 2px solid #E6007E!important;
+    color: #002B49!important;
+    background-color: white!important;
+    padding: 10px 40px!important;
+    text-decoration: none !important;
+
+}
+
+.custom-addon:hover {
+  color: white!important;
+  border: 2px solid #E6007E!important;
+    background-color: #E6007E!important;
+    color: white;
+}
+
+   
+.tmg_add_on_section {  float: left;  width: 100%;}
+.tmg_addon_banner_section { max-width: 100%; width: 100%; margin-top: 60px}
+.tmg_addon_banner_txt { max-width: 760px;}
+.tmg_addon_banner_txt h1{  margin: 0;  padding: 0;     font-weight: 300; font-style: normal;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: -0.05em;}
+.filter_srch_row {  display: flex; justify-content: space-between; align-items: center; padding: 50px 0; flex-wrap: wrap;}
+.tmg_add_on_row.tmg_addon-grid{ display: flex; flex-wrap: wrap; margin-bottom: 0px; margin-left: -20px; margin-right: -20px;}
+   
+.tmg_add_on_row.tmg_addon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.tmg_addon_block {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.tmg_addon_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tmg_content_row_db {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* Keep existing responsive breakpoints but update them for flex */
+@media (max-width:992px) {
+  .tmg_addon_block {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width:767px) {
+  .tmg_addon_block {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width:580px) {
+  .tmg_addon_block {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}   
+   
+   
+   
+.tmg_addon_block{ -ms-flex: 0 0 33%;  flex: 0 0 33%; max-width: 33%;  padding: 20px; }
+.tmg_addon_box{ 
+    /* border: 1px solid #f1f1f1; */
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: left;
+    position: relative;
+/*     box-shadow: 0 0 10px rgb(0 0 0 / 10%); */
+    padding: 30px;
+    background: #ffffff;
+}
+
+.addon-content-wrap {
+  background: #D9D9D9;
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.tmg_addon_block:hover .tmg_addon_box {
+/*     transform: scale(1.05); 
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 30%);
+    transition: all 0.3s ease-out;*/
+}
+.tmg_content_row_db { display: flex; padding: 0px; flex-wrap: wrap;}
+.tmg_content_row_db p { font-size: 14px; margin: 0; padding: 0; color: #04216B; font-weight: 400 !important; line-height: 23px;}
+.tmg_content_row_db p a{  color: #000; }
+.tmg_content_row_db span { color: #9a9a9a; font-size: 16px;}
+.heart_bx {  position: absolute; right: 10px;  top: 7px;}
+.tmg_content_row_db a.button.custom_btn { margin:20px 0 0;  border: 0; color: #ffffff; background: #C5299B;
+    border: #C5299B; display: inline-flex;
+    line-height: 23px;
+   }
+   .tmg_content_row_db a.button.custom_btn:hover{     background-color: #06226D;}
+.tmg_content_row_db a.button.custom_btn .st0 {  stroke: #ffffff;}
+.read-more-link .st0 {
+  stroke: #C5299B;
+}
+.read-more-link-wrap {
+  width: 100%;
+  text-align: right;
+  margin-top: 30px;
+}
+.heart_bx:hover path.st0 {  fill: #dF1D35;}
+
+.load_more_wrap {  text-align: center;  display: flex;  flex-wrap: wrap; justify-content: center; width: 100%; margin-top: 45px;}
+.load_more_wrap a{ display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    border-radius: 3px;
+    color: #00a9fa;
+    font-size: 16px;
+    border: 2px solid #00a9fa;
+}
+/*****************Detail Page***************************/
+/*detail_page*/
+.cloudnanny_db_detail .cd_search_dv{ background-color: #edf8ff; padding-bottom: 0; /*padding-top: 0;*/ }
+.tmg_addon_detail_wrapper{ background-color: #ffffff; padding-top: 0; padding-bottom: 0; width: 100%; float: left;}
+.cldn_row{  display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin: 45px 0;}
+.tmg_column_7{ width: 65%;}
+.cld_bg{ display: inline-block;  width: 100%;}
+.tmg_addon_wrap.cld_bg .tmg_placeholder-image{ height: auto;  width: 100%;  display: inline-block;}
+.tmg_addon_wrap.cld_bg .tmg_placeholder-image img{   width: 100%;}
+.audio_wrap { width: 100%; padding: 15px 0 0; display: flex;align-items: center; justify-content: space-between;}
+.db_rap_box{ width: 215px; float: left; }
+.share_button { float: right; }
+.db_rap_box audio {  width: 100%;}
+   
+
+   
+.link_bg { 
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  color: #C5299B;
+font-family: Khula;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal; 
+ }
+
+.Available_add{ width: 100%; display: flex; flex-wrap: wrap; padding-top: 20px; }
+.tmg_addon_wrap  h4{ text-transform: uppercase; letter-spacing: 0.002px; font-size: 18px;  margin-bottom: 0;}
+.addons_wrap { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; width: 100%; margin-top: 20px;justify-content: space-between;}
+.addons_wrap .add_on_img {
+    flex: 0 0 32%;
+    max-width: 32%;
+    height: 10rem;
+    background-repeat: no-repeat;
+    display: flex;
+    background-size: cover;
+    border-radius: 1px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.addons_wrap .add_on_img a h5{ text-transform: uppercase; color: #ffffff; font-size: 16px; margin-bottom: 0; font-weight: 600; }
+.addons_wrap .add_on_img a:hover{ text-decoration: none; }
+.about_brand_wrap{ width: 100%; display: flex; flex-wrap: wrap; padding-top: 20px; }
+.about_brand_wrap  h4{  text-transform: uppercase;  letter-spacing: 0.002px; font-size: 18px;  margin-bottom: 0;}
+.description_text{ width: 90%; display: inline-block; padding: 10px 0 0 0; }
+.description_text p{ font-size: 14px; line-height: 22px; }
+.what_get_section{ display: -ms-flexbox;  display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; width: 100%; margin-top: 20px; }
+.get_column-6 {-ms-flex: 0 0 50%;flex: 0 0 50%;  max-width: 50%;}
+.list_box ul { margin: 20px 0 0 0; padding: 0; }
+.list_box ul li {
+    background-image: url(https://www.webdew.com/hubfs/Final_Webdew/arrow-check.svg);
+    background-repeat: no-repeat;
+    padding: 0 0 6px 35px;
+    list-style: none;
+    margin: 0 0 5px 0;
+    width: 100%;
+}
+.list_box ul li:last-child{ margin-bottom: 0; }
+.keywords_wrp{ display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap;  width: 100%;   margin-top: 20px;  }
+.keywords_wrp h4{ color: #06226D;
+  margin-bottom:0;
+font-family: Khula;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;}
+.keywords_wrp ul{ margin: 5px 0 0 0; padding: 0; width: 100%; display: inline-block; }
+.emotion_feel h4{ text-transform: uppercase; letter-spacing: 0.002px; font-size: 18px; margin-bottom: 20px;}
+.emotion_feel ul{ margin: 0; padding: 0; }
+.emotion_feel ul li { font-size: 12px;  padding: 5px 10px; }
+.tmg_column_5{  width: 35%;  padding-left: 30px; }
+.domain_sale { width: 100%; display: inline-block; }
+.domain_sale h3 { width: 100%; display: inline-block; color: #48484d; margin-bottom: 0; font-size: 20px;font-weight: 600; }
+.domain_sale h2 {  font-size: 32px; color:#009bff; margin: 10px 0; font-weight: 700; }
+.domain_sale h2 span{ font-size: 16px; font-weight: 400; color: #48484d; }
+.domain_sale  .domain_price{  font-size: 30px; color: #444751;  }
+.buy_button{ width: 100%; display: inline-block; margin-top: 30px; text-align: center; }
+.buy_button a {
+  border-radius: 1px;
+  background-color: rgb(0, 155, 255);
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+  width: 100%;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+}
+.buy_button a:hover{ text-decoration: none !important; color: #009bff !important; background-color: #ffffff; border: 2px solid #009bff;}
+.buy_button a:focus { color: #ffffff;outline: 0;text-decoration: none !important;}
+.emotion_feel{ margin-top: 30px; }
+.quetion_form_section{ margin-top: 30px; }
+.que_tb_wrp h4{text-transform: uppercase; letter-spacing: 0.002px;  font-size: 18px;  margin-bottom: 0; }
+.que_tb_wrp span{ font-size: 12px; font-weight: normal; color: #009bff;  margin-bottom: 20px;  display: block; }
+.addres_line { display: flex; align-items: center; margin-bottom: 10px;}
+.addres_line .icon{ margin: 0 20px 0 0; padding: 0; }
+.addres_line .text_link a{  color: #48484d; }
+.addres_line .text_link a:hover{ text-decoration: none; }
+.offer_form h4{  text-transform: capitalize; letter-spacing: 0.002px; font-size: 18px;  margin-top: 20px;margin-bottom: 20px;}
+.form_div .hs-input{border-style: solid;border-width: 2px;border-color: rgb(204, 207, 209); border-radius: 1px; background-color: rgb(255, 255, 255); height: 50px;}
+.form_div input.hs-button.primary.large{
+    border-radius: 1px;
+    background-color: #009bff;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.hs_your_offer .input{ position: relative; }
+.hs_your_offer .input::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "USD";
+    height: 50px;
+    width: 90px;
+    background-color: #edf8ff;
+    color: #009bff;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid #d1d4d6;
+}
+.form_div .hs_your_offer .hs-input{ padding-left: 100px; }
+.cloudnanny_db_detail .cd_search_dv h3{  color: #775547; }
+.media_business{ width: 100%; display: inline-block; margin-top: 30px; padding-bottom: 0; }
+.media_row{  display: -ms-flexbox; display: flex;  -ms-flex-wrap: wrap;  flex-wrap: wrap; padding-top: 20px; margin-right: -15px;  margin-left: -15px;}
+.media_row .get_column-6{   padding: 0 15px;}
+.tile_media h3{ margin-bottom: 0; color: #444751; font-size: 25px; }
+.Length_div h4{ font-size: 18px; display: inline-block; margin-bottom: 15px; }
+.Length_div p {  font-size: 14px; line-height: 22px;}
+.Length_div h4 span {
+    background-color: #00bb88;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #fff;
+    padding: 4px 14px;
+    margin: 0 0 0 4px;
+}
+.Length_div.tld h4 span { background-color: #009bff; }
+.Length_div p > span{ color: #009bff; }
+.tmg_addon_detail_wrapper .cloudnanny_db_detail .cd_search_dv,
+.tmg_addon_detail_wrapper .industry_feature_section { background-color: #fff;}
+.tmg_addon_detail_wrapper .industry_feature_section  .industry_column {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px -1px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px;
+    background-color: #edf8ff;
+}
+.tmg_addon_detail_wrapper .cloudnanny_db_detail .cd_search_dv h3 {  color: #494a52;}
+/* all */
+::-webkit-input-placeholder { color:#495057; }
+::-moz-placeholder { color:#495057; } /* firefox 19+ */
+:-ms-input-placeholder { color:#495057; } /* ie */
+input:-moz-placeholder { color:#495057; }
+.form_div input[type=text]:focus, 
+.form_div input[type=email]:focus, 
+.form_div input[type=password]:focus, 
+.form_div input[type=tel]:focus, 
+.form_div input[type=number]:focus, 
+.form_div input[type=file]:focus, 
+.form_div select:focus, .form_div  textarea:focus {border-color: #009bff;}
+
+.offer_form iframe { width: 100% !important;}
+.db_title_pg {  margin: 30px 0 0;} 
+.filter_wrapper { display: flex; flex-wrap: wrap;  padding:0;}
+.tmg_addon_search_wrap {  position: relative;}
+.tmg_addon_search {  max-width: 350px; margin: 0 auto;}
+.c-dropdown { position: relative;display: inline-block;text-align: left;}
+.c-dropdown__list {
+  margin: 5px 0 0 0;
+  padding: 6px 0;
+  list-style: none;
+  position: absolute;
+  top: 125%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 3px;
+  background: #fff;
+  transition: opacity 0.25s linear, top 0.25s linear;
+  z-index: 1;
+      border: 1px solid #ccc;
+}
+.c-dropdown.is-open .c-dropdown__list {opacity: 1; visibility: visible;top: 100%;}
+.c-dropdown__item {
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  color: #434a54;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.25s linear;
+}
+.c-dropdown__item:hover { background-color: #e6e9ed;}
+.c-button {
+  -webkit-appearance: none;
+  margin: 0;
+  border: 0;
+  overflow: visible;
+  font: inherit;
+  text-transform: none;
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.c-button:hover, 
+.c-button:focus {  outline: none;  text-decoration: none;}
+.c-button:not(:disabled) {  cursor: pointer;}
+.c-button--dropdown {
+    padding: 12px 30px 12px 15px;
+    background-color: #fff;
+    color: #06226D;
+    font-size: 14px;
+    line-height: 20px;
+    min-height: 32px;
+    border-radius: 3px;
+    transition: background-color 0.2s linear;
+    border: 1px solid #06226D;
+       width: 300px;
+    text-align: left;
+}
+.c-button--dropdown:hover { background-color: #06226D; color: #ffffff;}
+.c-button--dropdown:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top-color: #06226D;
+}
+
+.search-input-wrap {
+  position: relative;
+}
+
+.search-input-wrap svg {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+}
+
+.tmg_addon_search input[type="search"]{
+    padding: 12px 15px 12px 15px;
+    background-color: #fff;
+    color: #06226D;
+    font-size: 14px;
+    line-height: 20px;
+    min-height: 32px;
+    border-radius: 3px;
+    transition: background-color 0.2s linear;
+    border: 1px solid #9B9B9D;
+    width: 300px;
+    text-align: left;
+    outline: 0;
+    border-radius: 50px;
+    padding-right: 30px;
+}
+
+.tmg_content_row_db h3 {   margin: 0px; margin-bottom: 10px;  padding: 0; color: #04216B; font-size: 34px; font-weight: 300;}
+#addon_list .addon_list_item{ display:none; overflow:hidden; }
+.add_on_fl_list {  display: flex;  align-items: center;  gap: 10px;}
+.add_on_fl_list ul.fil_list {  margin: 0; padding: 0; display: flex; list-style: none; gap: 5px; flex-wrap: wrap;margin-bottom: 10px;}
+.add_on_fl_list ul.fil_list li {
+    padding: 10px 30px;
+    background-color: #D9D9D9;
+    color: #04216B;
+    font-size: 14px;;
+    border-radius: 50px;
+    transition: background-color 0.2s linear;
+    width: auto;
+    text-align: left;
+    outline: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.add_on_fl_list ul.fil_list li.active{}
+.add_on_fl_list ul.fil_list li.active { background-color: #000000;   color: #fff;}
+.tmg_placeholder-image { max-width: 360px;  width: 100%; margin-bottom: 53px;}
+.tmg_placeholder-image img {  
+     max-height: 35px;
+    text-align: left;
+    object-position: left;
+    object-fit: contain;
+    max-width: 90%;
+
+}
+ @media (max-width:992px){
+  .tmg_addon_block{ -ms-flex: 0 0 50%;  flex: 0 0 50%; max-width: 50%;}
+ }
+
+@media (max-width:767px){
+.tmg_addon_block{ -ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;  }
+.tmg_column_7 {  width: 100%;}
+.tmg_column_5 {  width: 100%; padding-left: 0;}
+.hbspt-form iframe { width: 100% !important;}
+
+.filter_srch_row { padding: 30px 0; flex-wrap: wrap;}
+.tmg_addon_box {  padding: 30px;}
+.add_on_fl_list {  flex-wrap: wrap;}
+.add_on_fl_list ul.fil_list { flex-wrap: wrap;}
+.tmg_addon_search_wrap { margin-top: 30px; width: 100%; }
+.tmg_addon_search input[type="search"] {width: 100%;  }
+.tmg_addon_search {  max-width: 100%;  margin: 0 auto; width: 100%;}
+
+}
+
+@media (max-width:580px){
+.tmg_addon_block{     -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;  }
+.get_column-6 { -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+}
+
+@media (max-width: 1024px) {
+  .addon-content-wrap {
+    padding-bottom: 40px;
+  }
+}
+ 
+</style>
+{% end_require_css%}
+{# =============== /CSS Styling =============== #}
+
+{# =============== /Script =============== #}
+{% require_js %}
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+   <script>
+
+
+$(function () {
+  var filterList = {
+    init: function () {
+      // MixItUp plugin
+      // http://mixitup.io
+      $("#addon_list").mixItUp({
+        selectors: {
+          target: ".addon_list_item",
+          filter: ".filter"
+        },
+        load: {
+          filter: ".all_add_on"
+        }
+      });
+    }
+  };
+
+  // Run the show!
+  filterList.init();
+});
+
+!(function (a, b) {
+  "use strict";
+  (a.MixItUp = function () {
+    var b = this;
+    b._execAction("_constructor", 0),
+      a.extend(b, {
+        selectors: {
+          target: ".mix",
+          filter: ".filter",
+          sort: ".sort"
+        },
+        animation: {
+          enable: !0,
+          effects: "fade scale",
+          duration: 600,
+          easing: "ease",
+          perspectiveDistance: "3000",
+          perspectiveOrigin: "50% 50%",
+          queue: !0,
+          queueLimit: 1,
+          animateChangeLayout: !1,
+          animateResizeContainer: !0,
+          animateResizeTargets: !1,
+          staggerSequence: !1,
+          reverseOut: !1
+        },
+        callbacks: {
+          onMixLoad: !1,
+          onMixStart: !1,
+          onMixBusy: !1,
+          onMixEnd: !1,
+          onMixFail: !1,
+          _user: !1
+        },
+        controls: {
+          enable: !0,
+          live: !1,
+          toggleFilterButtons: !1,
+          toggleLogic: "or",
+          activeClass: "active"
+        },
+        layout: {
+          display: "inline-block",
+          containerClass: "",
+          containerClassFail: "fail"
+        },
+        load: {
+          filter: "all",
+          sort: !1
+        },
+        _$body: null,
+        _$container: null,
+        _$targets: null,
+        _$parent: null,
+        _$sortButtons: null,
+        _$filterButtons: null,
+        _suckMode: !1,
+        _mixing: !1,
+        _sorting: !1,
+        _clicking: !1,
+        _loading: !0,
+        _changingLayout: !1,
+        _changingClass: !1,
+        _changingDisplay: !1,
+        _origOrder: [],
+        _startOrder: [],
+        _newOrder: [],
+        _activeFilter: null,
+        _toggleArray: [],
+        _toggleString: "",
+        _activeSort: "default:asc",
+        _newSort: null,
+        _startHeight: null,
+        _newHeight: null,
+        _incPadding: !0,
+        _newDisplay: null,
+        _newClass: null,
+        _targetsBound: 0,
+        _targetsDone: 0,
+        _queue: [],
+        _$show: a(),
+        _$hide: a()
+      }),
+      b._execAction("_constructor", 1);
+  }),
+    (a.MixItUp.prototype = {
+      constructor: a.MixItUp,
+      _instances: {},
+      _handled: {
+        _filter: {},
+        _sort: {}
+      },
+      _bound: {
+        _filter: {},
+        _sort: {}
+      },
+      _actions: {},
+      _filters: {},
+      extend: function (b) {
+        for (var c in b) a.MixItUp.prototype[c] = b[c];
+      },
+      addAction: function (b, c, d, e) {
+        a.MixItUp.prototype._addHook("_actions", b, c, d, e);
+      },
+      addFilter: function (b, c, d, e) {
+        a.MixItUp.prototype._addHook("_filters", b, c, d, e);
+      },
+      _addHook: function (b, c, d, e, f) {
+        var g = a.MixItUp.prototype[b],
+          h = {};
+        (f = 1 === f || "post" === f ? "post" : "pre"),
+          (h[c] = {}),
+          (h[c][f] = {}),
+          (h[c][f][d] = e),
+          a.extend(!0, g, h);
+      },
+      _init: function (b, c) {
+        var d = this;
+        if (
+          (d._execAction("_init", 0, arguments),
+          c && a.extend(!0, d, c),
+          (d._$body = a("body")),
+          (d._domNode = b),
+          (d._$container = a(b)),
+          d._$container.addClass(d.layout.containerClass),
+          (d._id = b.id),
+          d._platformDetect(),
+          (d._brake = d._getPrefixedCSS("transition", "none")),
+          d._refresh(!0),
+          (d._$parent = d._$targets.parent().length
+            ? d._$targets.parent()
+            : d._$container),
+          d.load.sort &&
+            ((d._newSort = d._parseSort(d.load.sort)),
+            (d._newSortString = d.load.sort),
+            (d._activeSort = d.load.sort),
+            d._sort(),
+            d._printSort()),
+          (d._activeFilter =
+            "all" === d.load.filter
+              ? d.selectors.target
+              : "none" === d.load.filter
+              ? ""
+              : d.load.filter),
+          d.controls.enable && d._bindHandlers(),
+          d.controls.toggleFilterButtons)
+        ) {
+          d._buildToggleArray();
+          for (var e = 0; e < d._toggleArray.length; e++)
+            d._updateControls(
+              {
+                filter: d._toggleArray[e],
+                sort: d._activeSort
+              },
+              !0
+            );
+        } else
+          d.controls.enable &&
+            d._updateControls({
+              filter: d._activeFilter,
+              sort: d._activeSort
+            });
+        d._filter(),
+          (d._init = !0),
+          d._$container.data("mixItUp", d),
+          d._execAction("_init", 1, arguments),
+          d._buildState(),
+          d._$targets.css(d._brake),
+          d._goMix(d.animation.enable);
+      },
+      _platformDetect: function () {
+        var a = this,
+          c = ["Webkit", "Moz", "O", "ms"],
+          d = ["webkit", "moz"],
+          e = window.navigator.appVersion.match(/Chrome\/(\d+)\./) || !1,
+          f = "undefined" != typeof InstallTrigger,
+          g = function (a) {
+            for (var b = 0; b < c.length; b++)
+              if (c[b] + "Transition" in a.style)
+                return {
+                  prefix: "-" + c[b].toLowerCase() + "-",
+                  vendor: c[b]
+                };
+            return "transition" in a.style ? "" : !1;
+          },
+          h = g(a._domNode);
+        a._execAction("_platformDetect", 0),
+          (a._chrome = e ? parseInt(e[1], 10) : !1),
+          (a._ff = f
+            ? parseInt(window.navigator.userAgent.match(/rv:([^)]+)\)/)[1])
+            : !1),
+          (a._prefix = h.prefix),
+          (a._vendor = h.vendor),
+          (a._suckMode = window.atob && a._prefix ? !1 : !0),
+          a._suckMode && (a.animation.enable = !1),
+          a._ff && a._ff <= 4 && (a.animation.enable = !1);
+        for (var i = 0; i < d.length && !window.requestAnimationFrame; i++)
+          window.requestAnimationFrame = window[d[i] + "RequestAnimationFrame"];
+        "function" != typeof Object.getPrototypeOf &&
+          ("object" == typeof "test".__proto__
+            ? (Object.getPrototypeOf = function (a) {
+                return a.__proto__;
+              })
+            : (Object.getPrototypeOf = function (a) {
+                return a.constructor.prototype;
+              })),
+          a._domNode.nextElementSibling === b &&
+            Object.defineProperty(Element.prototype, "nextElementSibling", {
+              get: function () {
+                for (var a = this.nextSibling; a; ) {
+                  if (1 === a.nodeType) return a;
+                  a = a.nextSibling;
+                }
+                return null;
+              }
+            }),
+          a._execAction("_platformDetect", 1);
+      },
+      _refresh: function (a, c) {
+        var d = this;
+        d._execAction("_refresh", 0, arguments),
+          (d._$targets = d._$container.find(d.selectors.target));
+        for (var e = 0; e < d._$targets.length; e++) {
+          var f = d._$targets[e];
+          if (f.dataset === b || c) {
+            f.dataset = {};
+            for (var g = 0; g < f.attributes.length; g++) {
+              var h = f.attributes[g],
+                i = h.name,
+                j = h.value;
+              if (i.indexOf("data-") > -1) {
+                var k = d._helpers._camelCase(i.substring(5, i.length));
+                f.dataset[k] = j;
+              }
+            }
+          }
+          f.mixParent === b && (f.mixParent = d._id);
+        }
+        if (
+          (d._$targets.length && a) ||
+          (!d._origOrder.length && d._$targets.length)
+        ) {
+          d._origOrder = [];
+          for (var e = 0; e < d._$targets.length; e++) {
+            var f = d._$targets[e];
+            d._origOrder.push(f);
+          }
+        }
+        d._execAction("_refresh", 1, arguments);
+      },
+      _bindHandlers: function () {
+        var c = this,
+          d = a.MixItUp.prototype._bound._filter,
+          e = a.MixItUp.prototype._bound._sort;
+        c._execAction("_bindHandlers", 0),
+          c.controls.live
+            ? c._$body
+                .on("click.mixItUp." + c._id, c.selectors.sort, function () {
+                  c._processClick(a(this), "sort");
+                })
+                .on("click.mixItUp." + c._id, c.selectors.filter, function () {
+                  c._processClick(a(this), "filter");
+                })
+            : ((c._$sortButtons = a(c.selectors.sort)),
+              (c._$filterButtons = a(c.selectors.filter)),
+              c._$sortButtons.on("click.mixItUp." + c._id, function () {
+                c._processClick(a(this), "sort");
+              }),
+              c._$filterButtons.on("click.mixItUp." + c._id, function () {
+                c._processClick(a(this), "filter");
+              })),
+          (d[c.selectors.filter] =
+            d[c.selectors.filter] === b ? 1 : d[c.selectors.filter] + 1),
+          (e[c.selectors.sort] =
+            e[c.selectors.sort] === b ? 1 : e[c.selectors.sort] + 1),
+          c._execAction("_bindHandlers", 1);
+      },
+      _processClick: function (c, d) {
+        var e = this,
+          f = function (c, d, f) {
+            var g = a.MixItUp.prototype;
+            (g._handled["_" + d][e.selectors[d]] =
+              g._handled["_" + d][e.selectors[d]] === b
+                ? 1
+                : g._handled["_" + d][e.selectors[d]] + 1),
+              g._handled["_" + d][e.selectors[d]] ===
+                g._bound["_" + d][e.selectors[d]] &&
+                (c[(f ? "remove" : "add") + "Class"](e.controls.activeClass),
+                delete g._handled["_" + d][e.selectors[d]]);
+          };
+        if (
+          (e._execAction("_processClick", 0, arguments),
+          !e._mixing ||
+            (e.animation.queue && e._queue.length < e.animation.queueLimit))
+        ) {
+          if (((e._clicking = !0), "sort" === d)) {
+            var g = c.attr("data-sort");
+            (!c.hasClass(e.controls.activeClass) || g.indexOf("random") > -1) &&
+              (a(e.selectors.sort).removeClass(e.controls.activeClass),
+              f(c, d),
+              e.sort(g));
+          }
+          if ("filter" === d) {
+            var h,
+              i = c.attr("data-filter"),
+              j = "or" === e.controls.toggleLogic ? "," : "";
+            e.controls.toggleFilterButtons
+              ? (e._buildToggleArray(),
+                c.hasClass(e.controls.activeClass)
+                  ? (f(c, d, !0),
+                    (h = e._toggleArray.indexOf(i)),
+                    e._toggleArray.splice(h, 1))
+                  : (f(c, d), e._toggleArray.push(i)),
+                (e._toggleArray = a.grep(e._toggleArray, function (a) {
+                  return a;
+                })),
+                (e._toggleString = e._toggleArray.join(j)),
+                e.filter(e._toggleString))
+              : c.hasClass(e.controls.activeClass) ||
+                (a(e.selectors.filter).removeClass(e.controls.activeClass),
+                f(c, d),
+                e.filter(i));
+          }
+          e._execAction("_processClick", 1, arguments);
+        } else
+          "function" == typeof e.callbacks.onMixBusy &&
+            e.callbacks.onMixBusy.call(e._domNode, e._state, e),
+            e._execAction("_processClickBusy", 1, arguments);
+      },
+      _buildToggleArray: function () {
+        var a = this,
+          b = a._activeFilter.replace(/\s/g, "");
+        if (
+          (a._execAction("_buildToggleArray", 0, arguments),
+          "or" === a.controls.toggleLogic)
+        )
+          a._toggleArray = b.split(",");
+        else {
+          (a._toggleArray = b.split(".")),
+            !a._toggleArray[0] && a._toggleArray.shift();
+          for (var c, d = 0; (c = a._toggleArray[d]); d++)
+            a._toggleArray[d] = "." + c;
+        }
+        a._execAction("_buildToggleArray", 1, arguments);
+      },
+      _updateControls: function (c, d) {
+        var e = this,
+          f = {
+            filter: c.filter,
+            sort: c.sort
+          },
+          g = function (a, b) {
+            try {
+              d && "filter" === h && "none" !== f.filter && "" !== f.filter
+                ? a.filter(b).addClass(e.controls.activeClass)
+                : a
+                    .removeClass(e.controls.activeClass)
+                    .filter(b)
+                    .addClass(e.controls.activeClass);
+            } catch (c) {}
+          },
+          h = "filter",
+          i = null;
+        e._execAction("_updateControls", 0, arguments),
+          c.filter === b && (f.filter = e._activeFilter),
+          c.sort === b && (f.sort = e._activeSort),
+          f.filter === e.selectors.target && (f.filter = "all");
+        for (var j = 0; 2 > j; j++)
+          (i = e.controls.live ? a(e.selectors[h]) : e["_$" + h + "Buttons"]),
+            i && g(i, "[data-" + h + '="' + f[h] + '"]'),
+            (h = "sort");
+        e._execAction("_updateControls", 1, arguments);
+      },
+      _filter: function () {
+        var b = this;
+        b._execAction("_filter", 0);
+        for (var c = 0; c < b._$targets.length; c++) {
+          var d = a(b._$targets[c]);
+          d.is(b._activeFilter)
+            ? (b._$show = b._$show.add(d))
+            : (b._$hide = b._$hide.add(d));
+        }
+        b._execAction("_filter", 1);
+      },
+      _sort: function () {
+        var a = this,
+          b = function (a) {
+            for (var b = a.slice(), c = b.length, d = c; d--; ) {
+              var e = parseInt(Math.random() * c),
+                f = b[d];
+              (b[d] = b[e]), (b[e] = f);
+            }
+            return b;
+          };
+        a._execAction("_sort", 0), (a._startOrder = []);
+        for (var c = 0; c < a._$targets.length; c++) {
+          var d = a._$targets[c];
+          a._startOrder.push(d);
+        }
+        switch (a._newSort[0].sortBy) {
+          case "default":
+            a._newOrder = a._origOrder;
+            break;
+          case "random":
+            a._newOrder = b(a._startOrder);
+            break;
+          case "custom":
+            a._newOrder = a._newSort[0].order;
+            break;
+          default:
+            a._newOrder = a._startOrder.concat().sort(function (b, c) {
+              return a._compare(b, c);
+            });
+        }
+        a._execAction("_sort", 1);
+      },
+      _compare: function (a, b, c) {
+        c = c ? c : 0;
+        var d = this,
+          e = d._newSort[c].order,
+          f = function (a) {
+            return a.dataset[d._newSort[c].sortBy] || 0;
+          },
+          g = isNaN(1 * f(a)) ? f(a).toLowerCase() : 1 * f(a),
+          h = isNaN(1 * f(b)) ? f(b).toLowerCase() : 1 * f(b);
+        return h > g
+          ? "asc" === e
+            ? -1
+            : 1
+          : g > h
+          ? "asc" === e
+            ? 1
+            : -1
+          : g === h && d._newSort.length > c + 1
+          ? d._compare(a, b, c + 1)
+          : 0;
+      },
+      _printSort: function (a) {
+        var b = this,
+          c = a ? b._startOrder : b._newOrder,
+          d = b._$parent[0].querySelectorAll(b.selectors.target),
+          e = d.length ? d[d.length - 1].nextElementSibling : null,
+          f = document.createDocumentFragment();
+        b._execAction("_printSort", 0, arguments);
+        for (var g = 0; g < d.length; g++) {
+          var h = d[g],
+            i = h.nextSibling;
+          "absolute" !== h.style.position &&
+            (i && "#text" === i.nodeName && b._$parent[0].removeChild(i),
+            b._$parent[0].removeChild(h));
+        }
+        for (var g = 0; g < c.length; g++) {
+          var j = c[g];
+          if (
+            "default" !== b._newSort[0].sortBy ||
+            "desc" !== b._newSort[0].order ||
+            a
+          )
+            f.appendChild(j), f.appendChild(document.createTextNode(" "));
+          else {
+            var k = f.firstChild;
+            f.insertBefore(j, k),
+              f.insertBefore(document.createTextNode(" "), j);
+          }
+        }
+        e ? b._$parent[0].insertBefore(f, e) : b._$parent[0].appendChild(f),
+          b._execAction("_printSort", 1, arguments);
+      },
+      _parseSort: function (a) {
+        for (
+          var b = this,
+            c = "string" == typeof a ? a.split(" ") : [a],
+            d = [],
+            e = 0;
+          e < c.length;
+          e++
+        ) {
+          var f = "string" == typeof a ? c[e].split(":") : ["custom", c[e]],
+            g = {
+              sortBy: b._helpers._camelCase(f[0]),
+              order: f[1] || "asc"
+            };
+          if ((d.push(g), "default" === g.sortBy || "random" === g.sortBy))
+            break;
+        }
+        return b._execFilter("_parseSort", d, arguments);
+      },
+      _parseEffects: function () {
+        var a = this,
+          b = {
+            opacity: "",
+            transformIn: "",
+            transformOut: "",
+            filter: ""
+          },
+          c = function (b, c, d) {
+            if (a.animation.effects.indexOf(b) > -1) {
+              if (c) {
+                var e = a.animation.effects.indexOf(b + "(");
+                if (e > -1) {
+                  var f = a.animation.effects.substring(e),
+                    g = /\(([^)]+)\)/.exec(f),
+                    h = g[1];
+                  return {
+                    val: h
+                  };
+                }
+              }
+              return !0;
+            }
+            return !1;
+          },
+          d = function (a, b) {
+            return b
+              ? "-" === a.charAt(0)
+                ? a.substr(1, a.length)
+                : "-" + a
+              : a;
+          },
+          e = function (a, e) {
+            for (
+              var f = [
+                  ["scale", ".01"],
+                  ["translateX", "20px"],
+                  ["translateY", "20px"],
+                  ["translateZ", "20px"],
+                  ["rotateX", "90deg"],
+                  ["rotateY", "90deg"],
+                  ["rotateZ", "180deg"]
+                ],
+                g = 0;
+              g < f.length;
+              g++
+            ) {
+              var h = f[g][0],
+                i = f[g][1],
+                j = e && "scale" !== h;
+              b[a] += c(h) ? h + "(" + d(c(h, !0).val || i, j) + ") " : "";
+            }
+          };
+        return (
+          (b.opacity = c("fade") ? c("fade", !0).val || "0" : "1"),
+          e("transformIn"),
+          a.animation.reverseOut
+            ? e("transformOut", !0)
+            : (b.transformOut = b.transformIn),
+          (b.transition = {}),
+          (b.transition = a._getPrefixedCSS(
+            "transition",
+            "none " +
+              a.animation.duration +
+              "ms " +
+              a.animation.easing +
+              ", opacity " +
+              a.animation.duration +
+              "ms linear"
+          )),
+          (a.animation.stagger = c("stagger") ? !0 : !1),
+          (a.animation.staggerDuration = parseInt(
+            c("stagger") && c("stagger", !0).val ? c("stagger", !0).val : 100
+          )),
+          a._execFilter("_parseEffects", b)
+        );
+      },
+      _buildState: function (a) {
+        var b = this,
+          c = {};
+        return (
+          b._execAction("_buildState", 0),
+          (c = {
+            activeFilter: "" === b._activeFilter ? "none" : b._activeFilter,
+            activeSort:
+              a && b._newSortString ? b._newSortString : b._activeSort,
+            fail: !b._$show.length && "" !== b._activeFilter,
+            $targets: b._$targets,
+            $show: b._$show,
+            $hide: b._$hide,
+            totalTargets: b._$targets.length,
+            totalShow: b._$show.length,
+            totalHide: b._$hide.length,
+            display: a && b._newDisplay ? b._newDisplay : b.layout.display
+          }),
+          a
+            ? b._execFilter("_buildState", c)
+            : ((b._state = c), void b._execAction("_buildState", 1))
+        );
+      },
+      _goMix: function (a) {
+        var b = this,
+          c = function () {
+            b._chrome && 31 === b._chrome && f(b._$parent[0]),
+              b._setInter(),
+              d();
+          },
+          d = function () {
+            var a = window.pageYOffset,
+              c = window.pageXOffset;
+            document.documentElement.scrollHeight;
+            b._getInterMixData(),
+              b._setFinal(),
+              b._getFinalMixData(),
+              window.pageYOffset !== a && window.scrollTo(c, a),
+              b._prepTargets(),
+              window.requestAnimationFrame
+                ? requestAnimationFrame(e)
+                : setTimeout(function () {
+                    e();
+                  }, 20);
+          },
+          e = function () {
+            b._animateTargets(), 0 === b._targetsBound && b._cleanUp();
+          },
+          f = function (a) {
+            var b = a.parentElement,
+              c = document.createElement("div"),
+              d = document.createDocumentFragment();
+            b.insertBefore(c, a), d.appendChild(a), b.replaceChild(a, c);
+          },
+          g = b._buildState(!0);
+        b._execAction("_goMix", 0, arguments),
+          !b.animation.duration && (a = !1),
+          (b._mixing = !0),
+          b._$container.removeClass(b.layout.containerClassFail),
+          "function" == typeof b.callbacks.onMixStart &&
+            b.callbacks.onMixStart.call(b._domNode, b._state, g, b),
+          b._$container.trigger("mixStart", [b._state, g, b]),
+          b._getOrigMixData(),
+          a && !b._suckMode
+            ? window.requestAnimationFrame
+              ? requestAnimationFrame(c)
+              : c()
+            : b._cleanUp(),
+          b._execAction("_goMix", 1, arguments);
+      },
+      _getTargetData: function (a, b) {
+        var c,
+          d = this;
+        (a.dataset[b + "PosX"] = a.offsetLeft),
+          (a.dataset[b + "PosY"] = a.offsetTop),
+          d.animation.animateResizeTargets &&
+            ((c = d._suckMode
+              ? {
+                  marginBottom: "",
+                  marginRight: ""
+                }
+              : window.getComputedStyle(a)),
+            (a.dataset[b + "MarginBottom"] = parseInt(c.marginBottom)),
+            (a.dataset[b + "MarginRight"] = parseInt(c.marginRight)),
+            (a.dataset[b + "Width"] = a.offsetWidth),
+            (a.dataset[b + "Height"] = a.offsetHeight));
+      },
+      _getOrigMixData: function () {
+        var a = this,
+          b = a._suckMode
+            ? {
+                boxSizing: ""
+              }
+            : window.getComputedStyle(a._$parent[0]),
+          c = b.boxSizing || b[a._vendor + "BoxSizing"];
+        (a._incPadding = "border-box" === c),
+          a._execAction("_getOrigMixData", 0),
+          !a._suckMode && (a.effects = a._parseEffects()),
+          (a._$toHide = a._$hide.filter(":visible")),
+          (a._$toShow = a._$show.filter(":hidden")),
+          (a._$pre = a._$targets.filter(":visible")),
+          (a._startHeight = a._incPadding
+            ? a._$parent.outerHeight()
+            : a._$parent.height());
+        for (var d = 0; d < a._$pre.length; d++) {
+          var e = a._$pre[d];
+          a._getTargetData(e, "orig");
+        }
+        a._execAction("_getOrigMixData", 1);
+      },
+      _setInter: function () {
+        var a = this;
+        a._execAction("_setInter", 0),
+          a._changingLayout && a.animation.animateChangeLayout
+            ? (a._$toShow.css("display", a._newDisplay),
+              a._changingClass &&
+                a._$container
+                  .removeClass(a.layout.containerClass)
+                  .addClass(a._newClass))
+            : a._$toShow.css("display", a.layout.display),
+          a._execAction("_setInter", 1);
+      },
+      _getInterMixData: function () {
+        var a = this;
+        a._execAction("_getInterMixData", 0);
+        for (var b = 0; b < a._$toShow.length; b++) {
+          var c = a._$toShow[b];
+          a._getTargetData(c, "inter");
+        }
+        for (var b = 0; b < a._$pre.length; b++) {
+          var c = a._$pre[b];
+          a._getTargetData(c, "inter");
+        }
+        a._execAction("_getInterMixData", 1);
+      },
+      _setFinal: function () {
+        var a = this;
+        a._execAction("_setFinal", 0),
+          a._sorting && a._printSort(),
+          a._$toHide.removeStyle("display"),
+          a._changingLayout &&
+            a.animation.animateChangeLayout &&
+            a._$pre.css("display", a._newDisplay),
+          a._execAction("_setFinal", 1);
+      },
+      _getFinalMixData: function () {
+        var a = this;
+        a._execAction("_getFinalMixData", 0);
+        for (var b = 0; b < a._$toShow.length; b++) {
+          var c = a._$toShow[b];
+          a._getTargetData(c, "final");
+        }
+        for (var b = 0; b < a._$pre.length; b++) {
+          var c = a._$pre[b];
+          a._getTargetData(c, "final");
+        }
+        (a._newHeight = a._incPadding
+          ? a._$parent.outerHeight()
+          : a._$parent.height()),
+          a._sorting && a._printSort(!0),
+          a._$toShow.removeStyle("display"),
+          a._$pre.css("display", a.layout.display),
+          a._changingClass &&
+            a.animation.animateChangeLayout &&
+            a._$container
+              .removeClass(a._newClass)
+              .addClass(a.layout.containerClass),
+          a._execAction("_getFinalMixData", 1);
+      },
+      _prepTargets: function () {
+        var b = this,
+          c = {
+            _in: b._getPrefixedCSS("transform", b.effects.transformIn),
+            _out: b._getPrefixedCSS("transform", b.effects.transformOut)
+          };
+        b._execAction("_prepTargets", 0),
+          b.animation.animateResizeContainer &&
+            b._$parent.css("height", b._startHeight + "px");
+        for (var d = 0; d < b._$toShow.length; d++) {
+          var e = b._$toShow[d],
+            f = a(e);
+          (e.style.opacity = b.effects.opacity),
+            (e.style.display =
+              b._changingLayout && b.animation.animateChangeLayout
+                ? b._newDisplay
+                : b.layout.display),
+            f.css(c._in),
+            b.animation.animateResizeTargets &&
+              ((e.style.width = e.dataset.finalWidth + "px"),
+              (e.style.height = e.dataset.finalHeight + "px"),
+              (e.style.marginRight =
+                -(e.dataset.finalWidth - e.dataset.interWidth) +
+                1 * e.dataset.finalMarginRight +
+                "px"),
+              (e.style.marginBottom =
+                -(e.dataset.finalHeight - e.dataset.interHeight) +
+                1 * e.dataset.finalMarginBottom +
+                "px"));
+        }
+        for (var d = 0; d < b._$pre.length; d++) {
+          var e = b._$pre[d],
+            f = a(e),
+            g = {
+              x: e.dataset.origPosX - e.dataset.interPosX,
+              y: e.dataset.origPosY - e.dataset.interPosY
+            },
+            c = b._getPrefixedCSS(
+              "transform",
+              "translate(" + g.x + "px," + g.y + "px)"
+            );
+          f.css(c),
+            b.animation.animateResizeTargets &&
+              ((e.style.width = e.dataset.origWidth + "px"),
+              (e.style.height = e.dataset.origHeight + "px"),
+              e.dataset.origWidth - e.dataset.finalWidth &&
+                (e.style.marginRight =
+                  -(e.dataset.origWidth - e.dataset.interWidth) +
+                  1 * e.dataset.origMarginRight +
+                  "px"),
+              e.dataset.origHeight - e.dataset.finalHeight &&
+                (e.style.marginBottom =
+                  -(e.dataset.origHeight - e.dataset.interHeight) +
+                  1 * e.dataset.origMarginBottom +
+                  "px"));
+        }
+        b._execAction("_prepTargets", 1);
+      },
+      _animateTargets: function () {
+        var b = this;
+        b._execAction("_animateTargets", 0),
+          (b._targetsDone = 0),
+          (b._targetsBound = 0),
+          b._$parent
+            .css(
+              b._getPrefixedCSS(
+                "perspective",
+                b.animation.perspectiveDistance + "px"
+              )
+            )
+            .css(
+              b._getPrefixedCSS(
+                "perspective-origin",
+                b.animation.perspectiveOrigin
+              )
+            ),
+          b.animation.animateResizeContainer &&
+            b._$parent
+              .css(
+                b._getPrefixedCSS(
+                  "transition",
+                  "height " + b.animation.duration + "ms ease"
+                )
+              )
+              .css("height", b._newHeight + "px");
+        for (var c = 0; c < b._$toShow.length; c++) {
+          var d = b._$toShow[c],
+            e = a(d),
+            f = {
+              x: d.dataset.finalPosX - d.dataset.interPosX,
+              y: d.dataset.finalPosY - d.dataset.interPosY
+            },
+            g = b._getDelay(c),
+            h = {};
+          d.style.opacity = "";
+          for (var i = 0; 2 > i; i++) {
+            var j = 0 === i ? (j = b._prefix) : "";
+            b._ff &&
+              b._ff <= 20 &&
+              ((h[j + "transition-property"] = "all"),
+              (h[j + "transition-timing-function"] = b.animation.easing + "ms"),
+              (h[j + "transition-duration"] = b.animation.duration + "ms")),
+              (h[j + "transition-delay"] = g + "ms"),
+              (h[j + "transform"] = "translate(" + f.x + "px," + f.y + "px)");
+          }
+          (b.effects.transform || b.effects.opacity) && b._bindTargetDone(e),
+            b._ff && b._ff <= 20
+              ? e.css(h)
+              : e.css(b.effects.transition).css(h);
+        }
+        for (var c = 0; c < b._$pre.length; c++) {
+          var d = b._$pre[c],
+            e = a(d),
+            f = {
+              x: d.dataset.finalPosX - d.dataset.interPosX,
+              y: d.dataset.finalPosY - d.dataset.interPosY
+            },
+            g = b._getDelay(c);
+          (d.dataset.finalPosX !== d.dataset.origPosX ||
+            d.dataset.finalPosY !== d.dataset.origPosY) &&
+            b._bindTargetDone(e),
+            e.css(
+              b._getPrefixedCSS(
+                "transition",
+                "all " +
+                  b.animation.duration +
+                  "ms " +
+                  b.animation.easing +
+                  " " +
+                  g +
+                  "ms"
+              )
+            ),
+            e.css(
+              b._getPrefixedCSS(
+                "transform",
+                "translate(" + f.x + "px," + f.y + "px)"
+              )
+            ),
+            b.animation.animateResizeTargets &&
+              (d.dataset.origWidth - d.dataset.finalWidth &&
+                1 * d.dataset.finalWidth &&
+                ((d.style.width = d.dataset.finalWidth + "px"),
+                (d.style.marginRight =
+                  -(d.dataset.finalWidth - d.dataset.interWidth) +
+                  1 * d.dataset.finalMarginRight +
+                  "px")),
+              d.dataset.origHeight - d.dataset.finalHeight &&
+                1 * d.dataset.finalHeight &&
+                ((d.style.height = d.dataset.finalHeight + "px"),
+                (d.style.marginBottom =
+                  -(d.dataset.finalHeight - d.dataset.interHeight) +
+                  1 * d.dataset.finalMarginBottom +
+                  "px")));
+        }
+        b._changingClass &&
+          b._$container
+            .removeClass(b.layout.containerClass)
+            .addClass(b._newClass);
+        for (var c = 0; c < b._$toHide.length; c++) {
+          for (
+            var d = b._$toHide[c], e = a(d), g = b._getDelay(c), k = {}, i = 0;
+            2 > i;
+            i++
+          ) {
+            var j = 0 === i ? (j = b._prefix) : "";
+            (k[j + "transition-delay"] = g + "ms"),
+              (k[j + "transform"] = b.effects.transformOut),
+              (k.opacity = b.effects.opacity);
+          }
+          e.css(b.effects.transition).css(k),
+            (b.effects.transform || b.effects.opacity) && b._bindTargetDone(e);
+        }
+        b._execAction("_animateTargets", 1);
+      },
+      _bindTargetDone: function (b) {
+        var c = this,
+          d = b[0];
+        c._execAction("_bindTargetDone", 0, arguments),
+          d.dataset.bound ||
+            ((d.dataset.bound = !0),
+            c._targetsBound++,
+            b.on(
+              "webkitTransitionEnd.mixItUp transitionend.mixItUp",
+              function (e) {
+                (e.originalEvent.propertyName.indexOf("transform") > -1 ||
+                  e.originalEvent.propertyName.indexOf("opacity") > -1) &&
+                  a(e.originalEvent.target).is(c.selectors.target) &&
+                  (b.off(".mixItUp"), (d.dataset.bound = ""), c._targetDone());
+              }
+            )),
+          c._execAction("_bindTargetDone", 1, arguments);
+      },
+      _targetDone: function () {
+        var a = this;
+        a._execAction("_targetDone", 0),
+          a._targetsDone++,
+          a._targetsDone === a._targetsBound && a._cleanUp(),
+          a._execAction("_targetDone", 1);
+      },
+      _cleanUp: function () {
+        var b = this,
+          c = b.animation.animateResizeTargets
+            ? "transform opacity width height margin-bottom margin-right"
+            : "transform opacity",
+          d = function () {
+            b._$targets.removeStyle("transition", b._prefix);
+          };
+        b._execAction("_cleanUp", 0),
+          b._changingLayout
+            ? b._$show.css("display", b._newDisplay)
+            : b._$show.css("display", b.layout.display),
+          b._$targets.css(b._brake),
+          b._$targets
+            .removeStyle(c, b._prefix)
+            .removeAttr(
+              "data-inter-pos-x data-inter-pos-y data-final-pos-x data-final-pos-y data-orig-pos-x data-orig-pos-y data-orig-height data-orig-width data-final-height data-final-width data-inter-width data-inter-height data-orig-margin-right data-orig-margin-bottom data-inter-margin-right data-inter-margin-bottom data-final-margin-right data-final-margin-bottom"
+            ),
+          b._$hide.removeStyle("display"),
+          b._$parent.removeStyle(
+            "height transition perspective-distance perspective perspective-origin-x perspective-origin-y perspective-origin perspectiveOrigin",
+            b._prefix
+          ),
+          b._sorting &&
+            (b._printSort(),
+            (b._activeSort = b._newSortString),
+            (b._sorting = !1)),
+          b._changingLayout &&
+            (b._changingDisplay &&
+              ((b.layout.display = b._newDisplay), (b._changingDisplay = !1)),
+            b._changingClass &&
+              (b._$parent
+                .removeClass(b.layout.containerClass)
+                .addClass(b._newClass),
+              (b.layout.containerClass = b._newClass),
+              (b._changingClass = !1)),
+            (b._changingLayout = !1)),
+          b._refresh(),
+          b._buildState(),
+          b._state.fail && b._$container.addClass(b.layout.containerClassFail),
+          (b._$show = a()),
+          (b._$hide = a()),
+          window.requestAnimationFrame && requestAnimationFrame(d),
+          (b._mixing = !1),
+          "function" == typeof b.callbacks._user &&
+            b.callbacks._user.call(b._domNode, b._state, b),
+          "function" == typeof b.callbacks.onMixEnd &&
+            b.callbacks.onMixEnd.call(b._domNode, b._state, b),
+          b._$container.trigger("mixEnd", [b._state, b]),
+          b._state.fail &&
+            ("function" == typeof b.callbacks.onMixFail &&
+              b.callbacks.onMixFail.call(b._domNode, b._state, b),
+            b._$container.trigger("mixFail", [b._state, b])),
+          b._loading &&
+            ("function" == typeof b.callbacks.onMixLoad &&
+              b.callbacks.onMixLoad.call(b._domNode, b._state, b),
+            b._$container.trigger("mixLoad", [b._state, b])),
+          b._queue.length &&
+            (b._execAction("_queue", 0),
+            b.multiMix(b._queue[0][0], b._queue[0][1], b._queue[0][2]),
+            b._queue.splice(0, 1)),
+          b._execAction("_cleanUp", 1),
+          (b._loading = !1);
+      },
+      _getPrefixedCSS: function (a, b, c) {
+        var d = this,
+          e = {},
+          f = "",
+          g = -1;
+        for (g = 0; 2 > g; g++)
+          (f = 0 === g ? d._prefix : ""),
+            c ? (e[f + a] = f + b) : (e[f + a] = b);
+        return d._execFilter("_getPrefixedCSS", e, arguments);
+      },
+      _getDelay: function (a) {
+        var b = this,
+          c =
+            "function" == typeof b.animation.staggerSequence
+              ? b.animation.staggerSequence.call(b._domNode, a, b._state)
+              : a,
+          d = b.animation.stagger ? c * b.animation.staggerDuration : 0;
+        return b._execFilter("_getDelay", d, arguments);
+      },
+      _parseMultiMixArgs: function (a) {
+        for (
+          var b = this,
+            c = {
+              command: null,
+              animate: b.animation.enable,
+              callback: null
+            },
+            d = 0;
+          d < a.length;
+          d++
+        ) {
+          var e = a[d];
+          null !== e &&
+            ("object" == typeof e || "string" == typeof e
+              ? (c.command = e)
+              : "boolean" == typeof e
+              ? (c.animate = e)
+              : "function" == typeof e && (c.callback = e));
+        }
+        return b._execFilter("_parseMultiMixArgs", c, arguments);
+      },
+      _parseInsertArgs: function (b) {
+        for (
+          var c = this,
+            d = {
+              index: 0,
+              $object: a(),
+              multiMix: {
+                filter: c._state.activeFilter
+              },
+              callback: null
+            },
+            e = 0;
+          e < b.length;
+          e++
+        ) {
+          var f = b[e];
+          "number" == typeof f
+            ? (d.index = f)
+            : "object" == typeof f && f instanceof a
+            ? (d.$object = f)
+            : "object" == typeof f && c._helpers._isElement(f)
+            ? (d.$object = a(f))
+            : "object" == typeof f && null !== f
+            ? (d.multiMix = f)
+            : "boolean" != typeof f || f
+            ? "function" == typeof f && (d.callback = f)
+            : (d.multiMix = !1);
+        }
+        return c._execFilter("_parseInsertArgs", d, arguments);
+      },
+      _execAction: function (a, b, c) {
+        var d = this,
+          e = b ? "post" : "pre";
+        if (!d._actions.isEmptyObject && d._actions.hasOwnProperty(a))
+          for (var f in d._actions[a][e]) d._actions[a][e][f].call(d, c);
+      },
+      _execFilter: function (a, b, c) {
+        var d = this;
+        if (d._filters.isEmptyObject || !d._filters.hasOwnProperty(a)) return b;
+        for (var e in d._filters[a]) return d._filters[a][e].call(d, c);
+      },
+      _helpers: {
+        _camelCase: function (a) {
+          return a.replace(/-([a-z])/g, function (a) {
+            return a[1].toUpperCase();
+          });
+        },
+        _isElement: function (a) {
+          return window.HTMLElement
+            ? a instanceof HTMLElement
+            : null !== a && 1 === a.nodeType && "string" === a.nodeName;
+        }
+      },
+      isMixing: function () {
+        var a = this;
+        return a._execFilter("isMixing", a._mixing);
+      },
+      filter: function () {
+        var a = this,
+          b = a._parseMultiMixArgs(arguments);
+        a._clicking && (a._toggleString = ""),
+          a.multiMix(
+            {
+              filter: b.command
+            },
+            b.animate,
+            b.callback
+          );
+      },
+      sort: function () {
+        var a = this,
+          b = a._parseMultiMixArgs(arguments);
+        a.multiMix(
+          {
+            sort: b.command
+          },
+          b.animate,
+          b.callback
+        );
+      },
+      changeLayout: function () {
+        var a = this,
+          b = a._parseMultiMixArgs(arguments);
+        a.multiMix(
+          {
+            changeLayout: b.command
+          },
+          b.animate,
+          b.callback
+        );
+      },
+      multiMix: function () {
+        var a = this,
+          c = a._parseMultiMixArgs(arguments);
+        if ((a._execAction("multiMix", 0, arguments), a._mixing))
+          a.animation.queue && a._queue.length < a.animation.queueLimit
+            ? (a._queue.push(arguments),
+              a.controls.enable && !a._clicking && a._updateControls(c.command),
+              a._execAction("multiMixQueue", 1, arguments))
+            : ("function" == typeof a.callbacks.onMixBusy &&
+                a.callbacks.onMixBusy.call(a._domNode, a._state, a),
+              a._$container.trigger("mixBusy", [a._state, a]),
+              a._execAction("multiMixBusy", 1, arguments));
+        else {
+          a.controls.enable &&
+            !a._clicking &&
+            (a.controls.toggleFilterButtons && a._buildToggleArray(),
+            a._updateControls(c.command, a.controls.toggleFilterButtons)),
+            a._queue.length < 2 && (a._clicking = !1),
+            delete a.callbacks._user,
+            c.callback && (a.callbacks._user = c.callback);
+          var d = c.command.sort,
+            e = c.command.filter,
+            f = c.command.changeLayout;
+          a._refresh(),
+            d &&
+              ((a._newSort = a._parseSort(d)),
+              (a._newSortString = d),
+              (a._sorting = !0),
+              a._sort()),
+            e !== b &&
+              ((e = "all" === e ? a.selectors.target : e),
+              (a._activeFilter = e)),
+            a._filter(),
+            f &&
+              ((a._newDisplay =
+                "string" == typeof f ? f : f.display || a.layout.display),
+              (a._newClass = f.containerClass || ""),
+              (a._newDisplay !== a.layout.display ||
+                a._newClass !== a.layout.containerClass) &&
+                ((a._changingLayout = !0),
+                (a._changingClass = a._newClass !== a.layout.containerClass),
+                (a._changingDisplay = a._newDisplay !== a.layout.display))),
+            a._$targets.css(a._brake),
+            a._goMix(
+              c.animate ^ a.animation.enable ? c.animate : a.animation.enable
+            ),
+            a._execAction("multiMix", 1, arguments);
+        }
+      },
+      insert: function () {
+        var a = this,
+          b = a._parseInsertArgs(arguments),
+          c = "function" == typeof b.callback ? b.callback : null,
+          d = document.createDocumentFragment(),
+          e = (function () {
+            return (
+              a._refresh(),
+              a._$targets.length
+                ? b.index < a._$targets.length || !a._$targets.length
+                  ? a._$targets[b.index]
+                  : a._$targets[a._$targets.length - 1].nextElementSibling
+                : a._$parent[0].children[0]
+            );
+          })();
+        if ((a._execAction("insert", 0, arguments), b.$object)) {
+          for (var f = 0; f < b.$object.length; f++) {
+            var g = b.$object[f];
+            d.appendChild(g), d.appendChild(document.createTextNode(" "));
+          }
+          a._$parent[0].insertBefore(d, e);
+        }
+        a._execAction("insert", 1, arguments),
+          "object" == typeof b.multiMix && a.multiMix(b.multiMix, c);
+      },
+      prepend: function () {
+        var a = this,
+          b = a._parseInsertArgs(arguments);
+        a.insert(0, b.$object, b.multiMix, b.callback);
+      },
+      append: function () {
+        var a = this,
+          b = a._parseInsertArgs(arguments);
+        a.insert(a._state.totalTargets, b.$object, b.multiMix, b.callback);
+      },
+      getOption: function (a) {
+        var c = this,
+          d = function (a, c) {
+            for (
+              var d = c.split("."),
+                e = d.pop(),
+                f = d.length,
+                g = 1,
+                h = d[0] || c;
+              (a = a[h]) && f > g;
+
+            )
+              (h = d[g]), g++;
+            return a !== b ? (a[e] !== b ? a[e] : a) : void 0;
+          };
+        return a ? c._execFilter("getOption", d(c, a), arguments) : c;
+      },
+      setOptions: function (b) {
+        var c = this;
+        c._execAction("setOptions", 0, arguments),
+          "object" == typeof b && a.extend(!0, c, b),
+          c._execAction("setOptions", 1, arguments);
+      },
+      getState: function () {
+        var a = this;
+        return a._execFilter("getState", a._state, a);
+      },
+      forceRefresh: function () {
+        var a = this;
+        a._refresh(!1, !0);
+      },
+      destroy: function (b) {
+        var c = this,
+          d = a.MixItUp.prototype._bound._filter,
+          e = a.MixItUp.prototype._bound._sort;
+        c._execAction("destroy", 0, arguments),
+          c._$body
+            .add(a(c.selectors.sort))
+            .add(a(c.selectors.filter))
+            .off(".mixItUp");
+        for (var f = 0; f < c._$targets.length; f++) {
+          var g = c._$targets[f];
+          b && (g.style.display = ""), delete g.mixParent;
+        }
+        c._execAction("destroy", 1, arguments),
+          d[c.selectors.filter] && d[c.selectors.filter] > 1
+            ? d[c.selectors.filter]--
+            : 1 === d[c.selectors.filter] && delete d[c.selectors.filter],
+          e[c.selectors.sort] && e[c.selectors.sort] > 1
+            ? e[c.selectors.sort]--
+            : 1 === e[c.selectors.sort] && delete e[c.selectors.sort],
+          delete a.MixItUp.prototype._instances[c._id];
+      }
+    }),
+    (a.fn.mixItUp = function () {
+      var c,
+        d = arguments,
+        e = [],
+        f = function (b, c) {
+          var d = new a.MixItUp(),
+            e = function () {
+              return ("00000" + ((16777216 * Math.random()) << 0).toString(16))
+                .substr(-6)
+                .toUpperCase();
+            };
+          d._execAction("_instantiate", 0, arguments),
+            (b.id = b.id ? b.id : "MixItUp" + e()),
+            d._instances[b.id] || ((d._instances[b.id] = d), d._init(b, c)),
+            d._execAction("_instantiate", 1, arguments);
+        };
+      return (
+        (c = this.each(function () {
+          if (d && "string" == typeof d[0]) {
+            var c = a.MixItUp.prototype._instances[this.id];
+            if ("isLoaded" === d[0]) e.push(c ? !0 : !1);
+            else {
+              var g = c[d[0]](d[1], d[2], d[3]);
+              g !== b && e.push(g);
+            }
+          } else f(this, d[0]);
+        })),
+        e.length ? (e.length > 1 ? e : e[0]) : c
+      );
+    }),
+    (a.fn.removeStyle = function (c, d) {
+      return (
+        (d = d ? d : ""),
+        this.each(function () {
+          for (var e = this, f = c.split(" "), g = 0; g < f.length; g++)
+            for (var h = 0; 4 > h; h++) {
+              switch (h) {
+                case 0:
+                  var i = f[g];
+                  break;
+                case 1:
+                  var i = a.MixItUp.prototype._helpers._camelCase(i);
+                  break;
+                case 2:
+                  var i = d + f[g];
+                  break;
+                case 3:
+                  var i = a.MixItUp.prototype._helpers._camelCase(d + f[g]);
+              }
+              if (
+                (e.style[i] !== b &&
+                  "unknown" != typeof e.style[i] &&
+                  e.style[i].length > 0 &&
+                  (e.style[i] = ""),
+                !d && 1 === h)
+              )
+                break;
+            }
+          e.attributes &&
+            e.attributes.style &&
+            e.attributes.style !== b &&
+            "" === e.attributes.style.value &&
+            e.attributes.removeNamedItem("style");
+        })
+      );
+    });
+})(jQuery);
+
+
+ 
+     
+
+
+  </script>
+  
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to apply filter based on URL parameter
+    function applyFilter(filterName) {
+        if (!filterName) return;
+        
+        // Decode the filter name from the URL
+        const decodedFilter = decodeURIComponent(filterName);
+        
+        // Find and click the matching filter item
+        const filterContainers = document.querySelectorAll('.fil_list');
+        let filterFound = false;
+        
+        filterContainers.forEach(function(container) {
+            const items = container.querySelectorAll('li');
+            items.forEach(function(item) {
+                if (item.getAttribute('data-name') === decodedFilter) {
+                    // Trigger the actual filter click
+                    const clickEvent = new MouseEvent('click', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+                    clickEvent.skipUrlUpdate = true;
+                    item.dispatchEvent(clickEvent);
+                    filterFound = true;
+                }
+            });
+        });
+        
+        return filterFound;
+    }
+
+    // First, handle the deduplication
+    var filterContainers = document.querySelectorAll('.fil_list');
+    filterContainers.forEach(function(container) {
+        var items = container.querySelectorAll('li');
+        var seenNames = {};
+        items.forEach(function(item) {
+            var name = item.getAttribute('data-name');
+            if (seenNames[name]) {
+                item.remove();
+            } else {
+                seenNames[name] = true;
+                
+                // Add click handler to update URL
+                item.addEventListener('click', function(e) {
+                    // Only update URL if this isn't triggered by our URL handling
+                    if (!e.skipUrlUpdate) {
+                        const url = new URL(window.location);
+                        url.searchParams.set('filter', name);
+                        history.pushState({filter: name}, '', url);
+                    }
+                });
+            }
+        });
+    });
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', function(event) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterName = urlParams.get('filter');
+        if (filterName) {
+            applyFilter(filterName);
+        }
+    });
+    
+    // Check if there's an initial filter in the URL (handles direct links and refreshes)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialFilter = urlParams.get('filter');
+    if (initialFilter) {
+        // Wait for a short moment to ensure all DOM elements are ready
+        setTimeout(() => {
+            const filterApplied = applyFilter(initialFilter);
+            console.log('Filter applied:', filterApplied, 'for value:', initialFilter);
+        }, 100);
+    }
+});
+  </script>
+  
+ <script>
+  
+  // Add this to your existing JavaScript section
+$(document).ready(function() {
+    equalizeBoxHeights();
+    
+    // Also run when window is resized
+    let resizeTimer;
+    $(window).on('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(equalizeBoxHeights, 250);
+    });
+    
+    // Run after MixItUp filtering completes
+    $('#addon_list').on('mixEnd', function() {
+        equalizeBoxHeights();
+    });
+});
+
+function equalizeBoxHeights() {
+    const container = document.querySelector('.tmg_add_on_row');
+    const items = document.querySelectorAll('.tmg_addon_block');
+    
+    // Reset heights first
+    items.forEach(item => {
+        item.style.height = 'auto';
+        item.querySelector('.tmg_addon_box').style.height = 'auto';
+    });
+    
+    // Get container width and item width to determine items per row
+    const containerWidth = container.offsetWidth;
+    const itemWidth = items[0].offsetWidth;
+    const itemsPerRow = Math.floor(containerWidth / itemWidth);
+    
+    // Process each row
+    for (let i = 0; i < items.length; i += itemsPerRow) {
+        const rowItems = Array.from(items).slice(i, i + itemsPerRow);
+        if (rowItems.length === 0) break;
+        
+        // Find the tallest item in this row
+        let maxHeight = 0;
+        rowItems.forEach(item => {
+            const height = item.offsetHeight;
+            maxHeight = Math.max(maxHeight, height);
+        });
+        
+        // Set all items in this row to the max height
+        rowItems.forEach(item => {
+            item.style.height = maxHeight + 'px';
+            // Also set the inner box height
+            const box = item.querySelector('.tmg_addon_box');
+            if (box) {
+                box.style.height = '100%';
+            }
+        });
+    }
+}
+  
+  </script> 
+  
+  
+
+
+
+<script>
+$(document).ready(function(){
+    // Wait for initial load
+    setTimeout(function() {
+        var $container = $('#addon_list');
+        
+        // Store original MixItUp instance
+        var mixer = $container.data('mixItUp');
+        if (mixer) {
+            // Get all items and sort them
+            var items = $('.tmg_addon_block').toArray();
+            items.sort(function(a, b) {
+                return $(a).find('h3').text().localeCompare($(b).find('h3').text());
+            });
+            
+            // Destroy current instance
+            $container.mixItUp('destroy');
+            
+            // Reappend sorted items
+            $(items).each(function(i, item) {
+                $container.append(item);
+            });
+            
+            // Reinitialize MixItUp with original settings
+            $container.mixItUp({
+                selectors: {
+                    target: '.addon_list_item',
+                    filter: '.filter'
+                },
+                load: {
+                    filter: '.all_add_on'
+                }
+            });
+        }
+    }, 100);
+});
+</script>
+
+    
+{% end_require_js %}
+</div>
+{% endblock %}

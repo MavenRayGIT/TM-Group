@@ -1,0 +1,299 @@
+<!--
+ templateType: "blog_listing"
+ label: "TMG - Blog listing"
+ isAvailableForNewContent: true
+-->
+{% set template_css = "../../css/templates/tmg_blog.css" %}
+{% extends "./layouts/base.html" %}
+
+{% block header %}
+  {% global_partial path="./partials/TMG - Light-header.html" %}
+{% endblock %}
+
+{% block body_class %}header_light{% endblock %}
+
+{% block body %}
+<main class="body-container-wrapper">
+  <div class="body-container body-container--blog-index tmg_blog_list">
+    {% if blog_author %}
+      <div class="blog-header">
+        <div class="blog-header__inner">
+          {% if blog_author.avatar %}
+            <div class="blog-header__author-avatar" style="background-image: url('{{ blog_author.avatar }}');"></div>
+          {% endif %}
+          <h1 class="blog-header__title">{{ blog_author.display_name }}</h1>
+          {% if blog_author.bio %}
+            <h4 class="blog-header__subtitle">{{ blog_author.bio }}</h4>
+          {% endif %}
+          {% if blog_author.has_social_profiles %}
+            <div class="blog-header__author-social-links">
+              {% if blog_author.website %}
+                <a href="{{ blog_author.website }}" target="_blank" rel="noopener">
+                  {% icon name='link', purpose='semantic', style='SOLID', title='Follow me on my website', width='10' %}
+                </a>
+              {% endif %}
+              {% if blog_author.facebook %}
+                <a href="{{ blog_author.facebook }}" target="_blank" rel="noopener">
+                  {% icon name='facebook-f', purpose='semantic', style='SOLID', title='Follow me on Facebook', width='10' %}
+                </a>
+              {% endif %}
+              {% if blog_author.linkedin %}
+                <a href="{{ blog_author.linkedin }}" target="_blank" rel="noopener">
+                  {% icon name='linkedin-in', purpose='semantic', style='SOLID', title='Follow me on LinkedIn', width='10' %}
+                </a>
+              {% endif %}
+              {% if blog_author.twitter %}
+                <a href="{{ blog_author.twitter }}" target="_blank" rel="noopener">
+                  {% icon name='twitter', purpose='semantic', style='SOLID', title='Follow me on Twitter', width='10' %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {# Set current_url so we can disable pagination and enable special Our Projects behavior #}
+    {% set current_url = request.path %}
+    <div class="tmg_top_warrper">
+      <div class="content-wrapper">
+        <div class="tng_blog_tp_row">
+          <div class="header-wrapper-split-7">
+            <!--<h4>CATEGORIES</h4>-->
+            {% set my_tags = blog_tags(156885774881) %}
+            {% set my_tags_sorted = my_tags|sort(false, false, 'name') %}
+            {% set industry_allowlist = [
+              'community mental health',
+              'distribution',
+              'family office',
+              'foundations and nonprofits',
+              'healthcare',
+              'manufacturing'
+            ] %}
+            <div class="blog-tag-nav">
+              <ul>
+                <li class="custom_tag_get">
+                  <a href="/blog">All</a>
+                </li>
+                {% for item in my_tags_sorted %}
+                  {% if item.slug == 'our-projects' %}
+                    <li data-filter=".{{ item.slug }}" class="custom_tag_get tag-dropdown" data-rel="{{ blog_tag_url(item.id, item.slug) }}">
+                      <a href="{{ blog_tag_url(item.id, item.slug) }}" class="tag-dropdown__trigger" aria-haspopup="true">{{ item }}</a>
+                      <ul class="tag-dropdown__menu" aria-label="Industry tags">
+                        {% for allow in industry_allowlist %}
+                          {% set found = false %}
+                          {% for t in my_tags_sorted %}
+                            {% if not found %}
+                              {% set t_name_norm = t.name|lower|replace('&', 'and')|trim %}
+                              {% if t_name_norm == allow %}
+                                <li class="tag-dropdown__item">
+                                  <a href="{{ blog_tag_url(t.id, t.slug) }}">{{ t.name }}</a>
+                                </li>
+                                {% set found = true %}
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li data-filter=".{{ item.slug }}" class="custom_tag_get" data-rel="{{ blog_tag_url(item.id, item.slug) }}">
+                      <a href="{{ blog_tag_url(item.id, item.slug) }}">{{ item }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            // Helper: Normalize paths by lowercasing and removing any trailing slash.
+            function normalizePath(path) {
+              return path.toLowerCase().replace(/\/$/, '');
+            }
+            // Get the current page's path
+            var currentPath = normalizePath(window.location.pathname);
+            // Mark the active filter in the main nav
+            var foundActive = false;
+            var tagNavLinks = document.querySelectorAll('.blog-tag-nav ul li a');
+            tagNavLinks.forEach(function(link) {
+              try {
+                var linkPath = normalizePath(new URL(link.href, window.location.origin).pathname);
+                if (linkPath === currentPath) {
+                  link.parentElement.classList.add('active');
+                  foundActive = true;
+                }
+              } catch (e) {
+                var href = normalizePath(link.getAttribute('href'));
+                if (href === currentPath) {
+                  link.parentElement.classList.add('active');
+                  foundActive = true;
+                }
+              }
+            });
+            if (!foundActive && currentPath === '/blog') {
+              var allLink = document.querySelector('.blog-tag-nav ul li a[href="/blog"]');
+              if (allLink) {
+                allLink.parentElement.classList.add('active');
+              }
+            }
+          });
+        </script>
+
+        <style>
+          .header-wrapper-split-6 { width: 59%; }
+          .header-wrapper-split-4 { width: 39%; }
+          .header-wrapper-split-7 { width: 69%; }
+          .header-wrapper-split-3 { width: 31%; }
+          .tng_blog_tp_row_new { display: flex; }
+          .featured-image-container { width: 69%; }
+          .tmg_feature_post_tag_new { width: 29%; }
+          .latest_post_content_new {
+            padding: 20px;
+            margin: 0;
+            background-color: transparent;
+            border-radius: 0;
+          }
+        </style>
+      </div>
+    </div>
+
+    <div class="tmg_blog_content_wrap">
+      <div class="content-wrapper">
+        <section class="blog-index">
+          {% if '/tag/' not in current_url %}
+            {% set skip_first = true %}
+          {% else %}
+            {% set skip_first = false %}
+          {% endif %}
+          {% for content in contents %}
+            <article class="blog-index__post blog-index__post--small">
+              <a href="{{ content.absolute_url }}">
+                {% if content.featured_image and group.use_featured_image_in_summary %}
+                  <div class="blog-index__post-image blog-index__post-image--small" style="background-image: url('{{ content.featured_image }}');"></div>
+                {% endif %}
+                <div class="blog-index__post-content blog-index__post-content--small">
+                  <span class="article-date">{{ content.publish_date|datetimeformat('%B %e, %Y') }}</span>
+                  <h3>{{ content.name }}</h3>
+                </div>
+              </a>
+            </article>
+          {% endfor %}
+        </section>
+      </div>
+    </div>
+    
+    {# Disable pagination when on /tag/our-projects (i.e. show all posts) #}
+{% if contents.total_page_count > 1 %}
+      <div class="blog-pagination">
+        {% set page_list = [-2, -1, 0, 1, 2] %}
+        {% if contents.total_page_count - current_page_num == 1 %}
+          {% set offset = -1 %}
+        {% elif contents.total_page_count - current_page_num == 0 %}
+          {% set offset = -2 %}
+        {% elif current_page_num == 2 %}
+          {% set offset = 1 %}
+        {% elif current_page_num == 1 %}
+          {% set offset = 2 %}
+        {% else %}
+          {% set offset = 0 %}
+        {% endif %}
+        
+        <div class="blog-pagination-left">
+          {% if last_page_num %}
+            <a class="prev-link" href="{{ blog_page_link(last_page_num) }}"><i class="fa fa-angle-left"></i></a>
+          {% else %}
+            <a class="prev-link disable" href="#"><i class="fa fa-angle-left"></i></a>
+          {% endif %}
+          
+          {% if contents.total_page_count > 5 and current_page_num >= 4 %}
+            <a href="{{ blog_page_link(1) }}">1</a>
+            <a class="elipses" href="{% if current_page_num <= 5 %}{{ blog_page_link(1) }}{% else %}{{ blog_page_link(current_page_num - 5) }}{% endif %}">...</a>
+          {% endif %}
+        </div>
+        
+        <div class="blog-pagination-center">
+          {% for page in page_list %}
+            {% set this_page = current_page_num + page + offset %}
+            {% if this_page > 0 and this_page <= contents.total_page_count %}
+              <a {% if this_page == current_page_num %}class="active"{% endif %} href="{{ blog_page_link(this_page) }}">{{ this_page }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        <div class="blog-pagination-right">
+          {% if contents.total_page_count > 5 and contents.total_page_count - current_page_num > 2 %}
+            <a class="elipses" href="{% if contents.total_page_count - current_page_num <= 5 %}{{ contents.total_page_count }}{% else %}{{ blog_page_link(current_page_num + 5) }}{% endif %}">...</a>
+            <a href="{{ blog_page_link(contents.total_page_count) }}">{{ contents.total_page_count }}</a>
+          {% endif %}
+          
+          {% if next_page_num %}
+            <a class="next-link" href="{{ blog_page_link(current_page_num + 1) }}"><i class="fa fa-angle-right"></i></a>
+          {% else %}
+            <a class="next-link disable" href="#"><i class="fa fa-angle-right"></i></a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    
+  </div>
+</main>
+
+<style>
+  .blog-tag-nav ul li a {
+    background-color: #DEE6EA;
+    border: 0px solid #d1d6dc;
+    border-radius: 45px;
+    color: #03133f;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0;
+    padding: 3px 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .blog-tag-nav ul li a:hover,
+  .blog-tag-nav ul li a.active {
+    background-color: #06226D;
+    color: #fff;
+  }
+  .blog-tag-nav ul li.active a {
+    background-color: #06226D;
+    color: #fff;
+  }
+  .tmg_blog_list_srch .hs-search-field__input {
+    border: 1px solid #9b9b9d !important;
+    border-radius: 50px !important;
+    width: 200px !important;
+    margin-left: 40px;
+  }
+  .tmg_blog_list_srch .hs-search-field__input:focus {
+    border-color: #C5299B !important;
+  }
+  .tmg_blog_list_srch button.hs-search-field__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 42px;
+    border: none !important;
+    background: none !important;
+    padding: 10px 15px !important;
+  }
+  .tmg_blog_list_srch input[type="text"]::-ms-clear,
+  .tmg_blog_list_srch input[type="text"]::-ms-reveal,
+  .tmg_blog_list_srch input[type="text"]::-webkit-search-cancel-button {
+    display: none;
+    -webkit-appearance: none;
+  }
+  .tmg_blog_list_srch .hs-search-field__input::placeholder {
+    color: #03133F70;
+    transition: .3s opacity;
+  }
+  .tmg_blog_list_srch .hs-search-field__input:focus::placeholder {
+    opacity: 0;
+  }
+</style>
+
+{% endblock %}

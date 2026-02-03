@@ -1,0 +1,280 @@
+{% set unique_id = "slider_" ~ name ~ "_" ~ module.tag_choice|replace(" ", "_") %}
+{% set tag_posts = blog_recent_tag_posts("module.select_blog", module.tag_choice) %}
+
+<div class="tmg_we_serve_section {{ module.add_custom_class }}" id="{{ unique_id }}">
+  <div class="content-wrapper">
+    <div class="head_title">
+      <h2 class="title-l">{{ module.heading }}</h2>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="tmg_we_serve_row center-slider-{{ unique_id }}" data-aos="fade-up">
+      {% for tag_post in tag_posts %}
+      <div class="tmg_col_4">
+        <div class="we_serve_card">
+          <div class="we_serve_img">
+            <a href="{{ tag_post.absolute_url }}"><img src="{{ tag_post.featured_image }}" alt="{{ tag_post.name }}"></a>
+          </div>
+          <div class="tmg_we_serve_text">
+            <h4 class="title-s"><a href="{{ tag_post.absolute_url }}">{{ tag_post.name }}</a></h4>
+             <p class="text-s">{{ tag_post.meta_description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="btn-wrap">
+      <div class="prev-btn-{{ unique_id }}">       
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+          <style type="text/css">
+            .st0{fill:none;stroke:#C5299B;stroke-width:2;}
+          </style>
+          <path class="st0" d="M9.5,20.5l-9.1-9.5l9.1-9.5"/>
+          <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2"/>
+        </svg>
+      </div>
+      <div class="next-btn-{{ unique_id }}">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="26px" height="22px" viewBox="0 0 26 22" style="enable-background:new 0 0 26 22;" xml:space="preserve">
+          <style type="text/css">
+            .st0{fill:none;stroke:#C5299B;stroke-width:2;}
+          </style>
+          <path class="st0" d="M14.8,1.6l9.1,9.5l-9.1,9.5"/>
+          <line class="st0" x1="0.4" y1="11.2" x2="23.9" y2="11.2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+
+
+
+</style>
+{% require_css %}
+<style>
+  {% scope_css %} 
+  .tmg_we_serve_section {
+    width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+  }
+
+  #{{ unique_id }} .tmg_we_serve_row { 
+    display: flex; 
+    flex-wrap: wrap; 
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #{{ unique_id }} .head_title h2 {
+    color: #FFFFFF;
+    margin-bottom: 50px;
+  }
+
+  #{{ unique_id }} .tmg_col_4 {   
+    max-width: 25%;
+    width: 100%;
+    margin-right: 20px;
+  }
+
+  #{{ unique_id }} .tmg_we_serve_text { 
+    padding: 38px 20px 30px 0px;
+  }
+
+  #{{ unique_id }} .tmg_we_serve_text h4 {
+    color: #FFFFFF;
+    margin: 0 0 15px 0;
+    padding: 0;
+  }
+
+  #{{ unique_id }} .tmg_we_serve_text h4 a { 
+    color: #FFFFFF;  
+    text-decoration: none; 
+    font-weight: inherit!important; 
+  } 
+
+  #{{ unique_id }} .tmg_we_serve_text h4 a:hover { 
+    color: #c5299b; 
+  } 
+
+  #{{ unique_id }} .tmg_we_serve_text p {
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+  }
+
+  #{{ unique_id }} .we_serve_img img {
+    width: 100%;
+    border-radius: 0px 0px 20px 0px;
+    object-fit: cover;
+    height: 306px;
+  }
+
+  #{{ unique_id }} .btn-wrap { 
+    display: flex; 
+    justify-content: end; 
+    gap: 22px; 
+    align-items: center; 
+  }
+
+  #{{ unique_id }} .prev-btn-{{ unique_id }},
+  #{{ unique_id }} .next-btn-{{ unique_id }} {
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+    border: 2px solid #C5299B;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #{{ unique_id }} .prev-btn-{{ unique_id }} svg .st0,
+  #{{ unique_id }} .next-btn-{{ unique_id }} svg .st0 { 
+    stroke: #C5299B;
+  }
+
+  #{{ unique_id }} .prev-btn-{{ unique_id }}:hover,
+  #{{ unique_id }} .next-btn-{{ unique_id }}:hover { 
+    border: 2px solid #19ECDF;
+  }
+
+  #{{ unique_id }} .prev-btn-{{ unique_id }}:hover svg .st0,
+  #{{ unique_id }} .next-btn-{{ unique_id }}:hover svg .st0 { 
+    stroke: #19ECDF;
+  }
+
+  #{{ unique_id }} .prev-btn-{{ unique_id }}.slick-disabled,
+  #{{ unique_id }} .next-btn-{{ unique_id }}.slick-disabled { 
+    opacity: 0.5; 
+  }
+
+  @media (max-width: 768px) {
+    #{{ unique_id }} .btn-wrap {
+      display: none;
+    }
+  }
+  
+  #{{ unique_id }} .slick-list.draggable:before {
+    background: linear-gradient(90.79deg, hsla(0, 0%, 100%, 0) .66%, #051131 99.52%);
+    content: "";
+    height: 100%;
+    position: absolute;
+    right: -2px;
+    top: 0;
+    width: 338px;
+    z-index: 1;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  #{{ unique_id }} .hide-gradient:before {
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+  }  
+  {% end_scope_css %} 
+</style>
+{% end_require_css %}
+
+{% require_js %}
+<script>
+  $(document).ready(function() {
+    // Initialize slider with unique class
+    $(".center-slider-{{ unique_id }}").slick({
+      slidesToShow: 3.5,
+      slidesToScroll: 1,
+      speed: 300,
+      centerPadding: '20px',
+      infinite: false,
+      autoplay: false,
+      arrows: false,
+      responsive: [
+        {
+          breakpoint: 990,
+          settings: {
+            slidesToShow: 2.2,
+            slidesToScroll: 1,
+            adaptiveHeight: true,
+          }  
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1.2,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+
+    // Bind click events to unique navigation buttons
+    $(".prev-btn-{{ unique_id }}").click(function() {
+      $(".center-slider-{{ unique_id }}").slick("slickPrev");
+    });
+
+    $(".next-btn-{{ unique_id }}").click(function() {
+      $(".center-slider-{{ unique_id }}").slick("slickNext");
+    });
+
+    // Initial state for prev button
+    $(".prev-btn-{{ unique_id }}").addClass("slick-disabled");
+    
+    // Function to check if slider is at the last slides
+    function isAtLastSlides() {
+      const slider = $(".center-slider-{{ unique_id }}");
+      const totalSlides = slider.slick("getSlick").slideCount;
+      const currentSlide = slider.slick("slickCurrentSlide");
+      const slidesToShow = slider.slick("slickGetOption", "slidesToShow");
+      
+      return currentSlide + slidesToShow >= totalSlides;
+    }
+
+    // Initial check for gradient
+    if (isAtLastSlides()) {
+      $("#{{ unique_id }} .slick-list.draggable").addClass("hide-gradient");
+    }
+
+    // Handle slider events
+    $(".center-slider-{{ unique_id }}").on("afterChange", function() {
+      const slider = $(".center-slider-{{ unique_id }}");
+      
+      // Handle navigation buttons
+      if (slider.find(".slick-prev").hasClass("slick-disabled")) {
+        $(".prev-btn-{{ unique_id }}").addClass("slick-disabled");
+      } else {
+        $(".prev-btn-{{ unique_id }}").removeClass("slick-disabled");
+      }
+      
+      if (slider.find(".slick-next").hasClass("slick-disabled")) {
+        $(".next-btn-{{ unique_id }}").addClass("slick-disabled");
+      } else {
+        $(".next-btn-{{ unique_id }}").removeClass("slick-disabled");
+      }
+
+      // Handle gradient
+      if (isAtLastSlides()) {
+        $("#{{ unique_id }} .slick-list.draggable").addClass("hide-gradient");
+      } else {
+        $("#{{ unique_id }} .slick-list.draggable").removeClass("hide-gradient");
+      }
+    });
+  });
+</script>
+{% end_require_js %}
+<style>
+   .tmg_we_serve_section {
+     padding: 80px 0 !important;
+  }
+  @media (width <= 768px) {
+    .tmg_we_serve_section {
+      padding: 60px 0 0px !important;
+    }
+   .head_title h2 {
+      margin-bottom: 20px;
+    }
+  }
+</style>

@@ -1,0 +1,469 @@
+<div class="tmg_add_on_section">
+
+  {% if dynamic_page_hubdb_row %}
+  <div class="tmg_addon_detail_wrapper">
+    <div class="content-wrapper">
+      <div class="cldn_row">
+        <div class="tmg_column_12">
+          <div class="tmg_addon_wrap cld_bg">
+            <div class="tmg_placeholder-image">
+              <img src="{{ dynamic_page_hubdb_row.logo.url }}" width="500" {% if row.image.width>
+                                row.image.height %}class="landscape"{% endif %} alt="{{ row.name }}">
+            </div>
+            <div class="about_brand_wrap">
+              <h4>{{ dynamic_page_hubdb_row.name }} </h4>
+              <div class="description_text">
+                {{ dynamic_page_hubdb_row.description }}
+              </div>
+            </div>
+            <div class="keywords_wrp">
+              <ul>
+                {% for tag in dynamic_page_hubdb_row.related_industries %}
+                <li class="link_bg">
+                  {{tag.name }}
+                  <!-- {% if !loop.last %}, {% endif %} -->
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% elif dynamic_page_hubdb_table_id %}
+  <div class="tmg_addon_list_wrap">
+    <div class="tmg_addon_banner_section">
+      <div class="content-wrapper ">
+        <div class="tmg_addon_banner_txt">
+          <h1>These are addons to the MSFT family of products we implement</h1>
+        </div>
+      </div>
+    </div>
+    <div class="content-wrapper ">
+      <div class="tmg_addon_search_wrap">
+        <div class="container">
+          <div class="tmg_addon_search">
+            <form>
+              <input type="search" name="Search" value="" placeholder="Search by keyword, e.g. tech, beauty">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="filter_wrapper">
+        <div class="c-dropdown js-dropdown">
+          <input type="hidden" name="Framework" id="Framework" class="js-dropdown__input">
+          <span class="c-button c-button--dropdown js-dropdown__current">Products:</span>
+          <ul class="c-dropdown__list filters" id="filters">
+            {% set types = hubdb_table_column(dynamic_page_hubdb_table_id, "products").options %}
+            {% for choice in types %}
+            {% set type_list = type_list~choice.id|list%}
+            <li class="c-dropdown__item filter" data-filter="f-{{ choice.id }}">{{ choice.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="tmg_add_on_row tmg_addon-grid projects">
+        {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id) %}
+        <div class="tmg_addon_block project f-{{ row.products[0].id }}" data-filter="f-{{ row.products[0].id }}">
+          <div class="tmg_addon_box">
+            <div class="tmg_placeholder-image">
+              <a href="{{ request.path }}/{{ row.hs_path }}">
+                <img src="{{ row.logo.url }}" width="500" {% if row.logo.width>
+                                row.logo.height %}class="landscape"{% endif %} alt="{{ row.name }} ">
+              </a>
+            </div>
+            <div class="tmg_content_row_db">
+              <h4><a href="{{ request.path }}/{{ row.hs_path }}">{{ row.name }}</a></h4>
+              <p>{{ row.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="load_more_wrap"><a href="#" id="loadMore">Load More</a></div> -->
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+{# =============== CSS Styling =============== #}
+{% require_css %}
+<style>
+  .tmg_add_on_section {
+    display: inline-block;
+    width: 100%;
+  }
+  .tmg_addon_banner_section {
+    max-width: 100%;
+    width: 100%;
+    padding: 180px 0;
+    background-color: #03133F;
+  }
+  .tmg_addon_banner_txt {
+    max-width: 640px;
+  }
+  .tmg_addon_banner_txt h1 {
+    color: #ffffff;
+  }
+
+  .tmg_add_on_row.tmg_addon-grid,
+  .tmg_content_row_db,
+  .cldn_row,
+  .addons_wrap,
+  .about_brand_wrap,
+  .what_get_section,
+  .media_row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tmg_addon_block {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 10px;
+  }
+
+  .tmg_addon_box {
+    border: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  .tmg_addon_block:hover .tmg_addon_box {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .tmg_content_row_db p {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tmg_content_row_db p a {
+    color: #000;
+  }
+
+  .tmg_content_row_db span {
+    color: #9a9a9a;
+    font-size: 16px;
+  }
+
+  .heart_bx {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+  }
+
+  .heart_bx:hover path.st0 {
+    fill: #DF1D35;
+  }
+
+  .load_more_wrap {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 45px;
+  }
+
+  .load_more_wrap a {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    border: 2px solid #00a9fa;
+    border-radius: 3px;
+    color: #00a9fa;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  /* Detail Page */
+  .cloudnanny_db_detail .cd_search_dv,
+  .tmg_addon_detail_wrapper,
+  .tmg_addon_detail_wrapper .industry_feature_section {
+    background-color: #fff;
+  }
+
+  .tmg_addon_detail_wrapper {
+    padding: 18px 0 58px;
+    width: 100%;
+    float: left;
+  }
+
+  .tmg_column_12,
+  .cld_bg,
+  .domain_sale,
+  .media_business {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .tmg_addon_wrap.cld_bg .tmg_placeholder-image {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+
+  .tmg_addon_wrap.cld_bg .tmg_placeholder-image img {
+    width: 100%;
+    display: block;
+  }
+
+  .audio_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 15px;
+  }
+
+  .db_rap_box {
+    width: 215px;
+    float: left;
+  }
+
+  .db_rap_box audio {
+    width: 100%;
+  }
+
+  .share_button {
+    float: right;
+  }
+
+  .link_bg {
+    display: inline-block;
+    padding: 10px 13px;
+    border: 1px solid #009BFF;
+    border-radius: 1px;
+    background-color: #EDF8FF;
+    opacity: 0.9;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .link_bg:hover {
+    background-color: #009BFF;
+    color: #fff;
+  }
+
+  .Available_add,
+  .about_brand_wrap,
+  .addons_wrap,
+  .what_get_section,
+  .keywords_wrp,
+  .emotion_feel,
+  .quetion_form_section {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .tmg_addon_wrap h4,
+  .addons_wrap .add_on_img a h5,
+  .about_brand_wrap h4,
+  .keywords_wrp h4,
+  .emotion_feel h4,
+  .que_tb_wrp h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.002px;
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .addons_wrap {
+    justify-content: space-between;
+  }
+
+  .addons_wrap .add_on_img {
+    flex: 0 0 32%;
+    max-width: 32%;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .addons_wrap .add_on_img a h5 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .description_text {
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .description_text p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .get_column-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .list_box ul {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list_box ul li {
+    padding: 0 0 6px 35px;
+    background: url(https://www.webdew.com/hubfs/Final_Webdew/arrow-check.svg) no-repeat 0 0;
+    margin: 0 0 5px;
+  }
+
+  .list_box ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  .domain_sale h3 {
+    color: #48484d;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .domain_sale h2 {
+    font-size: 32px;
+    color: #009BFF;
+    margin: 10px 0;
+    font-weight: 700;
+  }
+
+  .domain_sale h2 span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #48484d;
+  }
+
+  .domain_sale .domain_price {
+    font-size: 30px;
+    color: #444751;
+  }
+
+  .buy_button {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .buy_button a {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #009BFF;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    border-radius: 1px;
+    text-decoration: none;
+  }
+
+  .buy_button a:hover,
+  .buy_button a:focus {
+    background-color: #fff;
+    color: #009BFF;
+    border-color: #009BFF;
+    outline: none;
+  }
+
+  .emotion_feel ul,
+  .keywords_wrp ul,
+  .quetion_form_section
+</style>
+{% end_require_css %}
+
+{# =============== /CSS Styling =============== #}
+
+{# =============== /Script =============== #}
+{% require_js %}
+<script>
+
+
+
+  ;(function($, window, document, undefined) {
+
+    'use strict';
+
+    var $html = $('html');
+
+    $html.on('click.ui.dropdown', '.js-dropdown', function(e) {
+      e.preventDefault();
+      $(this).toggleClass('is-open');
+    });
+
+    $html.on('click.ui.dropdown', '.js-dropdown [data-dropdown-value]', function(e) {
+      e.preventDefault();
+      var $item = $(this);
+      var $dropdown = $item.parents('.js-dropdown');
+      $dropdown.find('.js-dropdown__input').val($item.data('dropdown-value'));
+      $dropdown.find('.js-dropdown__current').text($item.text());
+    });
+
+    $html.on('click.ui.dropdown', function(e) {
+      var $target = $(e.target);
+      if (!$target.parents().hasClass('js-dropdown')) {
+        $('.js-dropdown').removeClass('is-open');
+      }
+    });
+
+  })(jQuery, window, document);
+
+  const filters = document.querySelectorAll('.filter');
+
+  filters.forEach(filter => { 
+
+    filter.addEventListener('click', function() {
+
+      let selectedFilter = filter.getAttribute('data-filter');
+      let itemsToHide = document.querySelectorAll(`.projects .project:not([data-filter='${selectedFilter}'])`);
+      let itemsToShow = document.querySelectorAll(`.projects [data-filter='${selectedFilter}']`);
+
+      if (selectedFilter == 'all') {
+        itemsToHide = [];
+        itemsToShow = document.querySelectorAll('.projects [data-filter]');
+      }
+
+      itemsToHide.forEach(el => {
+        el.classList.add('hide');
+        el.classList.remove('show');
+      });
+
+      itemsToShow.forEach(el => {
+        el.classList.remove('hide');
+        el.classList.add('show'); 
+      });
+
+    });
+  });
+
+
+
+
+</script>
+{% end_require_js %}
+{# =============== /Script =============== #}

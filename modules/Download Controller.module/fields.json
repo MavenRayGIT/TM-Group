@@ -1,0 +1,51 @@
+[ {
+  "id" : "60dbc8c9-f8c2-2919-2b7b-069fb1085b1b",
+  "name" : "featured_image",
+  "label" : "Featured Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://tmgroupinc.com/hubfs/fff.png",
+    "alt" : "fff",
+    "loading" : "lazy",
+    "width" : 1000,
+    "height" : 1000,
+    "max_width" : 1000,
+    "max_height" : 1000
+  }
+}, {
+  "id" : "6966cb1a-ec8a-dfe3-bfbc-6e8151d4f5b4",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Heading for the download module"
+}, {
+  "id" : "4d8ce6a7-43c4-bffd-0f8b-a0368645a872",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell. This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell."
+}, {
+  "picker" : "file",
+  "id" : "e5d3fddf-e593-f030-199f-1b2c705b6e91",
+  "name" : "downloadable_file",
+  "label" : "Downloadable File",
+  "required" : false,
+  "locked" : false,
+  "type" : "file",
+  "display_width" : null
+} ]

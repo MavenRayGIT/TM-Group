@@ -1,0 +1,113 @@
+[ {
+  "id" : "aca482b6-539f-0303-3807-da710951ab32",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Hero Statement Here"
+}, {
+  "id" : "83fba528-d3c2-2c8f-8ae1-c376425e21b2",
+  "name" : "logo_image",
+  "label" : "Logo Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/image%2048%20(1).png",
+    "alt" : "image 48 (1)",
+    "loading" : "lazy",
+    "width" : 249,
+    "height" : 113,
+    "max_width" : 249,
+    "max_height" : 113
+  }
+}, {
+  "id" : "c9d1a738-dd9a-8fa9-958c-1b92459ce7b7",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Learn about this project"
+}, {
+  "id" : "691a8f99-8dce-6edf-5b07-28cafc802078",
+  "name" : "button_link",
+  "label" : "Button Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "type" : "EXTERNAL",
+      "href" : ""
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "2fc3de08-98bd-b2d2-58e3-284003218315",
+  "name" : "topic",
+  "label" : "Eyebrow Topic",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "TMG"
+}, {
+  "id" : "713ec0df-6db2-23cd-8459-afb9a67e0ac7",
+  "name" : "background_image",
+  "label" : "Background Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "exact",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/tmg-home-main1.jpg",
+    "alt" : "tmg-home-main1",
+    "loading" : "disabled",
+    "width" : 2000,
+    "height" : 1333,
+    "max_width" : 2000,
+    "max_height" : 1333
+  }
+}, {
+  "id" : "c10f8166-b0d4-7e08-857d-49cd5104f94a",
+  "name" : "background_image_mobile",
+  "label" : "Background Image Mobile",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/tmg-home-main1-mobile-1.jpg",
+    "alt" : "tmg-home-main1-mobile-1",
+    "loading" : "lazy",
+    "width" : 767,
+    "height" : 1333,
+    "max_width" : 767,
+    "max_height" : 1333
+  }
+} ]

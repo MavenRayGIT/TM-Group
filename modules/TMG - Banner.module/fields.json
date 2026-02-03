@@ -1,0 +1,131 @@
+[ {
+  "id" : "da2a22c2-ba9d-5a6e-17ad-b9b91c515b3e",
+  "name" : "add_custom_class",
+  "label" : "Add custom class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "f702dc8c-fcb4-0c00-5fbb-cf37fc4e329b",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "7c2d9e16-7b2e-d37b-87a1-0e4704ce35ab",
+  "name" : "text_field",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "e8788f23-8917-aea3-6e0f-2e8e895ce9ca",
+  "name" : "text",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h1>We work in all industries....but we specialize with...</h1>\n<p>This will talk briefly about out solutions. Hopefully we can break into simple grid, or just key areas. Maybe not platforms? Maybe more problem-oriented?</p>"
+}, {
+  "id" : "83fba528-d3c2-2c8f-8ae1-c376425e21b2",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/microsoft-dynamics-crm-online-2016-offers-users-a-host-of-new-features_1725_40133304_0_14130565_500.jpg",
+    "alt" : "microsoft-dynamics-crm-online-2016-offers-users-a-host-of-new-features_1725_40133304_0_14130565_500",
+    "width" : 500,
+    "height" : 334,
+    "max_width" : 500,
+    "max_height" : 334,
+    "size_type" : "auto"
+  }
+}, {
+  "id" : "a10db318-1cfb-7518-55d0-a28165d53e0b",
+  "name" : "button_link",
+  "label" : "Button Link",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "4fa53707-ab8b-c9eb-c9d4-b244b1de0581",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn about this project"
+  }, {
+    "id" : "986e37e5-677a-31b9-34e0-00ddaa8a46b1",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_text" : "Learn about this project",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+}, {
+  "id" : "4510551f-8610-13ea-8425-83d9dcec1be9",
+  "name" : "background_image",
+  "label" : "Background Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/thumbs%20up%20-%20code2.jpg",
+    "alt" : "thumbs up - code2",
+    "loading" : "disabled",
+    "width" : 2200,
+    "height" : 1467,
+    "max_width" : 2000,
+    "max_height" : 1333.6363636363635
+  }
+} ]

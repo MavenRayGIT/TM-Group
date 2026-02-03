@@ -1,0 +1,303 @@
+[ {
+  "id" : "f4fb536c-ade6-cba9-47a8-8e7a3d0115fa",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a48e8dd8-ae9f-d5db-bbea-45e90e3c331d",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#051131",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "13d35e09-1486-4376-9e07-19dd74d6b38f",
+    "name" : "desktop_spacing",
+    "label" : "Desktop Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "95c39494-1206-e457-24ac-1f9db3081b6e",
+      "name" : "spacing",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 120,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 80,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing" : {
+        "padding" : {
+          "top" : {
+            "value" : 120,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 80,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  }, {
+    "id" : "4f20f418-e3be-e0ab-3a1d-30e47f9c28a2",
+    "name" : "mobile_spacing",
+    "label" : "Mobile Spacing",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "531029e5-5320-fc26-1e2e-9e21737d6548",
+      "name" : "spacing",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : {
+        "padding" : {
+          "top" : {
+            "value" : 62,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing" : {
+        "padding" : {
+          "top" : {
+            "value" : 62,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : "#051131",
+      "opacity" : 100
+    },
+    "desktop_spacing" : {
+      "spacing" : {
+        "padding" : {
+          "top" : {
+            "value" : 120,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 80,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    },
+    "mobile_spacing" : {
+      "spacing" : {
+        "padding" : {
+          "top" : {
+            "value" : 62,
+            "units" : "px"
+          },
+          "bottom" : {
+            "value" : 60,
+            "units" : "px"
+          },
+          "left" : {
+            "value" : 0,
+            "units" : "px"
+          },
+          "right" : {
+            "value" : 0,
+            "units" : "px"
+          }
+        }
+      }
+    }
+  }
+}, {
+  "id" : "c7a23355-96f6-003f-ddb5-45bb5fa00f2e",
+  "name" : "add_custom_class",
+  "label" : "Add Custom Class",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "8038bc44-5492-e070-dbdc-306a16748342",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Industries"
+}, {
+  "id" : "dc249084-b835-0ad2-b4f3-284f89a796f7",
+  "name" : "we_serve_card",
+  "label" : "Card",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : 3,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "d342b356-22e9-09a1-1e5a-509e91098ea4",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/carbon_pedestrian-family.svg",
+      "alt" : "carbon_pedestrian-family",
+      "loading" : "lazy",
+      "width" : 66,
+      "height" : 65,
+      "max_width" : 66,
+      "max_height" : 65
+    }
+  }, {
+    "id" : "66454f1f-a00c-e7dd-1cb1-65354fe34a79",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<h4>Family Offices</h4>\n<p>This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/carbon_pedestrian-family.svg",
+      "alt" : "carbon_pedestrian-family",
+      "loading" : "lazy",
+      "width" : 66,
+      "height" : 65,
+      "max_width" : 66,
+      "max_height" : 65
+    },
+    "text" : "<h4>Family Offices</h4>\n<p>This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.</p>"
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/carbon_pedestrian-family.svg",
+      "alt" : "carbon_pedestrian-family",
+      "loading" : "lazy",
+      "width" : 66,
+      "height" : 65,
+      "max_width" : 66,
+      "max_height" : 65
+    },
+    "text" : "<h4>Family Offices</h4>\n<p>This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.</p>"
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/carbon_pedestrian-family.svg",
+      "alt" : "carbon_pedestrian-family",
+      "loading" : "lazy",
+      "width" : 66,
+      "height" : 65,
+      "max_width" : 66,
+      "max_height" : 65
+    },
+    "text" : "<h4>Family Offices</h4>\n<p>This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.This talks briefly about the leadership, small size but big effort, we care mentality in a nutshell.</p>"
+  } ]
+} ]

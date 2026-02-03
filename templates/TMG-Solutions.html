@@ -1,0 +1,165 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: TMG - Solutions 
+  
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--home"
+%}
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Banner",
+         full_width=true,
+         width=12,
+         label='TMG - Banner', 
+         path='../modules/TMG - Banner',        
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Two Column",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column', 
+         path='../modules/TMG - Two Column',
+         select_image_position='rgt_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "FAQs non database",
+         full_width=true,
+         width=12,
+         label='FAQs non database', 
+         path='../modules/FAQs non database',
+       
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Two Column",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column', 
+         path='../modules/TMG - Two Column',
+         select_image_position='lft_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "FAQs non database",
+         full_width=true,
+         width=12,
+         label='FAQs non database', 
+         path='../modules/FAQs non database',
+       
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Two Column",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column', 
+         path='../modules/TMG - Two Column',
+         select_image_position='rgt_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "FAQs non database",
+         full_width=true,
+         width=12,
+         label='FAQs non database', 
+         path='../modules/FAQs non database',
+       
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Two Column",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column', 
+         path='../modules/TMG - Two Column',
+         select_image_position='lft_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %}
+
+
+
+
+
+{% end_dnd_area %}
+{% endblock body %}

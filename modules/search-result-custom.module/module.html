@@ -1,0 +1,59 @@
+<section class="result-listing-section hs-search-results">
+	<div class="container">
+		{# 	template used to inject search results #}
+		<template class="hs-search-results__template">
+			<li class="search-result-item">
+				<a href="#" class="result-card">
+					<div class="result-featured-image hs-search-results__featured-image">
+						<img class="result-image" src="">
+					</div>
+					<div class="result-copy-flex">
+						<h3 class="result-card-title">Content Title</h3>
+						<p class="result-card-description">Description</p>
+					</div>
+				</a>
+			</li>
+		</template>
+
+		<div class="top-search-flex">
+			<div class="result-stats">
+				Showing <span class="result-offset"></span>-<span class="page-results"></span> out of <span class="result-total"></span> results
+			</div>
+
+			<div class="results-search-container hs-search-field">
+				<div class="hs-search-field__bar">
+					<form class="results-search-form" data-hs-do-not-collect="true" action="{{ site_settings.content_search_results_page_path }}">
+						<input type="text" class="results-search-input hs-search-field__input" name="term" autocomplete="off" aria-label="{{ "Search" }}" placeholder="Search for Vendor or Service">
+						<input type="hidden" name="type" value="SITE_PAGE">
+						<input type="hidden" name="type" value="BLOG_POST">
+						<input type="hidden" name="type" value="LISTING_PAGE">
+						<input type="hidden" name="type" value="KNOWLEDGE_ARTICLE">
+						<input type="hidden" name="limit" value="8">
+
+						<button class="input-search-button" aria-label="Search">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<path d="M21 21L15.0001 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#4B4545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</button>
+					</form>
+				</div>
+				<ul class="results-typeahead hs-search-field__suggestions"></ul>
+			</div>
+		</div>
+
+		<ul id="hsresults" class="search-results-grid hs-search-results__listing"></ul>
+		<div class="results-pagination-container" data-search-path="{{ site_settings.content_search_results_page_path }}">
+			<a href="" class="pagination-button hs-search-results__prev-page">
+				<svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none">
+					<path d="M5.93787 10.6479C5.84319 10.7663 5.65385 10.7663 5.5355 10.6479L0.588757 5.70117C0.470414 5.58283 0.470414 5.41715 0.588757 5.29881L5.5355 0.352063C5.65385 0.23372 5.8432 0.23372 5.93787 0.352063L6.41124 0.801767C6.52959 0.92011 6.52959 1.10946 6.41124 1.20413L2.12722 5.51183L6.41124 9.79585C6.52959 9.89052 6.52959 10.0799 6.41124 10.1982L5.93787 10.6479Z" fill="#120F14"/>
+				</svg>
+			</a>
+			<div class="number-pagination-flex"></div>
+			<a href="" class="pagination-button hs-search-results__next-page">
+				<svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none">
+					<path d="M1.06213 0.352079C1.1568 0.233736 1.34615 0.233736 1.4645 0.352079L6.41124 5.29882C6.52959 5.41717 6.52959 5.58285 6.41124 5.70119L1.4645 10.6479C1.34615 10.7663 1.1568 10.7663 1.06213 10.6479L0.588757 10.1982C0.470414 10.0799 0.470414 9.89054 0.588757 9.79587L4.87278 5.48817L0.588758 1.20415C0.470414 1.10948 0.470414 0.920127 0.588758 0.801784L1.06213 0.352079Z" fill="#120F14"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+</section>

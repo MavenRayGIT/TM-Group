@@ -1,0 +1,192 @@
+<div class="tmg_team_section {{ module.add_custom_class }}">
+  <div class="content-wrapper">
+    <div class="head_title">
+      <h1 class="title-xl">We make a great team</h1>
+      <p class="text-s">This is a mention of what makes our team unique. This is a mention of what makes our team unique</p>
+    </div>
+    <div class="tmg_tap vertical-tabs">
+      <div class="ps_grid">
+        <ul class="tabs vertical" data-tab="">
+          {% set count = 1 %}
+          {% for item in module.team %}
+          <li class="tab-title-{{name}} {% if count == 1 %}active {% endif %}">
+            <a href="#panela1" aria-selected="tab-title-{{name}} {% if count == 1 %}true{% endif %}" tabindex="0">
+              {{ item.head_title.title }}
+            </a>
+          </li>
+          {% set count = count + 1 %}
+          {% endfor %}
+        </ul>
+        <div class="tabs-content">
+          {% set count = 1 %}
+          {% for item in module.team %}
+          <div class="content {% if count == 1 %}active {% endif %}" id="panela1" aria-hidden="false">
+            <div class="team_row">
+              {% for item2 in item.description %}
+              <div class="team_box">
+              <div class="team_box_card">
+                <div class="team_img">
+                  {% if item2.image.src %}
+                  {% set sizeAttrs = 'width="{{ item2.image.width|escape_attr }}" height="{{ item2.image.height|escape_attr }}"' %}
+                  {% if item2.image.size_type == 'auto' %}
+                  {% set sizeAttrs = 'width="{{ item2.image.width|escape_attr }}" height="{{ item2.image.height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+                  {% elif item2.image.size_type == 'auto_custom_max' %}
+                  {% set sizeAttrs = 'width="{{ item2.image.max_width|escape_attr }}" height="{{ item2.image.max_height|escape_attr }}" style="max-width: 100%; height: auto;"' %}
+                  {% endif %}
+                  {% set loadingAttr = item2.image.loading != 'disabled' ? 'loading="{{ item2.image.loading|escape_attr }}"' : '' %}
+                  <img src="{{ item2.image.src|escape_url }}" alt="{{ item2.image.alt|escape_attr }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                  {% endif %}
+                </div>
+                <div class="team_description">
+                  <h4>{{ item2.team_name }}</h4>
+                  <span>{{ item2.designation }}</span>
+                </div>
+                <div class="team_social_box">
+                  <div class="lindin_link">
+                    {% set href = item2.social_link.url.href %}
+                    {% if item2.social_link.url.type is equalto "EMAIL_ADDRESS" %}
+                    {% set href = "mailto:" + href %}
+                    {% endif %}
+                    <a {% if item2.social_link.url.type is equalto "CALL_TO_ACTION" %} href="{{ href }}" {# The href here is not escaped as it is not editable and functions as a JavaScript call to the associated CTA #} {% else %} href="{{ href|escape_url }}" {% endif %} {% if item2.social_link.open_in_new_tab %} target="_blank" {% endif %} {% if item2.social_link.rel %} rel="{{ item2.social_link.rel|escape_attr }}" {% endif %}>
+                      <img src="https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/image%2027.png" alt="">
+                    </a>
+                  </div>
+                  <div class="mail_link">
+                    <a href="mailto:{{ item2.mail }}"><img src="https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/TMG%202024/image%201%20(Traced).png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% set count = count + 1 %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% require_css %}
+<style>
+  {% scope_css %} 
+
+.tmg_team_section{  width: 100%;
+    background-color: {{ module.style.background_color.css }};
+    position: relative;
+    {{ module.style.desktop_spacing.spacing.css }};
+}
+.ps_grid .tabs {width:100%; display: flex; align-items: center; margin:0 0 50px 0; padding: 0;  gap: 10px;}
+.tabs-content { width: 100%; transition: .5s all cubic-bezier(0.075, 0.82, 0.165, 1);}
+.head_title h1{ font-style: normal;font-weight: 300; font-size: 50px; line-height: 52px; letter-spacing: -0.05em;color: #FFFFFF;margin-bottom: 40px; }
+.head_title p { font-style: normal; font-size: 20px; color: #FFFFFF;}
+.vertical-tabs {position: relative;}
+.ps_grid .tabs li {position: relative;  list-style: none;}
+.ps_grid .tabs li:after { content: "";display: table; clear: both;}
+.ps_grid .tabs li a {
+    position: relative;
+    display: inline;
+    width: 100%;
+    padding: 10px 25px;
+    text-decoration: none;
+    background-color: inherit;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+.ps_grid .tabs li a:before {
+    background: linear-gradient(45deg, #c5299b, #19ecdf) border-box;
+    border: 2px solid transparent;
+    border-radius: 80px;
+    bottom: 0;
+    content: "";
+    left: 0;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+.ps_grid .tabs li.active a,
+.ps_grid .tabs li:hover a {  z-index: 2; color: #C5299B ;}
+.ps_grid .tabs-content .content {display: none; padding: 0 15px 0 0; opacity: 0; list-style: none; transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);}
+.ps_grid .tabs-content .content.active {  display: block; transition-delay: .3s; z-index: 2; opacity: 1;}
+.ps_grid li.tab-title.active a{  color: #C5299B ; }
+h1.content_title.z-padding-bottom-3xl {  font-size: 36px;  margin-bottom: 30px;}
+.team_row{ display:flex; flex-wrap:wrap; margin-right:-15px; margin-left:-15px; }
+.team_box {   width: 25%;  padding: 0 15px; margin-bottom: 30px;}
+.team_box_card{ width:100%; border-radius:15px; overflow:hidden; background-color:#ffffff; }
+
+.team_img img{ width:100%; }
+.team_description{ padding:15px 15px 0 15px }
+.team_description h4{ font-family: 'Khula'; font-style: normal; font-weight: 400;font-size: 22px; line-height: 24px; margin: 0; padding: 0;width: 100%;}
+.team_description span{ font-family: 'Khula';font-style: normal; font-weight: 400; font-size: 18px; line-height: 24px; margin: 0; padding: 0; }
+.team_social_box {  display: flex;  padding: 15px 15px;  gap: 15px;}
+
+@media screen and (max-width: 767px) {
+.ps_grid .tabs {  flex-wrap: wrap;}
+.ps_grid .tabs li {  margin-bottom: 10px;}
+.tmg_team_section{  {{ module.style.mobile_spacing.spacing.css }}; }
+.ps_grid .tabs {
+    width: 100%;
+    float: left;
+    border-left:none;
+    border-bottom:  1px solid rgba(5, 27, 53, 0.2);
+   padding: 15px 0;
+}
+.tabs-content {width:100%;}
+.ps_grid .tabs-content .content { padding: 0 0 0 0;}
+.toggle .tabs {
+   border-bottom: 1px solid grey;
+   width: 100%;
+   overflow: hidden;
+   height: 36px;
+   line-height: 36px;
+}
+.toggle .tabs .tab {
+    float: left;
+    background: white;
+    color: #777777;
+    height: 31px;
+    margin: 2px 8px 0;
+    padding: 0 8px;
+    cursor: pointer;
+}
+.toggle .tabs .tab.active {  color: #dd4b39; border-bottom: 3px solid #dd4b39;}
+.toggle .panels .panel {padding: 20px 10px;   display: none;    }
+.toggle .panels .panel:first-child { display: block;}
+.team_box {   width: 50%;  padding: 0 15px; margin-bottom: 30px;}
+
+  }
+
+  @media screen and (max-width: 580px) {
+  .team_box {   width: 100%; }
+  }
+
+  {% end_scope_css %} 
+</style>
+{% end_require_css %}
+{% require_js %}
+<script>
+
+
+  // Acc
+  $().ready(function(){
+    $('.tab-title-{{name}} > a').click(function(e){
+      e.preventDefault();
+    var index = $(this).parent().index();
+    index = index - 0;
+    $(this).parent().addClass('active')
+      .siblings().removeClass('active')
+      .parent('ul.tabs').siblings('.tabs-content').children('.content').removeClass('active')
+      .eq(index).addClass('active');
+  });
+  })
+
+
+
+</script>
+{% end_require_js %}

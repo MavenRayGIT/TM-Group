@@ -1,0 +1,115 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: TMG -  Light Nav
+  
+-->
+{% extends "./layouts/base.html" %}
+{% block header %}
+  {% global_partial path="./partials/TMG - Light-header.html" %}
+{% endblock header %}
+
+{% block body_class %}header_light{% endblock body_class %}
+
+
+{% block body %}
+
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--home"
+%}
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Banner",
+         full_width=true,
+         width=12,
+         label='TMG - Banner', 
+         path='../modules/TMG - Banner',        
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+{% dnd_section
+    padding={
+          'default': { 'top':'50', 'bottom': '50', 'right': '30', 'left': '30' },
+          'mobile': { 'top':'40', 'bottom': '40', 'right': '30', 'left': '30' }       
+      }, 
+    full_width=false    
+ %}
+ {% dnd_module  module "TMG - Two Column slider",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column slider', 
+         path='../modules/TMG - Two Column slider',
+         select_image_position='rgt_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Two Column Video",
+         full_width=true,
+         width=12,
+         label='TMG - Two Column Video', 
+         path='../modules/TMG - Two Column Video',
+         select_image_position='rgt_img'
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Testimonial",
+         full_width=true,
+         width=12,
+         label='TMG - Testimonial', 
+         path='../modules/TMG - Testimonial',        
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+{% dnd_section
+    padding={
+          'default': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' },
+          'mobile': { 'top':'0', 'bottom': '0', 'right': '0', 'left': '0' }       
+      }, 
+    full_width=true    
+ %}
+ {% dnd_module  module "TMG - Insights",
+         full_width=true,
+         width=12,
+         label='TMG - Insights', 
+         path='../modules/TMG - Insights',        
+    %}     
+   {% end_dnd_module %}
+ {% end_dnd_section %} 
+
+
+
+
+{% end_dnd_area %}
+{% endblock body %}
