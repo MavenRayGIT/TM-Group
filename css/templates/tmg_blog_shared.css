@@ -41,3 +41,16 @@
     text-decoration: none;
     transition: all 0.3s ease;
 }
+
+/* Shared: tag pill hover + active states */
+.blog-tag-nav > ul > li > a:hover,
+.blog-tag-nav > ul > li > a.active {
+    background-color: #06226D;
+    color: #fff;
+}
+
+/* Add styles for active state */
+.blog-tag-nav > ul > li.active > a {
+    background-color: #06226D;
+    color: #fff;
+}

@@ -78,6 +78,7 @@ Codex must always provide:
 3) Exact line ranges to change (or a reliable search string if line numbers are unstable)
 4) Risk rating: Low, Medium, High
 5) Verification checklist (what Jon should preview in HubSpot)
+6) **Upload script** for all edited files (HubSpot CLI), unless explicitly told not to.
 
 ## Workflow Rule
 - Prefer a "propose first" approach.

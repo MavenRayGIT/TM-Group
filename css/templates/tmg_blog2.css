@@ -590,18 +590,6 @@ button.hs-search-field__button:hover {background-color: #fff; border: 0px;}
 .blog-tag-nav{ margin:0; padding:0; }
 .blog-tag-nav > ul { margin:0; padding:0; list-style: none;}
 .blog-tag-nav > ul > li { margin:3px 0; padding:0; display:inline-block; }
-.blog-tag-nav > ul > li > a:hover,
-.blog-tag-nav > ul > li > a.active {
-    background-color: #06226D;
-    color: #fff;
-}
-
-/* Add styles for active state */
-.blog-tag-nav > ul > li.active > a {
-    background-color: #06226D;
-    color: #fff;
-}
-
 @media screen and (min-width: 768px) {
     .blog-header__form {
         margin: 0 auto;
