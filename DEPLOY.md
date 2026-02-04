@@ -1,16 +1,14 @@
-# Deploy Notes (HubSpot CLI)
+# Deployment Rules (HubSpot)
 
-- If the watcher is running, saves can upload immediately.
-- Stop the watcher before experimenting.
-- Start the watcher only when ready to push a specific change.
+- `hs cms watch` is NOT used.
+- All changes are manual and intentional.
+- Files are uploaded individually using `hs upload`.
+- After a successful upload, changes MUST be committed to git.
+- Commit messages should describe the deploy (ex: "Deploy: blog tag dropdown").
 
-# TM Group HubSpot Deploy Notes
-
-- Watcher is OFF by default.
-- Local saves do not deploy.
-- Manual hs upload = live production change.
-
-## Preferred deploy pattern
-- Upload single files only.
-- Verify in HubSpot Preview immediately.
-- Rollback by re-uploading the previous version if needed.
+## Typical Flow
+1. Edit files locally
+2. Verify with preview if applicable
+3. `hs upload <file>`
+4. Confirm live
+5. `git commit -m "Deploy: <description>"`

@@ -94,3 +94,50 @@ Codex must always provide:
 - Do not reformat large HubL blocks.
 - Do not change file structure without approval.
 
+# Codex Rules (HubSpot Theme)
+
+- Read-only by default
+- Propose patches as diffs, do NOT apply automatically
+- Do NOT run `hs cms watch`
+- Do NOT upload files
+- Minor edits only unless explicitly approved
+- Always call out blast radius before proposing changes
+
+# HubSpot CDN/Bundling Gotchas (Site-Wide)
+
+## Preferred Cache-Bust Approach
+- Use a query string on `require_css` / `require_js` (preferred over renaming files).
+- Avoid loading the same asset twice (do NOT use both `template_css` and `require_css` for the same file).
+- Example pattern:
+  - `{% set template_css = "" %}`
+  - `{{ require_css(get_asset_url("/TM-Group/css/templates/your_file.css") ~ "?v=YYYYMMDDHHMM") }}`
+
+## Why This Matters
+- HubSpot compiles template CSS/JS into minified bundles and serves via CDN.
+- Preview can update faster than live; live pages can lag due to cached bundles.
+- DOM `<link>` tags often point to compiled assets (e.g., `template_*.min.css`), not the source file.
+
+## Verification Checklist (Live)
+- View Page Source (not DevTools DOM) and confirm the cache-busted URL is present.
+- Open the compiled asset URL and search for your selector change.
+- Use DevTools `getComputedStyle(...)` to verify the winning rule.
+
+## If Changes Don't Show
+- Confirm the correct template is used for the page type (listing vs tag vs author).
+- Ensure the cache-busted URL is present in live HTML.
+- If the compiled asset does not include your rule, publish again and re-check.
+- If an inherited/global rule overrides your change, increase specificity or add a scoped override.
+
+## Common Pitfalls
+- Global selectors like `.blog-tag-nav ul { display: flex; }` will affect nested dropdown `<ul>`s.
+- Preview success does not guarantee live success; always validate on the live URL.
+
+## Recent Incident Summary (Blog Tag Dropdown)
+- Symptom: Dropdown `<ul>` rendered inline as pills on tag pages.
+- Root causes:
+  - Global `.blog-tag-nav ul { display: flex; }` overriding dropdown menu.
+  - Compiled CSS bundle not reflecting latest changes on live.
+- Fix applied:
+  - Added scoped override for `.blog-tag-nav ul.tag-dropdown__menu` with `display: none !important;` and `position: absolute !important;`.
+  - Added hover/focus rules to show dropdown.
+  - Switched to cache-busted `require_css` and avoided duplicate includes.

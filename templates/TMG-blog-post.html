@@ -4,6 +4,7 @@
   isAvailableForNewContent: true
 -->
 {% set template_css = "../../css/templates/tmg_blog.css" %}
+{{ require_css(get_asset_url("/TM-Group/css/templates/tmg_blog_shared.css")) }}
 {% extends "./layouts/base.html" %}
 
 {% block header %}

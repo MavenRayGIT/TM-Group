@@ -1,0 +1,43 @@
+/* Blog shared styles (listing + post) */
+.blog-post__body p {
+    padding-left: 0 !important;
+}
+.hs-search-field__suggestions-container {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+}
+.hs-search-field__suggestions-container ul#autocomplete-results{
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+}
+.hs-search-field__suggestions-container ul#autocomplete-results li {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+.blog-post__meta {
+    margin: 1rem 0;
+}
+
+.blog-post__meta a {
+    color: #494A52;
+    text-decoration: underline;
+}
+
+/* Shared: tag pill styles (listing + post) */
+.blog-tag-nav > ul > li > a {
+    background-color: #DEE6EA;
+    border: 0px solid #d1d6dc;
+    border-radius: 45px;
+    color: #03133f;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}

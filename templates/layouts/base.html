@@ -7,8 +7,7 @@
     <meta charset="utf-8">
     {% if page_meta.html_title or pageTitle %}<title>{{ page_meta.html_title or pageTitle }}</title>{% endif %}
     <meta name="description" content="{{ page_meta.meta_description }}">
-    <link rel="stylesheet" href="{{ get_asset_url('../../css/main.css') + '?' + unixtimestamp() }}">
-    {{ require_css(get_asset_url("../../css/main.css")) }}
+    {{ require_css(get_asset_url("../../css/main.css") ~ "?v=20260204-04") }}
     {{ require_css(get_asset_url("../../css/custom-style.css")) }}
      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
     <link rel="icon" type="image/png" href="https://tmgroupinc.com/hubfs/favicon2025/favicon-96x96.png" sizes="96x96" />
@@ -24,7 +23,7 @@
     });
   });
 </script>
-    <link href="{{ get_asset_url('/TM-Group/css/tools/aos.css') + '?' + unixtimestamp() }}" rel="stylesheet">
+    {{ require_css(get_asset_url("/TM-Group/css/tools/aos.css") ~ "?v=20260204-04") }}
     {# This is intended to be used if a template requires template specific style sheets #}
     {% if template_css %}
       {{ require_css(get_asset_url(template_css)) }}

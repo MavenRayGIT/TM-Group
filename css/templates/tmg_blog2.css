@@ -1,3 +1,4 @@
+/* rebuild */
 /* Blog header */
 .blog-header {
     /* background-color: #F8FAFC;
@@ -587,16 +588,16 @@ button.hs-search-field__button:hover {background-color: #fff; border: 0px;}
 }
 
 .blog-tag-nav{ margin:0; padding:0; }
-.blog-tag-nav ul { margin:0; padding:0; list-style: none;}
-.blog-tag-nav ul li { margin:3px 0; padding:0; display:inline-block; }
-.blog-tag-nav ul li a:hover,
-.blog-tag-nav ul li a.active {
+.blog-tag-nav > ul { margin:0; padding:0; list-style: none;}
+.blog-tag-nav > ul > li { margin:3px 0; padding:0; display:inline-block; }
+.blog-tag-nav > ul > li > a:hover,
+.blog-tag-nav > ul > li > a.active {
     background-color: #06226D;
     color: #fff;
 }
 
 /* Add styles for active state */
-.blog-tag-nav ul li.active a {
+.blog-tag-nav > ul > li.active > a {
     background-color: #06226D;
     color: #fff;
 }
@@ -1682,7 +1683,7 @@ select.filters-select {   width: 100%;}
 
 
 /* Update the blog tag navigation styles */
-.blog-tag-nav ul {
+.blog-tag-nav > ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -1691,7 +1692,7 @@ select.filters-select {   width: 100%;}
     gap: 5px;  /* Consistent spacing between tags */
 }
 
-.blog-tag-nav ul li {
+.blog-tag-nav > ul > li {
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -1954,4 +1955,195 @@ article.tmg_feature_post_blog {
     height: auto !important;
 }
   
+}
+
+/* Override global nav flex for dropdown menu */
+.blog-tag-nav ul.tag-dropdown__menu {
+  display: none !important;
+}
+.blog-tag-nav li.tag-dropdown:hover > ul.tag-dropdown__menu,
+.blog-tag-nav li.tag-dropdown:focus-within > ul.tag-dropdown__menu {
+  display: block !important;
+}
+
+/* Fix dropdown flicker + hover bridge */
+.blog-tag-nav li.tag-dropdown { position: relative; }
+
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  margin-top: 8px;
+}
+
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+.blog-tag-nav li.tag-dropdown:hover > ul.tag-dropdown__menu,
+.blog-tag-nav li.tag-dropdown:focus-within > ul.tag-dropdown__menu {
+  display: block !important;
+}
+
+/* Dropdown menu layout override */
+.blog-tag-nav li.tag-dropdown { position: relative; }
+
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  margin-top: 8px;
+  padding: 8px;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #d1d6dc;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover bridge to prevent flicker */
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+.blog-tag-nav li.tag-dropdown:hover > ul.tag-dropdown__menu,
+.blog-tag-nav li.tag-dropdown:focus-within > ul.tag-dropdown__menu {
+  display: block !important;
+}
+
+/* Reset inherited nav layout on the nested list */
+.blog-tag-nav ul.tag-dropdown__menu {
+  display: block !important;
+}
+.blog-tag-nav ul.tag-dropdown__menu > li {
+  display: block;
+  margin: 0;
+}
+
+/* Dropdown link styling (simple list) */
+.blog-tag-nav ul.tag-dropdown__menu > li a {
+  display: block;
+  padding: 6px 10px;
+  color: #03133f;
+  text-decoration: none;
+  border-radius: 8px;
+  background: transparent;
+}
+.blog-tag-nav ul.tag-dropdown__menu > li a:hover {
+  background: #DEE6EA;
+}
+.blog-tag-nav li.tag-dropdown { position: relative; }
+
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  margin-top: 12px;
+  padding: 10px;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #d1d6dc;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  min-width: 280px;
+}
+
+.blog-tag-nav li.tag-dropdown > ul.tag-dropdown__menu::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+}
+
+.blog-tag-nav li.tag-dropdown:hover > ul.tag-dropdown__menu,
+.blog-tag-nav li.tag-dropdown:focus-within > ul.tag-dropdown__menu {
+  display: block !important;
+}
+
+.blog-tag-nav ul.tag-dropdown__menu {
+  display: none !important;
+  position: absolute !important;
+}
+.blog-tag-nav ul.tag-dropdown__menu > li { display: block; margin: 0; }
+
+.blog-tag-nav ul.tag-dropdown__menu > li a {
+  display: block;
+  padding: 6px 10px;
+  color: #03133f;
+  text-decoration: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.blog-tag-nav ul.tag-dropdown__menu > li a:hover { background: #DEE6EA; }
+
+/* Dropdown caret on trigger */
+.blog-tag-nav .tag-dropdown__trigger {
+  background-color: #DEE6EA;
+  border: 0;
+  border-radius: 45px;
+  color: #03133f;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 19.6px;
+  margin: 0;
+  padding: 3px 30px 3px 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  font-family: inherit;
+  font-weight: 400;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.blog-tag-nav .tag-dropdown__trigger::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-35%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid currentColor;
+}
+
+/* Force dropdown ul to ignore nav flex */
+.blog-tag-nav ul.tag-dropdown__menu {
+  display: none !important;
+  position: absolute !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+}
+.blog-tag-nav li.tag-dropdown:hover > ul.tag-dropdown__menu,
+.blog-tag-nav li.tag-dropdown:focus-within > ul.tag-dropdown__menu {
+  display: block !important;
+}
+.blog-tag-nav .tag-dropdown__trigger:hover,
+.blog-tag-nav .tag-dropdown__trigger:focus {
+  background-color: #06226D;
+  color: #fff;
 }

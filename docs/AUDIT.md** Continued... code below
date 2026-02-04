@@ -1,0 +1,98 @@
+**Templates with inline require blocks**
+- `templates/Addons.html`, `templates/Addons backup.html`, `templates/training_management.html`: large inline `{% require_css %}` / `{% require_js %}` blocks (non-modular, hard to de-dup).
+
+### Duplicate Includes Observed
+- `templates/layouts/base.html`: `css/main.css` is included twice (once via `<link rel="stylesheet">` and once via `require_css`).
+- Blog listing: previously had both `template_css` and `require_css` for the same file; now corrected in `TMG-blog-index.html`.
+
+---
+
+## 3) CSS Audit
+
+### `!important` Usage (Top Offenders)
+- `css/templates/tmg_blog2.css`: **71**
+- `css/templates/tmg_blog.css`: **54**
+- `css/typography.css`: **37**
+- `css/utilities/_helper.css`: **16**
+- `css/templates/system.css`: **12**
+- `css/components/header-shared.css`: **8**
+- `css/custom-style.css`: **6**
+- `css/theme-overrides.css`: **5**
+
+### Global Leak Selectors (High Conflict Risk)
+Examples of broad selectors that can leak into module/component scopes:
+- `css/theme-overrides.css`: `p { ... }`, `a { ... }` (global tag selectors).
+- `css/templates/tmg_blog2.css`: `.blog-tag-nav ul { ... }` (affected nested dropdown `<ul>`).
+- `css/typography.css`: `.main_navigation a { ... !important }`, `.social_media a { ... !important }`.
+
+### Repeated Patterns / Duplication
+- **Blog CSS duplication**: `css/templates/tmg_blog.css` and `css/templates/tmg_blog2.css` appear largely duplicated. Changes now need to be mirrored between blog post and blog listing styles.
+- **Slider styles** are repeated across multiple module CSS blocks (testimonial, insights, we-serve, two-column slider).
+
+### Potentially Unused Assets (verify)
+These exist but no direct references found in templates (may be included via main.css or unused):
+- `js/third_party/_swiper-min.js` (no usage found in templates/modules).
+- `css/third-party/_swiper-min.css` (no usage found).
+
+---
+
+## 4) JS Audit
+
+### Global JS (runs on every page)
+- `js/main.js` loads globally via base layout.
+  - Handles header menu toggles, language switcher, search toggle, email subscription form logic.
+  - Initializes AOS (`AOS.init(...)`).
+  - Inlines Slick (`{% include './third_party/_slick-min.js' %}`).
+
+### Potential Issues
+- **Slick library** is loaded globally via `main.js` even though only certain modules need it (testimonials, insights, sliders). This increases page weight site-wide.
+- **AOS** is loaded site-wide but used only on modules with `data-aos` attributes.
+- **Swiper** library exists but no evidence of use in templates/modules.
+
+### Duplicated Interaction Patterns
+Multiple modules initialize Slick individually with similar logic:
+- `TMG - Testimonial`, `TMG - Insights`, `TMG - We serve`, `TMG - Two Column slider`, `TMG - We serve-bk`.
+This indicates duplication and potential divergence in behavior/settings.
+
+---
+
+## 5) Optimization Recommendations (No Code Changes Yet)
+
+### Low Risk, High Return
+- **Remove duplicate `main.css` include** in `templates/layouts/base.html` (keep `require_css` only).
+  - Files: `templates/layouts/base.html`
+  - Why: avoid duplicate CSS load and potential re-order issues.
+  - Verify: view source to ensure only one `template_main.min.css` reference.
+
+- **Stop loading both `template_css` and `require_css` for the same file** (already fixed for blog listing).
+  - Files: `templates/TMG-blog-index.html` (current pattern is correct).
+  - Verify: page source shows only one `template_tmg_blog2.min.css` URL.
+
+- **Remove or isolate unused Swiper** if confirmed unused.
+  - Files: `js/third_party/_swiper-min.js`, `css/third-party/_swiper-min.css`
+  - Verify: `rg -n "swiper" templates modules js` returns only the library itself.
+
+### Medium Risk
+- **Load Slick only where needed** (module-scoped load instead of global in `main.js`).
+  - Files: `js/main.js`, slider modules (`TMG - Testimonial`, `TMG - Insights`, `TMG - We serve`, `TMG - Two Column slider`)
+  - Why: reduce global payload and JS parsing time.
+  - Verify: pages without sliders still function; slider pages still initialize correctly.
+
+- **Consolidate blog CSS** (`tmg_blog.css` vs `tmg_blog2.css`) to avoid duplication.
+  - Files: `css/templates/tmg_blog.css`, `css/templates/tmg_blog2.css`, `templates/TMG-blog-post.html`, `templates/TMG-blog-index.html`
+  - Why: reduce divergence between blog listing and blog post styles.
+  - Verify: blog post and blog listing render consistently after consolidation.
+
+### High Blast Radius
+- **Refactor global selectors (`p`, `a`, `ul`, etc.)** into scoped classes to reduce !important usage.
+  - Files: `css/theme-overrides.css`, `css/typography.css`, `css/templates/tmg_blog2.css`
+  - Why: global selectors cause conflicts and drive escalating specificity.
+  - Verify: regression test across all main templates and modules.
+
+---
+
+## Notes on HubSpot Bundling & Cache
+- HubSpot compiles `template_css` and `require_css` into minified bundles served via CDN.
+- Live pages may lag behind preview. Cache-busted `?v=` on `require_css` is preferred for forcing updates.
+- Always verify via **View Source** and check compiled bundle content for your selector.
+

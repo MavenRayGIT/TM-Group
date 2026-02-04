@@ -3,7 +3,9 @@
  label: "TMG - Blog listing"
  isAvailableForNewContent: true
 -->
-{% set template_css = "../../css/templates/tmg_blog.css" %}
+{% set template_css = "" %}
+{{ require_css(get_asset_url("/TM-Group/css/templates/tmg_blog2.css") ~ "?v=20260203") }}
+{{ require_css(get_asset_url("/TM-Group/css/templates/tmg_blog_shared.css")) }}
 {% extends "./layouts/base.html" %}
 
 {% block header %}
@@ -78,7 +80,7 @@
                 {% for item in my_tags_sorted %}
                   {% if item.slug == 'our-projects' %}
                     <li data-filter=".{{ item.slug }}" class="custom_tag_get tag-dropdown" data-rel="{{ blog_tag_url(item.id, item.slug) }}">
-                      <a href="{{ blog_tag_url(item.id, item.slug) }}" class="tag-dropdown__trigger" aria-haspopup="true">{{ item }}</a>
+                      <button class="tag-dropdown__trigger" type="button" aria-haspopup="true" aria-label="Open Our Projects menu">{{ item }}</button>
                       <ul class="tag-dropdown__menu" aria-label="Industry tags">
                         {% for allow in industry_allowlist %}
                           {% set found = false %}
