@@ -57,6 +57,15 @@
 
     {# Set current_url so we can disable pagination and enable special Our Projects behavior #}
     {% set current_url = request.path %}
+    {% set path_norm = request.path|lower|trim %}
+    {% set is_our_projects = path_norm|replace("/blog/tag/our-projects", "") != path_norm %}
+    {% set industry_slug = request.query_dict.industry|default("")|lower|trim %}
+    {% set filtered_posts = [] %}
+    {% set filtered_count = 0 %}
+    {% if is_our_projects and industry_slug %}
+      {% set filtered_posts = blog_recent_tag_posts("default", ["our-projects", industry_slug], 100, "AND") %}
+      {% set filtered_count = filtered_posts|length %}
+    {% endif %}
     <div class="tmg_top_warrper">
       <div class="content-wrapper">
         <div class="tng_blog_tp_row">
@@ -89,7 +98,7 @@
                               {% set t_name_norm = t.name|lower|replace('&', 'and')|trim %}
                               {% if t_name_norm == allow %}
                                 <li class="tag-dropdown__item">
-                                  <a href="{{ blog_tag_url(t.id, t.slug) }}">{{ t.name }}</a>
+                                  <a href="/blog/tag/our-projects?industry={{ t.slug }}">{{ t.name }}</a>
                                 </li>
                                 {% set found = true %}
                               {% endif %}
@@ -115,21 +124,26 @@
             function normalizePath(path) {
               return path.toLowerCase().replace(/\/$/, '');
             }
-            // Get the current page's path
+            // Get the current page's path + search
             var currentPath = normalizePath(window.location.pathname);
+            var currentSearch = window.location.search || '';
             // Mark the active filter in the main nav
             var foundActive = false;
             var tagNavLinks = document.querySelectorAll('.blog-tag-nav ul li a');
             tagNavLinks.forEach(function(link) {
               try {
-                var linkPath = normalizePath(new URL(link.href, window.location.origin).pathname);
-                if (linkPath === currentPath) {
+                var linkUrl = new URL(link.href, window.location.origin);
+                var linkPath = normalizePath(linkUrl.pathname);
+                var linkSearch = linkUrl.search || '';
+                var pathsMatch = linkPath === currentPath;
+                var searchMatches = (linkSearch === currentSearch) || (linkSearch === '' && currentSearch === '');
+                if (pathsMatch && searchMatches) {
                   link.parentElement.classList.add('active');
                   foundActive = true;
                 }
               } catch (e) {
                 var href = normalizePath(link.getAttribute('href'));
-                if (href === currentPath) {
+                if (href === currentPath && currentSearch === '') {
                   link.parentElement.classList.add('active');
                   foundActive = true;
                 }
@@ -140,6 +154,16 @@
               if (allLink) {
                 allLink.parentElement.classList.add('active');
               }
+            }
+
+            // Desktop: make "Our Projects" pill navigate to the tag page
+            var ourProjectsTrigger = document.querySelector('.tag-dropdown__trigger');
+            if (ourProjectsTrigger) {
+              ourProjectsTrigger.addEventListener('click', function (e) {
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                  window.location.href = '/blog/tag/our-projects';
+                }
+              });
             }
           });
         </script>
@@ -170,25 +194,46 @@
           {% else %}
             {% set skip_first = false %}
           {% endif %}
-          {% for content in contents %}
-            <article class="blog-index__post blog-index__post--small">
-              <a href="{{ content.absolute_url }}">
-                {% if content.featured_image and group.use_featured_image_in_summary %}
-                  <div class="blog-index__post-image blog-index__post-image--small" style="background-image: url('{{ content.featured_image }}');"></div>
-                {% endif %}
-                <div class="blog-index__post-content blog-index__post-content--small">
-                  <span class="article-date">{{ content.publish_date|datetimeformat('%B %e, %Y') }}</span>
-                  <h3>{{ content.name }}</h3>
-                </div>
-              </a>
-            </article>
-          {% endfor %}
+          {% if is_our_projects and industry_slug %}
+            {% for content in filtered_posts %}
+              <article class="blog-index__post blog-index__post--small">
+                <a href="{{ content.absolute_url }}">
+                  {% if content.featured_image and group.use_featured_image_in_summary %}
+                    <div class="blog-index__post-image blog-index__post-image--small" style="background-image: url('{{ content.featured_image }}');"></div>
+                  {% endif %}
+                  <div class="blog-index__post-content blog-index__post-content--small">
+                    <span class="article-date">{{ content.publish_date|datetimeformat('%B %e, %Y') }}</span>
+                    <h3>{{ content.name }}</h3>
+                  </div>
+                </a>
+              </article>
+            {% endfor %}
+            {% if filtered_count == 0 %}
+              <div class="blog-index__empty">
+                <p>No project profiles found for this industry.</p>
+              </div>
+            {% endif %}
+          {% else %}
+            {% for content in contents %}
+              <article class="blog-index__post blog-index__post--small">
+                <a href="{{ content.absolute_url }}">
+                  {% if content.featured_image and group.use_featured_image_in_summary %}
+                    <div class="blog-index__post-image blog-index__post-image--small" style="background-image: url('{{ content.featured_image }}');"></div>
+                  {% endif %}
+                  <div class="blog-index__post-content blog-index__post-content--small">
+                    <span class="article-date">{{ content.publish_date|datetimeformat('%B %e, %Y') }}</span>
+                    <h3>{{ content.name }}</h3>
+                  </div>
+                </a>
+              </article>
+            {% endfor %}
+          {% endif %}
         </section>
       </div>
     </div>
     
     {# Disable pagination when on /tag/our-projects (i.e. show all posts) #}
-{% if contents.total_page_count > 1 %}
+{% if contents.total_page_count > 1 and not (is_our_projects and industry_slug) %}
       <div class="blog-pagination">
         {% set page_list = [-2, -1, 0, 1, 2] %}
         {% if contents.total_page_count - current_page_num == 1 %}

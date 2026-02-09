@@ -1,4 +1,4 @@
-> Codex: You must read this file and ARCHITECTURE.md before performing any task in this repo.
+> Codex: At the start of every session in this repo, immediately read CODEX.md, ARCHITECTURE.md, and DEPLOY.md before performing any task.
 
 PROJECT: TM Group HubSpot CMS
 
@@ -84,6 +84,7 @@ Codex must always provide:
 - Prefer a "propose first" approach.
 - For anything beyond the Allowed list, propose the change and wait for approval.
 - Never perform broad cleanup just because lint warnings exist. HubL linting is not authoritative.
+- Capture "lessons learned" from each session and add them to `ARCHITECTURE.md`, `CODEX.md`, or `DEPLOY.md` as appropriate.
 
 ## Source of Truth
 - HubSpot Preview rendering is authoritative.

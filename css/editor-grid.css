@@ -1,0 +1,31 @@
+/* Editor-only grid helpers to mirror live DnD column layout */
+.dnd-section .row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dnd-section .dnd-column {
+  min-height: 1px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .dnd-section .row-fluid {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .dnd-section .dnd-column.span1 { width: 8.3333%; }
+  .dnd-section .dnd-column.span2 { width: 16.6667%; }
+  .dnd-section .dnd-column.span3 { width: 25%; }
+  .dnd-section .dnd-column.span4 { width: 33.3333%; }
+  .dnd-section .dnd-column.span5 { width: 41.6667%; }
+  .dnd-section .dnd-column.span6 { width: 50%; }
+  .dnd-section .dnd-column.span7 { width: 58.3333%; }
+  .dnd-section .dnd-column.span8 { width: 66.6667%; }
+  .dnd-section .dnd-column.span9 { width: 75%; }
+  .dnd-section .dnd-column.span10 { width: 83.3333%; }
+  .dnd-section .dnd-column.span11 { width: 91.6667%; }
+  .dnd-section .dnd-column.span12 { width: 100%; }
+}

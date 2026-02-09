@@ -148,6 +148,12 @@ Changes to sections do NOT affect TM Group custom DnD templates.
 - Manual `hs upload` = live production deploy.
 - Watcher is OFF by default.
 
+## 10. Editor Preview CSS Note
+
+- Editor preview may not load `css/main.css` (or the full global bundle), which causes DnD grid rules (`.row-fluid`, `.span*`) to be missing and columns to stack in the editor only.
+- Live pages can still be correct even if the editor stacks.
+- Temporary mitigation is an editor-only stylesheet that restores minimal grid rules without affecting live output.
+
 ---
 
 ## 9. Working discipline
