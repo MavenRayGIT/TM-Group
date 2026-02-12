@@ -242,6 +242,14 @@
       "source_type" : "html",
       "embed_html" : "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I5GM_XiZPHA?si=gpsxo8PR1Ip5XiIt\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
     }
+  }, {
+    "id" : "208d3a8c-f309-4f78-b89f-38859ff412ad",
+    "name" : "hubspot_video",
+    "label" : "HubSpot Video",
+    "required" : false,
+    "locked" : false,
+    "type" : "videoplayer",
+    "display_width" : null
   } ],
   "tab" : "CONTENT",
   "expanded" : false,

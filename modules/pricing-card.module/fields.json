@@ -235,14 +235,14 @@
         "type" : "font",
         "display_width" : null,
         "default" : {
-          "font" : null,
-          "font_set" : "DEFAULT",
+          "font" : "Open Sans",
+          "font_set" : "GOOGLE",
           "styles" : null,
           "size" : null,
           "size_unit" : null,
           "color" : null,
           "variant" : null,
-          "fallback" : null,
+          "fallback" : "sans-serif",
           "style" : null
         }
       } ],
@@ -328,14 +328,14 @@
         "type" : "font",
         "display_width" : null,
         "default" : {
-          "font" : null,
-          "font_set" : "DEFAULT",
+          "font" : "Open Sans",
+          "font_set" : "GOOGLE",
           "styles" : null,
           "size" : null,
           "size_unit" : null,
           "color" : null,
           "variant" : null,
-          "fallback" : null,
+          "fallback" : "sans-serif",
           "style" : null
         }
       } ],
@@ -394,14 +394,14 @@
         "type" : "font",
         "display_width" : null,
         "default" : {
-          "font" : null,
-          "font_set" : "DEFAULT",
+          "font" : "Open Sans",
+          "font_set" : "GOOGLE",
           "styles" : null,
           "size" : null,
           "size_unit" : null,
           "color" : null,
           "variant" : null,
-          "fallback" : null,
+          "fallback" : "sans-serif",
           "style" : null
         }
       } ],

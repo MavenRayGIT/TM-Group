@@ -1,8 +1,8 @@
-.title-xxl{font-style:normal;font-weight:300;font-size:70px;line-height:1;letter-spacing:-0.05em}
-.title-xl{font-size:80px!important;font-weight:200;line-height:78px;font-family:'Khula';letter-spacing:-0.05em}
-.title-l{font-size:50px!important;font-weight:300;line-height:52px;font-family:'Khula',sans-serif;letter-spacing:-0.05em;font-style:normal}
-.title-m{font-size:32px!important;font-weight:300;line-height:52px;font-family:'Khula';font-style:normal}
-.title-s{font-size:22px!important;font-family:'Open Sans',sans-serif;font-style:normal;font-weight:200;line-height:25px;margin:0}
+.title-xxl{font-style:normal;font: weight 300px !important;font: size 70px !important;line: height 1px !important;letter-spacing:-0.05em}
+.title-xl{font-size:80px!important;font: weight 200px !important;line: height 78px !important;font-family:'Khula';letter-spacing:-0.05em}
+.title-l{font-size:50px!important;font: weight 300px !important;line: height 52px !important;font-family:'Khula',sans-serif;letter-spacing:-0.05em;font-style:normal}
+.title-m{font-size:32px!important;font: weight 300px !important;line: height 52px !important;font-family:'Khula';font-style:normal}
+.title-s{font-size:22px!important;font-family:'Open Sans',sans-serif;font-style:normal;font: weight 200px !important;line: height 25px !important;;margin:0}
 .text-s{font-size:16px!important;font-style:normal;font-family:'Open Sans',sans-serif;font-weight:400;line-height:1.4em;}
 .title-l-italic{line-height:45px;font-family:Georgia,Palatino,Times!important;font-style:italic;font-size:35px!important;font-weight:100!important}
 .title-s-italic{font-family:'Khula';font-style:normal;font-weight:200;font-size:24px;line-height:45px;color:#fff}
@@ -13,6 +13,8 @@
 .social_media a{font-size:18px!important}
 .text-footer-s{font-size:16px!important;font-family:'Open Sans';font-style:normal;font-weight:400}
 .text-footer-l{font-size:18px!important;font-style:normal;font-weight:400}
+
+h1, h2, h3 {font-weight:200;line-height:.85em;font-family:'Khula';letter-spacing:-0.05em}
 
 /*blog footer*/
 .lm34r_title {font-size:16px!important; line-height: 1.2em!important;}

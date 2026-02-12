@@ -330,6 +330,12 @@
 </style>
 {% require_css %}
 <style type="text/css">
+	.menu.header__menu--desktop > ul {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding-left: 0;
+	}
 
 	.body_class_b header.header.dark_header {
 		background-color: #ffffff;
@@ -820,7 +826,7 @@
 	.top_header span a, .top_header span strong {  color: #fff;  text-decoration: none;}
 	.top_header{  padding:12px 100px; background-color:#7DBC38; display:flex; justify-content:end;  }
 	.main_menu-nav {  margin-right: 50px;}
-	.main_menu-row {  display: flex;  flex-wrap: wrap; align-items: center;  }
+	.main_menu-row {  display: flex;  flex-wrap: nowrap; align-items: center;  }
 	.cst-humburger-icon, .mobile-close-icon { display: none;  }
 	.main_menu-logo {  position: relative; max-width: 245px; }
 	a.menu_logo-link {

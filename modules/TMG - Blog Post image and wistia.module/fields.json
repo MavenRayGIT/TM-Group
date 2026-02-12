@@ -233,54 +233,9 @@
   "type" : "text",
   "display_width" : null
 }, {
-  "id" : "1cac1cf5-eabf-9a26-0dec-4cce31d71c5c",
-  "name" : "left_column",
-  "label" : "Image Group",
-  "required" : false,
-  "locked" : false,
-  "children" : [ {
-    "id" : "d342b356-22e9-09a1-1e5a-509e91098ea4",
-    "name" : "image",
-    "label" : "Image",
-    "required" : false,
-    "locked" : false,
-    "responsive" : true,
-    "resizable" : true,
-    "show_loading" : false,
-    "type" : "image",
-    "display_width" : null,
-    "default" : {
-      "size_type" : "auto",
-      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500.jpg",
-      "alt" : "improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500",
-      "loading" : "lazy",
-      "width" : 499,
-      "height" : 346,
-      "max_width" : 499,
-      "max_height" : 346
-    }
-  } ],
-  "tab" : "CONTENT",
-  "expanded" : false,
-  "group_occurrence_meta" : null,
-  "type" : "group",
-  "display_width" : null,
-  "default" : {
-    "image" : {
-      "size_type" : "auto",
-      "src" : "https://44974531.fs1.hubspotusercontent-na1.net/hubfs/44974531/Imported_Blog_Media/improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500.jpg",
-      "alt" : "improved-tablet-functionality-is-just-one-of-the-advantaged-provided-by-_1725_40019746_0_14109626_500",
-      "loading" : "lazy",
-      "width" : 499,
-      "height" : 346,
-      "max_width" : 499,
-      "max_height" : 346
-    }
-  }
-}, {
   "id" : "3c8318d1-2deb-210f-1018-419aefdcb681",
   "name" : "wistia_video_and_image",
-  "label" : "Wistia video and image",
+  "label" : "Video and image",
   "required" : false,
   "locked" : false,
   "children" : [ {
@@ -290,7 +245,7 @@
     "required" : false,
     "locked" : false,
     "display" : "select",
-    "choices" : [ [ "image", "Image" ], [ "wistia_video", "Wistia video" ] ],
+    "choices" : [ [ "image", "Image" ], [ "wistia_video", "Video" ] ],
     "multiple" : false,
     "reordering_enabled" : true,
     "preset" : null,
@@ -329,7 +284,7 @@
   }, {
     "id" : "00d088a6-8479-8813-7a27-1808ed85202e",
     "name" : "wistia_video_id",
-    "label" : "Wistia Video ID",
+    "label" : "Legacy Video ID (Unused)",
     "required" : false,
     "locked" : false,
     "visibility" : {
@@ -345,6 +300,14 @@
     "display_width" : null,
     "default" : "29b0fbf547"
   }, {
+    "id" : "c138bf02-35c3-4b19-bf17-72cf3271ca36",
+    "name" : "hubspot_video",
+    "label" : "HubSpot Video",
+    "required" : false,
+    "locked" : false,
+    "type" : "videoplayer",
+    "display_width" : null
+  }, {
     "id" : "29fe3e6c-ad24-0970-bf9b-4747843e764f",
     "name" : "title",
     "label" : "Title",
@@ -353,7 +316,7 @@
     "allow_new_line" : false,
     "type" : "text",
     "display_width" : null,
-    "default" : "Add title here"
+    "default" : "Executive Summary Video"
   }, {
     "id" : "7bea921d-bb06-7ac3-5ce6-53f637c13757",
     "name" : "description",
@@ -362,7 +325,7 @@
     "locked" : false,
     "type" : "richtext",
     "display_width" : null,
-    "default" : "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>"
+    "default" : "<p>Watch the video summary and read the full project profile blog below. When you’re ready to take the next step, complete the form above to connect with our team and explore a tailored solution for your organization.</p>"
   }, {
     "id" : "0f94460e-76c8-d624-e764-bddc21e308d3",
     "name" : "post_link",
@@ -401,8 +364,8 @@
       "max_height" : 820
     },
     "wistia_video_id" : "29b0fbf547",
-    "title" : "Add title here",
-    "description" : "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>",
+    "title" : "Executive Summary Video",
+    "description" : "<p>Watch the video summary and read the full project profile blog below. When you’re ready to take the next step, complete the form above to connect with our team and explore a tailored solution for your organization.</p>",
     "post_link" : {
       "url" : {
         "content_id" : null,

@@ -68,7 +68,7 @@
 				<div class="main_navigation-inr">
 					<div class="main_menu-nav">
 						<nav class="menu menu--desktop header__menu--desktop hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" aria-label="Main menu">
-							<ul role="menu">
+							<ul>
 								{{ menu_items() }}
 							</ul>
 						</nav>
@@ -286,6 +286,13 @@
 </style>
 {% require_css %}
 <style type="text/css">
+	.menu.header__menu--desktop > ul {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding-left: 0;
+	}
+
 	header.header.sticky-menu .menu.header__menu--desktop > ul > li.hs-menu-item > .menu-link {
 		color: #0F0D0D !important;
 	}
@@ -859,7 +866,7 @@
 
 	.top_header{  padding:12px 100px; background-color:#7DBC38; display:flex; justify-content:end;  }
 	.main_menu-nav {  margin-right: 50px;}
-	.main_menu-row {  display: flex;  flex-wrap: wrap; align-items: center;  }
+	.main_menu-row {  display: flex;  flex-wrap: nowrap; align-items: center;  }
 	.cst-humburger-icon, .mobile-close-icon { display: none; }
 	.main_menu-logo {  position: relative; max-width: 245px; }
 	a.menu_logo-link {

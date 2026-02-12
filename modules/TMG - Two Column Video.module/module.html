@@ -138,7 +138,7 @@
             });
           </script>
           {% end_require_js %}
-          {% else %}
+          {% elif module.left_column.embed_field.embed_html|trim %}
           <div id="embed_container" class="embed_container">
             <div class="iframe_wrapper">
               {{ module.left_column.embed_field.embed_html }}
@@ -153,6 +153,33 @@
               position: relative;
             }
 
+            .embed_container {
+              display: inline-block;
+              height: 100%;
+              position: relative;
+              width: 100%;
+            }
+
+            .embed_container iframe {
+              left: 0;
+              max-height: 100%;
+              max-width: 100%;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+          {% end_require_css %}
+          {% elif module.left_column.hubspot_video.player_id %}
+          <div id="embed_container" class="embed_container">
+            {% video_player "embed_player"
+              player_id="{{ module.left_column.hubspot_video.player_id }}"
+            %}
+          </div>
+          {% require_css %}
+          <style>
             .embed_container {
               display: inline-block;
               height: 100%;

@@ -1,3 +1,29 @@
+{% set resolved_featured_image = content.featured_image if content.featured_image else content.featuredImage %}
+{% if not resolved_featured_image and content.featured_image and content.featured_image.src %}
+  {% set resolved_featured_image = content.featured_image.src %}
+{% endif %}
+{% if not resolved_featured_image and content.featuredImage and content.featuredImage.src %}
+  {% set resolved_featured_image = content.featuredImage.src %}
+{% endif %}
+{% if not resolved_featured_image and content.featured_image_url %}
+  {% set resolved_featured_image = content.featured_image_url %}
+{% endif %}
+{% if not resolved_featured_image and content.featuredImageUrl %}
+  {% set resolved_featured_image = content.featuredImageUrl %}
+{% endif %}
+
+{% set resolved_featured_image_alt = content.featured_image_alt_text if content.featured_image_alt_text else content.featuredImageAltText %}
+{% if not resolved_featured_image_alt and content.featured_image and content.featured_image.alt %}
+  {% set resolved_featured_image_alt = content.featured_image.alt %}
+{% endif %}
+{% if not resolved_featured_image_alt and content.featuredImage and content.featuredImage.alt %}
+  {% set resolved_featured_image_alt = content.featuredImage.alt %}
+{% endif %}
+{% if not resolved_featured_image_alt %}
+  {% set resolved_featured_image_alt = content.title if content.title else "Featured post image" %}
+{% endif %}
+{% set display_featured_image = resolved_featured_image %}
+
 {% if module.blog_image_module %}
 <div id="blogmodule2col" class="blog_2col_section {{ module.add_custom_class }}">
     <div class="blog_2col_wrapper">
@@ -5,14 +31,9 @@
             <div class="blog_2col_main" data-aos="fade-up">
                 <div class="blog_2col_image">
                     <div class="image_container">
-                        {% set featured_image = content.featured_image %}
-                        {% if featured_image %}
-                            <img src="{{ featured_image }}" 
-                                 alt="{{ content.title }}"
-                                 class="featured_image">
-                        {% else %}
-                            <img src="{{ module.default_featured_image.src }}" 
-                                 alt="Default post image"
+                        {% if display_featured_image %}
+                            <img src="{{ display_featured_image }}" 
+                                 alt="{{ resolved_featured_image_alt }}"
                                  class="featured_image">
                         {% endif %}
                     </div>
@@ -20,12 +41,14 @@
             </div>
             <div class="blog_2col_sidebar" data-aos="fade-up">
                 <div class="blog_2col_content">
-                    {% if module.wistia_video_and_image.select_post_type == 'wistia_video' %}
                     <div class="blog_2col_video">
-                        <div class="wistia_responsive_padding">
-                            <div class="wistia_responsive_wrapper">
-                                <div class="wistia_embed wistia_async_{{ module.wistia_video_and_image.wistia_video_id }} videoFoam=true">
-                                </div>
+                        <div class="video_responsive_padding">
+                            <div class="video_responsive_wrapper">
+                                {% if module.wistia_video_and_image.hubspot_video.player_id %}
+                                {% video_player "blog_video_player"
+                                  player_id="{{ module.wistia_video_and_image.hubspot_video.player_id }}"
+                                %}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -41,7 +64,6 @@
                         {% endif %}
                     </div>
                     {% endif %}
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -52,14 +74,9 @@
     <div class="blog_fullwidth_wrapper">
         <div class="blog_fullwidth_image" data-aos="fade-up">
             <div class="fullwidth_image_container">
-                {% set featured_image = content.featured_image %}
-                {% if featured_image %}
-                    <img src="{{ featured_image }}" 
-                         alt="{{ content.title }}"
-                         class="featured_image_full">
-                {% else %}
-                    <img src="{{ module.default_featured_image.src }}" 
-                         alt="Default post image"
+                {% if display_featured_image %}
+                    <img src="{{ display_featured_image }}" 
+                         alt="{{ resolved_featured_image_alt }}"
                          class="featured_image_full">
                 {% endif %}
             </div>
@@ -132,12 +149,12 @@
     padding-right: 5%;
 }
 
-.wistia_responsive_padding {
+.video_responsive_padding {
     padding: 56.25% 0 0 0;
     position: relative;
 }
 
-.wistia_responsive_wrapper {
+.video_responsive_wrapper {
     height: 100%;
     left: 0;
     position: absolute;
@@ -145,7 +162,7 @@
     width: 100%;
 }
 
-.wistia_embed {
+.video_responsive_wrapper iframe {
     height: 100%;
     width: 100%;
 }
@@ -230,10 +247,3 @@
 {% end_scope_css %}
 </style>
 {% end_require_css %}
-
-{% if module.blog_image_module %}
-{% require_js %}
-<script src="https://fast.wistia.com/embed/medias/{{ module.wistia_video_and_image.wistia_video_id }}.jsonp" async></script>
-<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-{% end_require_js %}
-{% endif %}

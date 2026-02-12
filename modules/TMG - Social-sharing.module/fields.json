@@ -189,6 +189,9 @@
       "type" : "font",
       "display_width" : null,
       "default" : {
+        "font" : "Open Sans",
+        "font_set" : "GOOGLE",
+        "fallback" : "sans-serif",
         "size_unit" : "px"
       }
     } ],
